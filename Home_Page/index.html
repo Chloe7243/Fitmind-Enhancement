@@ -3,28 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FitMind - Navbar</title>
+    <title>FitMind</title>
     <link rel="stylesheet" href="styles.css">
     <script defer src="script.js"></script>
 </head>
 <body>
+
+    <!-- Navigation Bar -->
     <header>
         <div class="navbar">
-            <div class="menu-btn" onclick="toggleMenu()">&#9776; Menu</div>
-            <div class="logo"><a href="#">FitMind</a></div>
-            <div class="sign-in"><a href="#">Sign In</a></div>
-        </div>
+            <div class="menu-container">
+                <div class="menu-icon" id="menu-icon">&#9776;</div>
+                <div class="logo"><a href="#">FitMind</a></div>
+            </div>
+            <nav class="nav-links">
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#">Service</a>
+                <a href="#">Help</a>
+            </nav>
+            <button class="sign-in" onclick="window.location.href='#'">Sign In</button>
 
-        <!-- Menu Bar -->
-        <div class="menu-box" id="menu-box">
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Stress Tracking</a></li>
-                <li><a href="#">Exercise Tracking</a></li>
-                <li><a href="#">Community</a></li>
-                <li><a href="#">Notifications</a></li>
-            </ul>
         </div>
     </header>
+
+    <!-- Sidebar Menu -->
+    <div class="menu-box" id="menu-box">
+        <ul>
+            <li><a href="#">DashBoard</a></li>
+            <li><a href="#">Stress Tracking</a></li>
+            <li><a href="#">Exercise Tracking</a></li>
+            <li><a href="#">Community</a></li>
+            <li><a href="#">Notifications</a></li>
+        </ul>
+    </div>
+
 </body>
 </html>
