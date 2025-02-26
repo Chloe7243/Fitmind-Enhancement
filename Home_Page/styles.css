@@ -126,3 +126,174 @@ body.overlay-active {
     position: relative;
     overflow: hidden;
 }
+
+/* Hero Section */
+.hero {
+    position: relative;
+    width: 100%;
+    height: 50vh; 
+    background: url('your-image.jpg') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Overlay for Better Readability */
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3); /* Adds a slight dark overlay */
+}
+
+/* Text Styling */
+.hero-content {
+    position: relative;
+    color: white;
+    text-align: center;
+    z-index: 2; /* Ensures text is above overlay */
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.hero-content p {
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero {
+        height: 40vh; /* Reduce height on smaller screens */
+    }
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+    .hero-content p {
+        font-size: 1.2rem;
+    }
+}
+
+/* Profile Section */
+.profile-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f8f8f8;
+    padding: 20px 0;
+}
+
+.profile-container {
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 15px 25px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: black;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 15px;
+}
+
+.profile-info .greeting {
+    font-size: 14px;
+    color: #666;
+}
+
+.profile-info .username {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+/* Dashborad Section */
+.dashboard-header {
+    text-align: center;  /* Centers the text */
+    font-size: 20px;  /* Modern and bold */
+    font-weight: bold;  
+    margin-top: 30px;  /* Adds space after profile */
+    margin-bottom: 20px;  /* Space before dashboard boxes */
+    letter-spacing: 1px;  /* Sleek look */
+}
+
+/* Dashboard Container */
+.dashboard {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 50px 20px;
+    background: #f8f8f8;
+}
+
+/* Individual Cards */
+.dashboard-card {
+    background: white;
+    padding: 20px;
+    width: 300px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dashboard-card:hover {
+    transform: scale(1.05);
+    box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Card Image */
+.dashboard-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+/* Card Text */
+.dashboard-card h2 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.dashboard-card p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+/* Buttons */
+.dashboard-card button {
+    background: black;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s ease;
+}
+
+.dashboard-card button:hover {
+    background: #555;
+}
