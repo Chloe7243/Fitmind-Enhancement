@@ -163,7 +163,7 @@ body.overlay-active {
     position: relative;
     color: white; /* Ensures text is visible */
     text-align: center;
-    z-index: 2; /* Ensures text is above overlay */-
+    z-index: 2; /* Ensures text is above overlay */
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Adds shadow for visibility */
 }
 

@@ -2,6 +2,9 @@
 	"folders": [
 		{
 			"path": "../.."
+		},
+		{
+			"path": "../../../SETUP - Project/FITMIND PROJECT SAMPLE/GITHUB"
 		}
 	],
 	"settings": {
