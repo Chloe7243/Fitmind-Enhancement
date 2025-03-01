@@ -1,0 +1,103 @@
+
+.notification-heading {
+    font-size: 32px;      
+    font-weight: bold;    
+    color: black;         
+    text-align: center;   
+    margin-top: 100px;    
+}
+
+
+
+
+
+.move-center {
+    display: block;   
+    margin: 100px auto;  
+}
+
+
+
+.heading2  { 
+    font-size: 50px;      
+    font-weight: bold;    
+    color: black;         
+    text-align: center;   
+    margin-top: 10px;    
+}
+
+.heading3  { 
+    font-size: 20px;      
+    font-weight: normal;    
+    color: black;         
+    text-align: center;   
+    margin-top: 15px;    
+}
+
+.heading4 { font-size: 20px;      
+    font-weight: normal;    
+    color: black;         
+    text-align: center;   
+    margin-top: 20px;    
+}
+
+
+
+.back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color:  blue;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+
+
+
+
+.past-notification {
+    display: block;
+    margin-top: 20px; 
+    padding: 10px 20px; 
+    font-size: 16px;    
+    background-color: #007bff; 
+    color: white;      
+    text-decoration: underline;  
+   
+    text-align: center;
+   
+
+}
+
+.settings-icon {
+
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color:  white;
+    color: white;
+    border: none;
+    
+    
+
+
+
+
+
+
+
+
+
+
+}
