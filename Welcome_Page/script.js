@@ -9,5 +9,5 @@ document.addEventListener("DOMContentLoaded", function () {
             document.querySelector("#loading-screen").style.display = "none";
             document.querySelector("#welcome-container").style.display = "block";
         }
-    }, 300);
+    }, 200);
 });
