@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitMind - Advanced Exercise Tracking</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div class="exercise-container">
+    <h1>Exercise Tracking</h1>
+    <p class="subtext">Track your workouts and get personalized wellness recommendations.</p>
+
+    <form id="exercise-form">
+        <div class="form-group">
+            <label for="exercise-type">Exercise Type</label>
+            <select id="exercise-type">
+                <option value="Cardio">Cardio</option>
+                <option value="Stretching">Stretching</option>
+                <option value="Strength">Strength Training</option>
+                <option value="Recreational">Recreational (Running, Cycling)</option>
+                <option value="Yoga">Yoga</option>
+                <option value="HIIT">High-Intensity Interval Training (HIIT)</option>
+                <option value="Pilates">Pilates</option>
+                <option value="Custom">Custom</option>
+            </select>
+            <input type="text" id="custom-exercise" placeholder="Enter custom exercise" style="display:none;">
+        </div>
+
+        <div class="form-group">
+            <label for="duration">Duration (minutes)</label>
+            <input type="number" id="duration" placeholder="Duration" required>
+        </div>
+
+        <button type="submit" class="log-btn">Log Exercise</button>
+    </form>
+
+    <div class="exercise-log">
+        <h2>Logged Exercises</h2>
+        <ul id="exercise-list"></ul>
+    </div>
+
+    <div class="progress-section">
+        <h2>Progress Chart</h2>
+        <canvas id="progress-chart"></canvas>
+    </div>
+
+    <div class="recommendations">
+        <h2>Personalized Recommendations</h2>
+        <ul id="suggestions-list"></ul>
+    </div>
+</div>
+
+</body>
+</html>
