@@ -1,4 +1,20 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
+    const menuBtn = document.querySelector(".menu-btn");
+    const menuBox = document.querySelector("#menu-box");
+
+    menuBtn.addEventListener("click", (event) => {
+        event.stopPropagation();
+        menuBox.classList.toggle("active");
+        menuBtn.classList.toggle("pushed");
+    });
+
+    document.addEventListener("click", (event) => {
+        if (!menuBox.contains(event.target) && !menuBtn.contains(event.target)) {
+            menuBox.classList.remove("active");
+            menuBtn.classList.remove("pushed");
+        }
+    });
+
     const form = document.getElementById('exercise-form');
     const typeSelect = document.getElementById('exercise-type');
     const customInput = document.getElementById('custom-exercise');
@@ -9,15 +25,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let exerciseData = JSON.parse(localStorage.getItem('exercises')) || [];
     let progressChart;
 
-    // Show/hide custom input field
     typeSelect.addEventListener('change', () => {
         customInput.style.display = typeSelect.value === 'Custom' ? 'block' : 'none';
     });
 
     form.addEventListener('submit', (e) => {
         e.preventDefault();
-
-        const type = typeSelect.value === 'Custom' ? customInput.value.trim() : typeSelect.value;
+        const type = typeSelect.value === 'Custom' ? customInput.value : typeSelect.value;
         const duration = parseInt(document.getElementById('duration').value);
 
         if (type && duration > 0) {
@@ -70,42 +84,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Suggestions system: supports both predefined and custom exercises
     function updateSuggestions(type) {
-        suggestionsList.innerHTML = ""; // Clear previous
+        suggestionsList.innerHTML = "";
 
         const suggestions = {
-            Cardio: [
-                "Stay hydrated during long runs.",
-                "Combine cardio with strength training for balanced fitness."
-            ],
-            Stretching: [
-                "Deep breathing enhances flexibility gains.",
-                "Try holding each stretch for 30 seconds."
-            ],
-            Strength: [
-                "Focus on form over weight to avoid injury.",
-                "Rest between sets for optimal recovery."
-            ],
-            Recreational: [
-                "Group activities make it more fun!",
-                "Track distances for running/cycling."
-            ],
-            Yoga: [
-                "Focus on breath awareness during yoga flows.",
-                "Morning yoga helps energize your day."
-            ],
-            HIIT: [
-                "Mix high and low intensity to maximize results.",
-                "Ensure proper warm-up and cool-down."
-            ],
-            Pilates: [
-                "Engage your core throughout the workout.",
-                "Use controlled movements for better muscle activation."
-            ]
+            Cardio: ["Stay hydrated!", "Mix cardio with strength training for balance."],
+            Stretching: ["Stretch daily to improve flexibility.", "Hold each stretch for 30 seconds."],
+            Strength: ["Focus on form, not weight.", "Take rest days to recover."],
+            Recreational: ["Join a group for fun!", "Track your distance if running."],
+            Yoga: ["Focus on your breathing.", "Morning yoga is energizing."],
+            HIIT: ["Alternate high and low intensity.", "Don't skip your warm-up."],
+            Pilates: ["Engage your core.", "Controlled movements improve results."]
         };
 
-        // For predefined types, use stored suggestions
         if (suggestions[type]) {
             suggestions[type].forEach(suggestion => {
                 const li = document.createElement("li");
@@ -113,11 +104,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 suggestionsList.appendChild(li);
             });
         } else {
-            // For custom exercises, generate dynamic suggestions
             const customSuggestions = [
                 `Great choice with "${type}"! Keep it fun.`,
                 `Track your progress with "${type}" to stay motivated.`,
-                `Pair "${type}" with stress-relief exercises for balanced wellness.`
+                `Pair "${type}" with relaxation exercises for balance.`
             ];
             customSuggestions.forEach(suggestion => {
                 const li = document.createElement("li");
