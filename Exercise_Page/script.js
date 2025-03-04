@@ -15,12 +15,12 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    const form = document.getElementById('exercise-form');
-    const typeSelect = document.getElementById('exercise-type');
-    const customInput = document.getElementById('custom-exercise');
-    const exerciseList = document.getElementById('exercise-list');
-    const suggestionsList = document.getElementById('suggestions-list');
-    const ctx = document.getElementById('progress-chart').getContext('2d');
+    const form = document.querySelector('#exercise-form');
+    const typeSelect = document.querySelector('#exercise-type');
+    const customInput = document.querySelector('#custom-exercise');
+    const exerciseList = document.querySelector('#exercise-list');
+    const suggestionsList = document.querySelector('#suggestions-list');
+    const ctx = document.querySelector('#progress-chart').getContext('2d');
 
     let exerciseData = JSON.parse(localStorage.getItem('exercises')) || [];
     let progressChart;
@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
     form.addEventListener('submit', (e) => {
         e.preventDefault();
         const type = typeSelect.value === 'Custom' ? customInput.value : typeSelect.value;
-        const duration = parseInt(document.getElementById('duration').value);
+        const duration = parseInt(document.querySelector('#duration').value);
 
         if (type && duration > 0) {
             exerciseData.push({ type, duration });
