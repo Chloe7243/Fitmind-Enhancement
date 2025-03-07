@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitMind - Exercise Tracking</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+</head>
+<body>
+
+<!-- Navigation Bar (Copied from Dashboard) -->
+<header>
+    <div class="navbar">
+        <div class="menu-container">
+            <div class="menu-icon menu-btn" id="menu-icon">&#9776;</div>
+            <div class="logo"><a href="#">FitMind</a></div>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="services.html">Service</a>
+            <a href="help.html">Help</a>
+        </nav>
+        <a href="/FITMIND-APP-MAIN-PROJECT/Sign_Page/sign-in.html"><button class="sign-in">Sign In</button></a>
+    </div>
+</header>
+
+<!-- Sidebar Menu (Copied from Dashboard) -->
+<div class="menu-box" id="menu-box">
+    <ul>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="stress-tracking.html">Stress Tracking</a></li>
+        <li><a href="exercise-tracking.html">Exercise Tracking</a></li>
+        <li><a href="community.html">Community</a></li>
+        <li><a href="notifications.html">Notifications</a></li>
+    </ul>
+</div>
+
+<!-- Main Exercise Page Content -->
+<section class="exercise-section">
+    <h1>Exercise Tracking</h1>
+    <p class="subtext">Track your exercises and monitor your progress.</p>
+
+    <form id="exercise-form">
+        <div class="form-group">
+            <label for="exercise-type">Exercise Type</label>
+            <select id="exercise-type">
+                <option value="Cardio">Cardio</option>
+                <option value="Stretching">Stretching</option>
+                <option value="Strength">Strength Training</option>
+                <option value="Recreational">Recreational (Running, Cycling)</option>
+                <option value="Yoga">Yoga</option>
+                <option value="HIIT">High-Intensity Interval Training (HIIT)</option>
+                <option value="Pilates">Pilates</option>
+                <option value="Custom">Custom</option>
+            </select>
+            <input type="text" id="custom-exercise" placeholder="Enter custom exercise" style="display:none;">
+        </div>
+
+        <div class="form-group">
+            <label for="duration">Duration (minutes)</label>
+            <input type="number" id="duration" placeholder="Duration" required>
+        </div>
+
+        <button type="submit" class="log-btn">Log Exercise</button>
+    </form>
+
+    <div class="exercise-log">
+        <h2>Logged Exercises</h2>
+        <ul id="exercise-list"></ul>
+    </div>
+
+    <div class="progress-section">
+        <h2>Progress Chart</h2>
+        <canvas id="progress-chart"></canvas>
+    </div>
+
+    <div class="recommendations">
+        <h2>Personalized Recommendations</h2>
+        <ul id="suggestions-list"></ul>
+    </div>
+</section>
+
+</body>
+</html>
