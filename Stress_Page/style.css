@@ -50,7 +50,7 @@ header {
 .logo a {
     font-size: 35px;
     font-weight: bold;
-    text-decoration: none; 
+    text-decoration: none;
     color: black;
 }
 
@@ -93,7 +93,7 @@ header {
     color: white;
 }
 
-/* Sidebar Menu Box */
+/* Sidebar Menu */
 .menu-box {
     position: fixed;
     top: 0;
@@ -146,12 +146,12 @@ body.overlay-active {
     overflow: hidden;
 }
 
-/* Main Section for Exercise Page */
-.exercise-section {
-    background: #fff;
+/* Stress Tracking Section */
+.stress-section {
+    background: white;
     max-width: 700px;
     width: 90%;
-    margin: 60px auto 30px;
+    margin: 100px auto 30px;
     padding: 30px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     border-radius: 12px;
@@ -159,45 +159,70 @@ body.overlay-active {
     animation: fadeIn 0.8s ease-out;
 }
 
-.exercise-section h1 {
+.stress-section h1 {
+    font-size: 28px;
     color: #004d40;
     margin-bottom: 10px;
-    font-size: 24px;
 }
 
-.exercise-section .subtext {
-    color: #666;
+.stress-section .subtext {
     font-size: 14px;
+    color: #666;
     margin-bottom: 20px;
 }
 
 /* Form Styling */
 .form-group {
     text-align: left;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 .form-group label {
     font-weight: bold;
-    margin-bottom: 5px;
-    display: block;
     color: #333;
+    display: block;
+    margin-bottom: 8px;
 }
 
-.form-group select, 
-.form-group input {
+.form-group input,
+.form-group textarea {
     width: 100%;
     padding: 12px;
     font-size: 14px;
-    border: 1px solid #ccc;
+    border: 1px solid #ddd;
     border-radius: 6px;
     outline: none;
     transition: border 0.3s;
 }
 
 .form-group input:focus,
-.form-group select:focus {
+.form-group textarea:focus {
     border-color: #00796b;
+}
+
+textarea {
+    resize: none;
+}
+
+/* Emoji Scale */
+.emoji-scale {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+}
+
+.emoji-scale label {
+    font-size: 28px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.emoji-scale label:hover {
+    transform: scale(1.2);
+}
+
+.emoji-scale input {
+    display: none; /* Hide radio buttons */
 }
 
 /* Log Button */
@@ -206,96 +231,85 @@ body.overlay-active {
     padding: 12px;
     font-size: 16px;
     font-weight: bold;
-    color: white;
     background-color: #00796b;
+    color: white;
     border: none;
     border-radius: 6px;
     cursor: pointer;
-    margin-top: 10px;
-    transition: background-color 0.3s;
+    transition: background 0.3s;
 }
 
 .log-btn:hover {
     background-color: #005f56;
 }
 
-/* Exercise Log */
-.exercise-log {
+/* Stress Log */
+.stress-log {
     text-align: left;
-    margin: 20px 0;
+    margin-top: 25px;
 }
 
-.exercise-log h2 {
+.stress-log h2 {
     font-size: 18px;
     color: #004d40;
     margin-bottom: 10px;
 }
 
-#exercise-list {
+#stress-list {
     list-style: none;
     padding: 0;
 }
 
-#exercise-list li {
-    background: #f0f9f4;
-    border: 1px solid #d4edda;
+#stress-list li {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
     padding: 10px;
     margin-bottom: 8px;
     border-radius: 6px;
+    font-size: 14px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 }
 
-#exercise-list button {
+#stress-list button {
     background: #ff4d4d;
     color: white;
     border: none;
-    padding: 5px 8px;
     cursor: pointer;
     border-radius: 4px;
+    padding: 5px 8px;
+    font-size: 12px;
 }
 
-/* Progress Chart */
-.progress-section {
-    margin-top: 20px;
-    text-align: left;
-}
-
-.progress-section h2 {
-    font-size: 18px;
-    color: #004d40;
-    margin-bottom: 10px;
-}
-
-canvas {
+.notes {
+    font-size: 12px;
+    color: #666;
+    margin-top: 5px;
     width: 100%;
-    max-width: 100%;
-    height: 200px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    background: white;
 }
 
-/* Recommendations */
-.recommendations {
-    margin-top: 20px;
+/* Relaxation Suggestions */
+.relaxation-suggestions {
     text-align: left;
+    margin-top: 25px;
 }
 
-.recommendations h2 {
+.relaxation-suggestions h2 {
     font-size: 18px;
     color: #004d40;
     margin-bottom: 10px;
 }
 
-.recommendations ul {
+.relaxation-suggestions ul {
+    list-style: disc;
     padding-left: 20px;
     font-size: 14px;
     color: #555;
 }
 
-/* Animation */
+/* Animations */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -307,38 +321,26 @@ canvas {
     }
 }
 
-/* Responsive for Mobile */
+/* Mobile Adjustments */
 @media (max-width: 768px) {
-    header {
-        flex-wrap: wrap;
-    }
-
     .nav-links {
         display: none;
     }
 
     .menu-container {
-        width: 100%;
         justify-content: space-between;
+        width: 100%;
     }
-
-    .menu-icon {
-        font-size: 26px;
-    }
-
 
     .menu-box {
-        width: 100%; /* Full width on mobile */
-        padding-top: 60px;
+        width: 100%;
     }
 
-    .menu-box ul li a {
-        font-size: 18px;
+    .stress-section {
         padding: 20px;
     }
 
-    .exercise-section {
-        padding: 20px;
-        margin-top: 100px;
+    .emoji-scale label {
+        font-size: 24px;
     }
 }
