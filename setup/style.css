@@ -8,7 +8,7 @@ body {
 
 /* login section entry boxes and buttons and header */
 h1 {
-    font-size: 35px;
+    font-size: 25px;
     margin: 1em;
     color: black;
     align-content: center;
@@ -29,7 +29,7 @@ h1 {
 .login {
     background-color: aqua;
     width: 8vw;
-    height: 3vh;
+    height: 4vh;
     margin: 0.5em;
     text-align: center;
     flex:1;
@@ -44,7 +44,7 @@ h1 {
 .register {
     background-color: aquamarine;
     width: 6vw;
-    height: 3vh;
+    height: 4vh;
     margin: 0.5em;
     text-align: center;
     flex:1;
@@ -68,14 +68,14 @@ p2 {
 }
 
 .usertext {
-    font-size: 1.2vh;
-    font-size: 1.2vw;
+    font-size: 0.8vh;
+    font-size: 0.8vw;
     margin: 0em;
     margin-bottom: -0.65em;
 }
 .passtext {
-    font-size: 1.2vh;
-    font-size: 1.2vw;
+    font-size: 0.8vh;
+    font-size: 0.8vw;
     margin: 0em;
     margin-bottom: -0.65em;
 }
@@ -89,7 +89,7 @@ main {
     margin: 2em;
     margin-top: 3em;
     width:20vw;
-    height: 32vh;
+    height: 38vh;
     align-self: center;
     align-content: center;
     border-color: aqua;
