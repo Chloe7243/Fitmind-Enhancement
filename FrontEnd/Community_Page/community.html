@@ -8,16 +8,35 @@
       <link href="css/bootstrap.min.css" rel="stylesheet">
       <link href="css/bootstrap-icons.min.css" rel="stylesheet">
       <link href="css/main.css" rel="stylesheet">
+      <script defer src="community.js"></script>
    </head>
-   <body class="index-page">
-      <header id="header" class="header d-flex align-items-center fixed-top">
-         <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
-            <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
-               <h1 class="sitename">Fit Mind</h1>
-            </a>
-            <a class="btn-getstarted" href="index.html">Get Started</a>
-         </div>
-      </header>
+   <!-- Navigation Bar -->
+   <header>
+      <div class="navbar">
+          <div class="menu-container">
+              <div class="menu-icon" id="menu-icon">&#9776;</div>
+              <div class="logo"><a href="index.html">FitMind</a></div>
+          </div>
+          <nav class="nav-links">
+              <a href="index.html">Home</a>
+              <a href="about.html">About</a>
+              <a href="services.html">Service</a>
+              <a href="help.html">Help</a>
+          </nav>
+          <a href="/FITMIND-APP-MAIN-PROJECT/Sign_Page/sign-in.html"><button class="sign-in">Sign In</button></a>
+      </div>
+  </header>
+
+  <!-- Sidebar Menu -->
+  <div class="menu-box" id="menu-box">
+      <ul>
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="/FITMIND-APP-MAIN-PROJECT/FrontEnd/Stress_Page/stress.html">Stress Tracking</a></li>
+          <li><a href="/FITMIND-APP-MAIN-PROJECT/FrontEnd/Exercise_Page/exercise.html">Exercise Tracking</a></li>
+          <li><a href="community.html">Community</a></li>
+          <li><a href="notifications.html">Notifications</a></li>
+      </ul>
+  </div>
       <main class="main">
          <section id="hero" class="hero section">
             <div class="container">
