@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../Desktop/Fit Mind"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "Fit Mind App"
+	}
+}
