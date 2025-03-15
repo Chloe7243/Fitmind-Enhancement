@@ -317,28 +317,3 @@ textarea {
  transform: translateY(0);
  }
 }
-/* Mobile Adjustments */
-@media (max-width: 768px) {
- .nav-links {
- display: none;
- }
- .menu-container {
- width: 100%;
- }
- .sign-in{white-space: nowrap;}
- .menu-box {
- width: 100%;
- }
- .stress-section {
- padding: 20px;
- margin: 30px auto 30px;
- }
- .emoji-scale label {
- font-size: 24px;
- }
- .btnsec{display: block;}
- .btnsec .form-group {
-    margin-bottom: 20px;
-    width: 100%;
-}
-}
