@@ -1,23 +1,28 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const menuBtn = document.querySelector(".menu-btn");
+document.addEventListener("DOMContentLoaded", function () {
+    const menuBtn = document.querySelector("#menu-icon");
     const menuBox = document.querySelector("#menu-box");
+    const navLinks = document.querySelector(".nav-links");
+    const body = document.querySelector("body");
 
-    menuBtn.addEventListener("click", (event) => {
+    menuBtn.addEventListener("click", function (event) {
         event.stopPropagation();
         menuBox.classList.toggle("active");
         menuBtn.classList.toggle("pushed");
+        navLinks.classList.toggle("active");
+        body.classList.toggle("overlay-active"); // This will move the hero section
     });
 
-    document.addEventListener("click", (event) => {
+    document.addEventListener("click", function (event) {
         if (!menuBox.contains(event.target) && !menuBtn.contains(event.target)) {
             menuBox.classList.remove("active");
             menuBtn.classList.remove("pushed");
+            body.classList.remove("overlay-active");
         }
     });
 
-    const form = document.getElementById('stress-form');
-    const stressList = document.getElementById('stress-list');
-    const relaxationList = document.getElementById('relaxation-list');
+    const form = document.querySelector('#stress-form');
+    const stressList = document.querySelector('#stress-list');
+    const relaxationList = document.querySelector('#relaxation-list');
 
     let stressData = JSON.parse(localStorage.getItem('stressLogs')) || [];
 
@@ -30,8 +35,8 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        const cause = document.getElementById('stress-cause').value.trim();
-        const notes = document.getElementById('additional-notes').value.trim();
+        const cause = document.querySelector('#stress-cause').value.trim();
+        const notes = document.querySelector('#additional-notes').value.trim();
         const entry = {
             date: new Date().toLocaleString(),
             level: stressLevel.value,
