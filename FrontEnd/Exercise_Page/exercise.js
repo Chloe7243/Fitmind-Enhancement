@@ -1,15 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
     const menuBtn = document.querySelector("#menu-icon");
     const menuBox = document.querySelector("#menu-box");
-    const navLinks = document.querySelector(".nav-links");
     const body = document.querySelector("body");
 
     menuBtn.addEventListener("click", function (event) {
         event.stopPropagation();
         menuBox.classList.toggle("active");
         menuBtn.classList.toggle("pushed");
-        navLinks.classList.toggle("active");
-        body.classList.toggle("overlay-active"); // This will move the hero section
+        body.classList.toggle("overlay-active");
     });
 
     document.addEventListener("click", function (event) {

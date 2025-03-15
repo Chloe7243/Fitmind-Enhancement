@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Oswald:wght@400;700&family=Orbitron:wght@400;600&display=swap');
+
+
 /* General Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Titillium Web', sans-serif;
 }
 
 body {
@@ -44,7 +47,7 @@ header {
 }
 
 .logo a {
-    font-size: 30px;
+    font-size: 40px;
     font-weight: bold;
     text-decoration: none;
     color: #00796b;
