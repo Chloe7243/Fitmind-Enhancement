@@ -4,7 +4,7 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>FitMind - Stress Tracking</title>
-      <link rel="stylesheet" href="style.css">
+      <link rel="stylesheet" href="notes.css">
       <script defer src="notes.js"></script>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
    </head>
@@ -35,32 +35,31 @@
            </ul>
        </div>
        
-      <section class="stress-section">
+      <!-- Notes Section -->
+      <section class="notes-section">
          <h1>My Notes</h1>
-         <p class="subtext">Keep track of your reflections, workout notes, and stress-related thoughts.
-         </p>
-         <form id="stress-form">
-            <div class="form-group">
-               <input type="text" id="Note-Title" placeholder="Note Title">
-            </div>
-            <div class="form-group">
-               <textarea id="Write-your-note" rows="3" placeholder="Write your note..."></textarea>
-            </div>
-            <button type="submit" class="log-btn">Save Note</button>
-            <div class="btnsec">
-            	 <div class="form-group">
-	               <input type="text" id="Search-notes" placeholder="Search notes...">
-	            </div>
-	            <div class="btnlast">
-	            	 <button type="submit" class="log-btn">Search</button>
-	            	  <button type="submit" class="log-btn">Show All Notes</button>
-	            </div>
-            </div>
+         <p class="subtext">Keep track of your reflections, workout notes, and stress-related thoughts.</p>
 
-         </form>
-         <div class="stress-log">
-            <h2>Saved Notes</h2>
+         <!-- Note Input -->
+         <div class="note-form">
+            <input type="text" id="note-title" placeholder="Note Title">
+            <textarea id="note-content" rows="4" placeholder="Write your note..."></textarea>
+            <button id="save-note-btn">Save Note</button>
          </div>
-      </section>
+
+         <!-- Search & Show All Buttons -->
+         <div class="search-container">
+            <input type="text" id="search-notes" placeholder="Search notes...">
+            <button id="search-btn">Search</button>
+            <button id="show-all-btn">Show All Notes</button>
+         </div>
+
+         <!-- Saved Notes -->
+         <div class="notes-container">
+            <h2>Saved Notes</h2>
+            <ul id="notes-list"></ul>
+         </div>
+   </section>
+
    </body>
 </html>

@@ -1,0 +1,407 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Oswald:wght@400;700&family=Orbitron:wght@400;600&display=swap');
+
+
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Titillium Web', sans-serif;
+}
+
+body {
+    background: #f0f2f5;
+    color: #333;
+    overflow-x: hidden;
+}
+
+/* Header Navigation Bar */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: white;
+    border-bottom: 2px solid #ddd;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    
+}
+
+.navbar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Center Logo */
+.logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.logo a {
+    font-size: 40px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #00796b;
+}
+
+/* Adjusted Menu Icon */
+.menu-icon {
+    font-size: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Sidebar Menu */
+.menu-box ul li a {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    padding: 15px;
+    transition: background 0.3s;
+}
+
+.menu-box ul li a i {
+    margin-right: 10px;
+}
+
+.nav-links a:hover {
+    color: #00796b;
+}
+
+/* Sign In Button */
+.sign-in {
+    font-size: 16px;
+    color: white;
+    padding: 10px 20px;
+    background: #00796b;
+    border: 1px solid #333;
+    border: none;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+    cursor: pointer;
+}
+
+.sign-in:hover {
+    background: #005a4e;
+}
+
+/* Sidebar Menu */
+.menu-box {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background: #222;
+    padding-top: 100px;
+    transition: 0.5s ease-in-out;
+    z-index: 1000;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.menu-box.active {
+    left: 0;
+}
+
+.menu-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-box ul li {
+    padding: 15px;
+    border-bottom: 1px solid #444;
+}
+
+.menu-box ul li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    transition: background 0.3s;
+    padding: 15px;
+}
+
+.menu-box ul li a:hover {
+    background: #444;
+    padding-left: 20px;
+}
+
+/* When menu icon is clicked */
+.menu-icon.pushed {
+ color: gray; /* Optional: Change color when clicked */
+}
+
+/* Ensure clicking outside closes menu */
+body.overlay-active {
+ position: relative;
+ overflow: hidden;
+}
+
+/* Notes Section */
+.notes-section {
+    background: white;
+    max-width: 750px;
+    width: 90%;
+    margin: 100px auto 30px;
+    padding: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    text-align: center;
+    animation: fadeIn 0.8s ease-out;
+}
+
+.notes-section h1 {
+    font-size: 28px;
+    color: #004d40;
+    margin-bottom: 10px;
+}
+
+.notes-section .subtext {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* Note Input Form */
+.note-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.note-form input,
+.note-form textarea {
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    resize: none;
+    transition: border 0.3s ease-in-out;
+}
+
+.note-form input:focus,
+.note-form textarea:focus {
+    border-color: #00796b;
+}
+
+/* Save Note Button */
+.note-form button {
+    padding: 12px;
+    font-size: 16px;
+    background: #00796b;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.note-form button:hover {
+    background: #005f56;
+}
+
+/* Search Notes */
+.search-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#search-notes {
+    flex-grow: 1;
+    padding: 12px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    transition: border 0.3s ease-in-out;
+}
+
+#search-notes:focus {
+    border-color: #00796b;
+}
+
+#search-btn {
+    padding: 12px;
+    font-size: 16px;
+    background: #00796b;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#search-btn:hover {
+    background: #005f56;
+}
+
+/* Notes Container */
+.notes-container {
+    text-align: left;
+    margin-top: 25px;
+}
+
+.notes-container h2 {
+    font-size: 18px;
+    color: #004d40;
+    margin-bottom: 10px;
+}
+
+#notes-list {
+    list-style: none;
+    padding: 0;
+}
+
+/* Individual Note Card */
+.note-card {
+    background: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    transition: transform 0.2s ease-in-out;
+}
+
+.note-card:hover {
+    transform: scale(1.02);
+}
+
+.note-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.note-content {
+    margin: 8px 0;
+    font-size: 14px;
+    color: #555;
+}
+
+.note-date {
+    font-size: 12px;
+    color: gray;
+}
+
+/* Delete Button */
+.delete-note {
+    background: #ff4d4d;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 6px 10px;
+    font-size: 14px;
+    border-radius: 6px;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    transition: background 0.3s;
+}
+
+.delete-note:hover {
+    background: #e84118;
+}
+
+/* Search Notes & Show All Button */
+.search-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#search-notes {
+    flex-grow: 1;
+    padding: 12px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    transition: border 0.3s ease-in-out;
+}
+
+#search-notes:focus {
+    border-color: #00796b;
+}
+
+#search-btn,
+#show-all-btn {
+    padding: 12px;
+    font-size: 16px;
+    background: #00796b;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#search-btn:hover,
+#show-all-btn:hover {
+    background: #005f56;
+}
+
+/* Responsive for Mobile */
+@media (max-width: 768px) {
+    .search-container {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    #search-btn,
+    #show-all-btn {
+        width: 100%;
+    }
+}
+
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+
+    .menu-box {
+        width: 100%;
+    }
+
+    .notes-section {
+        padding: 20px;
+    }
+
+    .note-card {
+        font-size: 14px;
+    }
+
+    .search-container {
+        flex-direction: column;
+    }
+
+    #search-notes {
+        width: 100%;
+    }
+}
