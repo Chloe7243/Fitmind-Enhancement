@@ -114,8 +114,8 @@ body {
 .hero {
     text-align: center;
     padding: 120px 20px;
-    background: #e3e6e8;
-    min-height: 50vh;
+    background: #e0f2f1;
+    min-height: 10vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
