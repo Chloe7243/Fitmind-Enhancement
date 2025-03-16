@@ -65,6 +65,16 @@ body {
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
 }
 
+/* Sidebar Top Icon */
+.menu-icon-top {
+    text-align: center;
+    font-size: 30px;
+    color: white;
+    position: relative;  /* Allows fine-tuned positioning */
+    top: -20px;  /* Moves the icon up */
+    margin-bottom: 10px;  /* Reduces space below */
+}
+
 /* Adjusted Menu Icon */
 .menu-icon {
     cursor: pointer;
