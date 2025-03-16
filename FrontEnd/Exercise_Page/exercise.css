@@ -1,101 +1,54 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Oswald:wght@400;700&family=Orbitron:wght@400;600&display=swap');
-
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
 /* General Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Titillium Web', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
+/* Body */
 body {
     background: #f0f2f5;
     color: #333;
     overflow-x: hidden;
-    padding-top: 80px;
 }
 
-/* Header Navigation Bar */
-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: white;
-    border-bottom: 2px solid #ddd;
-    padding: 15px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    
-}
-
+/* NAVBAR */
 .navbar {
-    width: 100%;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-}
-
-/* Center Logo */
-.logo {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    align-items: center;
+    background: #ffffff;
+    padding: 15px 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
 }
 
 .logo a {
-    font-size: 40px;
+    font-size: 24px;
     font-weight: bold;
-    text-decoration: none;
     color: #00796b;
-}
-
-/* Adjusted Menu Icon */
-.menu-icon {
-    font-size: 20px;
-    cursor: pointer;
-    font-weight: bold;
-    color: #333;
-}
-
-/* Sidebar Menu */
-.menu-box ul li a {
-    color: white;
     text-decoration: none;
-    display: flex;
-    align-items: center;
-    font-size: 16px;
-    padding: 15px;
+}
+
+.sign-in {
+    background: #00796b;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
     transition: background 0.3s;
 }
 
-.menu-box ul li a i {
-    margin-right: 10px;
-}
-
-.nav-links a:hover {
-    color: #00796b;
-}
-
-/* Sign In Button */
-.sign-in {
-    font-size: 16px;
-    color: white;
-    padding: 10px 20px;
-    background: #00796b;
-    border: 1px solid #333;
-    border: none;
-    border-radius: 5px;
-    transition: background 0.3s ease;
-    cursor: pointer;
-}
-
 .sign-in:hover {
-    background: #005a4e;
+    background: #005f56;
 }
 
 /* Sidebar Menu */
@@ -110,6 +63,12 @@ header {
     transition: 0.5s ease-in-out;
     z-index: 1000;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Adjusted Menu Icon */
+.menu-icon {
+    cursor: pointer;
+    font-weight: bold;
 }
 
 .menu-box.active {
@@ -141,46 +100,69 @@ header {
     padding-left: 20px;
 }
 
-/* When menu icon is clicked */
-.menu-icon.pushed {
-    color: gray; /* Optional: Change color when clicked */
+/* HERO SECTION */
+.hero {
+    text-align: center;
+    padding: 120px 20px;
+    background: #e3e6e8;
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-/* Ensure clicking outside closes menu */
-body.overlay-active {
-    position: relative;
-    overflow: hidden;
+.hero h1 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #004d40;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.1);
 }
 
-/* Main Section for Exercise Page */
+.hero p {
+    font-size: 18px;
+    color: #555;
+    margin-top: 10px;
+}
+
+.start-tracking {
+    background: #ff6600;
+    color: white;
+    padding: 15px 25px;
+    border: none;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background 0.3s ease-in-out;
+}
+
+.start-tracking:hover {
+    background: #e65c00;
+}
+
+/* EXERCISE FORM */
 .exercise-section {
-    background: #fff;
-    max-width: 700px;
-    width: 90%;
-    margin: 60px auto 30px;
-    padding: 30px;
+    max-width: 800px;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    padding: 40px 20px;
+    background: white;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     border-radius: 12px;
-    text-align: center;
-    animation: fadeIn 0.8s ease-out;
+    margin-top: 20px;
 }
 
-.exercise-section h1 {
-    color: #004d40;
-    margin-bottom: 10px;
+.exercise-section h2 {
     font-size: 24px;
-}
-
-.exercise-section .subtext {
-    color: #666;
-    font-size: 14px;
+    color: #004d40;
     margin-bottom: 20px;
 }
 
-/* Form Styling */
 .form-group {
     text-align: left;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 .form-group label {
@@ -225,14 +207,21 @@ body.overlay-active {
     background-color: #005f56;
 }
 
-/* Exercise Log */
+/* LOGGED EXERCISES */
 .exercise-log {
-    text-align: left;
-    margin: 20px 0;
+    max-width: 800px;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    padding: 30px 20px;
+    background: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    margin-top: 20px;
 }
 
 .exercise-log h2 {
-    font-size: 18px;
+    font-size: 22px;
     color: #004d40;
     margin-bottom: 10px;
 }
@@ -262,35 +251,46 @@ body.overlay-active {
     border-radius: 4px;
 }
 
-/* Progress Chart */
+/* PROGRESS CHART */
 .progress-section {
+    max-width: 800px;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    padding: 30px 20px;
+    background: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
     margin-top: 20px;
-    text-align: left;
 }
 
 .progress-section h2 {
-    font-size: 18px;
+    font-size: 22px;
     color: #004d40;
     margin-bottom: 10px;
 }
 
 canvas {
     width: 100%;
-    max-width: 100%;
-    height: 200px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    background: white;
+    max-width: 600px;
+    margin: auto;
 }
 
-/* Recommendations */
+/* RECOMMENDATIONS */
 .recommendations {
+    max-width: 800px;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    padding: 30px 20px;
+    background: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
     margin-top: 20px;
-    text-align: left;
 }
 
 .recommendations h2 {
-    font-size: 18px;
+    font-size: 22px;
     color: #004d40;
     margin-bottom: 10px;
 }
@@ -301,23 +301,83 @@ canvas {
     color: #555;
 }
 
-/* Animation */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+/* Footer Styling */
+.footer {
+    background: #00796b;
+    color: white;
+    padding: 40px 20px;
+    margin-top: 50px;
 }
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.footer h2, .footer h3 {
+    margin-bottom: 10px;
+}
+
+.footer p, .footer ul {
+    font-size: 14px;
+}
+
+.footer ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer ul li {
+    margin-bottom: 8px;
+}
+
+.footer ul li a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer ul li a:hover {
+    color: #ffcc00;
+}
+
+.footer-contact, .footer-social {
+    text-align: center;
+}
+
+.footer-social a {
+    color: white;
+    font-size: 20px;
+    margin: 0 10px;
+    transition: color 0.3s;
+}
+
+.footer-social a:hover {
+    color: #ffcc00;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
 
 /* Responsive for Mobile */
 @media (max-width: 768px) {
+    .hero h1 {
+        font-size: 28px;
+    }
 
-    .exercise-section {
+    .start-tracking {
+        font-size: 16px;
+    }
+
+    .exercise-section, .exercise-log, .progress-section, .recommendations {
         padding: 20px;
-        margin-top: 100px;
     }
 }

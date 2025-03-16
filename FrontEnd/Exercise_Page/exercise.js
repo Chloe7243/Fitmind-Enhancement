@@ -1,92 +1,109 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // Sidebar Menu Toggle
     const menuBtn = document.querySelector("#menu-icon");
     const menuBox = document.querySelector("#menu-box");
     const body = document.querySelector("body");
 
     menuBtn.addEventListener("click", function (event) {
-        event.stopPropagation();
+        event.stopPropagation(); // Prevents immediate closure when clicking menu icon
         menuBox.classList.toggle("active");
-        menuBtn.classList.toggle("pushed");
-        body.classList.toggle("overlay-active");
     });
 
+    // Click anywhere outside to close menu
     document.addEventListener("click", function (event) {
         if (!menuBox.contains(event.target) && !menuBtn.contains(event.target)) {
             menuBox.classList.remove("active");
-            menuBtn.classList.remove("pushed");
-            body.classList.remove("overlay-active");
         }
     });
 
-    const form = document.querySelector('#exercise-form');
-    const typeSelect = document.querySelector('#exercise-type');
-    const customInput = document.querySelector('#custom-exercise');
-    const exerciseList = document.querySelector('#exercise-list');
-    const suggestionsList = document.querySelector('#suggestions-list');
-    const ctx = document.querySelector('#progress-chart').getContext('2d');
+    // Exercise Form Elements
+    const form = document.querySelector("#exercise-form");
+    const exerciseTypeSelect = document.querySelector("#exercise-type");
+    const customInput = document.querySelector("#custom-exercise");
+    const exerciseList = document.querySelector("#exercise-list");
+    const durationInput = document.querySelector("#duration");
+    const ctx = document.querySelector("#progress-chart").getContext("2d");
+    const suggestionsList = document.querySelector("#suggestions-list");
 
-    let exerciseData = JSON.parse(localStorage.getItem('exercises')) || [];
+    let exerciseData = JSON.parse(localStorage.getItem("exercises")) || [];
     let progressChart;
 
-    typeSelect.addEventListener('change', () => {
-        customInput.style.display = typeSelect.value === 'Custom' ? 'block' : 'none';
+    // Show custom exercise input field if "Custom" is selected
+    exerciseTypeSelect.addEventListener("change", () => {
+        customInput.style.display = exerciseTypeSelect.value === "Custom" ? "block" : "none";
     });
 
-    form.addEventListener('submit', (e) => {
+    // Form Submission: Log Exercise
+    form.addEventListener("submit", (e) => {
         e.preventDefault();
-        const type = typeSelect.value === 'Custom' ? customInput.value : typeSelect.value;
-        const duration = parseInt(document.querySelector('#duration').value);
+        const type = exerciseTypeSelect.value === "Custom" ? customInput.value.trim() : exerciseTypeSelect.value;
+        const duration = parseInt(durationInput.value);
 
-        if (type && duration > 0) {
-            exerciseData.push({ type, duration });
-            saveAndRender();
-            updateSuggestions(type);
-            form.reset();
-            customInput.style.display = 'none';
+        if (!type || duration <= 0) {
+            alert("Please enter a valid exercise and duration.");
+            return;
         }
+
+        exerciseData.push({ type, duration, date: new Date().toLocaleDateString() });
+        saveAndRender();
+        updateSuggestions(type);
+        form.reset();
+        customInput.style.display = "none";
     });
 
+    // Save & Render Data
     function saveAndRender() {
-        localStorage.setItem('exercises', JSON.stringify(exerciseData));
+        localStorage.setItem("exercises", JSON.stringify(exerciseData));
         renderExerciseLog();
         updateChart();
     }
 
+    // Render Exercise Log
     function renderExerciseLog() {
-        exerciseList.innerHTML = '';
+        exerciseList.innerHTML = "";
         exerciseData.forEach((exercise, index) => {
-            const li = document.createElement('li');
-            li.innerHTML = `${exercise.type} - ${exercise.duration} mins 
-                <button onclick="removeExercise(${index})">X</button>`;
+            const li = document.createElement("li");
+            li.innerHTML = `
+                ${exercise.date} - ${exercise.type} - ${exercise.duration} mins 
+                <button class="remove-btn" onclick="removeExercise(${index})">X</button>
+            `;
             exerciseList.appendChild(li);
         });
     }
 
+    // Remove Exercise
     window.removeExercise = (index) => {
         exerciseData.splice(index, 1);
         saveAndRender();
     };
 
+    // Update Chart.js Graph
     function updateChart() {
         if (progressChart) progressChart.destroy();
 
-        const labels = exerciseData.map(e => e.type);
+        const labels = exerciseData.map(e => `${e.date} (${e.type})`);
         const durations = exerciseData.map(e => e.duration);
 
         progressChart = new Chart(ctx, {
-            type: 'bar',
+            type: "bar",
             data: {
                 labels,
                 datasets: [{
-                    label: 'Duration (mins)',
+                    label: "Duration (mins)",
                     data: durations,
-                    backgroundColor: '#00bfa5'
+                    backgroundColor: "#00bfa5",
+                    borderWidth: 1
                 }]
             },
-            options: { responsive: true, plugins: { legend: { display: false } } }
+            options: {
+                responsive: true,
+                plugins: { legend: { display: false } },
+                scales: { y: { beginAtZero: true } }
+            }
         });
     }
 
+    // Generate Personalized Recommendations
     function updateSuggestions(type) {
         suggestionsList.innerHTML = "";
 
@@ -120,5 +137,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    // Load Existing Data on Page Load
     saveAndRender();
 });
