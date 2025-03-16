@@ -157,7 +157,13 @@ body {
 .stress-log h2 , .relaxation-suggestions h2, .stress-section h2 {
     font-size: 22px;
     color: #004d40;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
+}
+
+.relaxation-suggestions ul {
+    padding-left: 20px;
+    font-size: 14px;
+    color: #555;
 }
 
 /* Stress Entry Box */

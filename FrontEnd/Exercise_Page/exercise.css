@@ -281,7 +281,7 @@ canvas {
     max-width: 800px;
     width: 100%;
     margin: auto;
-    text-align: center;
+    text-align: left;
     padding: 30px 20px;
     background: white;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
