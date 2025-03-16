@@ -1,23 +1,20 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // Sidebar Menu Toggle
     const menuBtn = document.querySelector("#menu-icon");
     const menuBox = document.querySelector("#menu-box");
-    const body = document.querySelector("body");
 
     menuBtn.addEventListener("click", function (event) {
         event.stopPropagation();
         menuBox.classList.toggle("active");
-        menuBtn.classList.toggle("pushed");
-        body.classList.toggle("overlay-active");
     });
 
     document.addEventListener("click", function (event) {
         if (!menuBox.contains(event.target) && !menuBtn.contains(event.target)) {
             menuBox.classList.remove("active");
-            menuBtn.classList.remove("pushed");
-            body.classList.remove("overlay-active");
         }
     });
 
+    // Note Taking System
     const saveNoteBtn = document.querySelector("#save-note-btn");
     const noteTitle = document.querySelector("#note-title");
     const noteContent = document.querySelector("#note-content");
@@ -28,27 +25,34 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let notes = JSON.parse(localStorage.getItem("fitmindNotes")) || [];
 
+    // Save New Note
     saveNoteBtn.addEventListener("click", () => {
         const title = noteTitle.value.trim();
         const content = noteContent.value.trim();
+
         if (title && content) {
-            const note = {
-                title,
-                content,
-                date: new Date().toLocaleString()
+            const note = { 
+                title, 
+                content, 
+                date: new Date().toLocaleString() 
             };
+
             notes.unshift(note);
             saveAndRenderNotes();
             noteTitle.value = "";
             noteContent.value = "";
+        } else {
+            alert("Please enter a note title and content.");
         }
     });
 
+    // Save to Local Storage and Render Notes
     function saveAndRenderNotes() {
         localStorage.setItem("fitmindNotes", JSON.stringify(notes));
         renderNotes();
     }
 
+    // Render Notes
     function renderNotes(filteredNotes = notes) {
         notesList.innerHTML = "";
         filteredNotes.forEach((note, index) => {
@@ -66,7 +70,8 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    window.deleteNote = (index) => {
+    // Delete Note
+    window.deleteNote = function (index) {
         notes.splice(index, 1);
         saveAndRenderNotes();
     };
@@ -87,5 +92,6 @@ document.addEventListener("DOMContentLoaded", function () {
         renderNotes(notes); // Display all notes again
     });
 
+    // Auto-load saved notes on page load
     saveAndRenderNotes();
 });
