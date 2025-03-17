@@ -328,4 +328,42 @@ html,body {
         font-size: 12px;
         padding: 5px 6px;
     }
+
+    .menu-box {
+        width: 200px;
+    }
+
+    .menu-box ul li a {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .menu-box ul li a:hover {
+        padding-left: 15px;
+    }
+
+    .footer-container {
+        flex-direction: column;
+    }
+
+    .footer-contact, .footer-social {
+        margin-bottom: 20px;
+    }
+
+    .footer-social {
+        display: flex;
+        justify-content: center;
+    }
+
+    .footer-social a {
+        font-size: 24px;
+    }
+
+    .footer-bottom {
+        padding: 10px 0;
+    }
+
+    .footer ul li a {
+        font-size: 12px;
+    }
 }
