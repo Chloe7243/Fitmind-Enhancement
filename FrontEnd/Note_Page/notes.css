@@ -181,6 +181,7 @@ body {
     border: 1px solid #ddd;
     border-radius: 6px;
     transition: border 0.3s;
+    resize: none;
 }
 
 .note-form input:focus,

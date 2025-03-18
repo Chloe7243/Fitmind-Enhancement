@@ -234,6 +234,7 @@ body {
     border-radius: 6px;
     outline: none;
     transition: border 0.3s;
+    resize: none;
 }
 
 .form-group input:focus, .form-group textarea:focus {
