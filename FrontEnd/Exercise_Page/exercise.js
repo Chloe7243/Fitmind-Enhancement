@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const li = document.createElement("li");
             li.innerHTML = `
                 ${exercise.date} - ${exercise.type} - ${exercise.duration} mins 
-                <button class="remove-btn" onclick="removeExercise(${index})">X</button>
+                <button class="remove-btn" onclick="removeExercise(${index})">🗑️ Delete</button>
             `;
             exerciseList.appendChild(li);
         });

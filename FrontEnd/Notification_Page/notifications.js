@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
         notifications.forEach((notification, index) => {
             notificationList.innerHTML += `
                 <li>${notification.activity} - ${formatTime(notification.time)}
-                    <button class="delete-btn" onclick="deleteNotification(${index})">🗑️</button>
+                    <button class="delete-btn" onclick="deleteNotification(${index})">🗑️ Delete</button>
                 </li>
             `;
         });

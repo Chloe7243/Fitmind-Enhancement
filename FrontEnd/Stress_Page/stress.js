@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     ${entry.date} - Level ${entry.level} - ${entry.cause}
                     <p class="notes">Notes: ${entry.notes}</p>
                 </div>
-                <button class="remove-btn" onclick="removeStressEntry(${index})">X</button>
+                <button class="remove-btn" onclick="removeStressEntry(${index})">🗑️ Delete</button>
             `;
             stressList.appendChild(li);
         });

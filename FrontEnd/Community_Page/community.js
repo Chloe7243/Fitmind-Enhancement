@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             .map((comment, commentIndex) => `
                                 <li class="comment">
                                     ${comment}
-                                    <button class="delete-comment" onclick="deleteComment(${postIndex}, ${commentIndex})">🗑️</button>
+                                    <button class="delete-comment" onclick="deleteComment(${postIndex}, ${commentIndex})">🗑️ Delete</button>
                                 </li>
                             `)
                             .join("")}
