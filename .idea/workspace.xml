@@ -5,71 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b9a4bed6-0873-4879-8d11-a76e7270f381" name="Changes" comment="Create README.md">
-      <change beforePath="$PROJECT_DIR$/FrontEnd/Community_Page/community.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/community.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/Community_Page/community.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/community.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/Community_Page/community.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/community.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/Exercise_Page/.gitkeep" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/register.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/Exercise_Page/exercise.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/exercise.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/Exercise_Page/exercise.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/exercise.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/Exercise_Page/exercise.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/exercise.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/Home_Page/.gitkeep" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/signIn.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/Home_Page/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/Home_Page/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/script.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/Home_Page/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/Note_Page/notes.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/notes.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/Note_Page/notes.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/notes.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/Note_Page/notes.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/notes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/Notification_Page/.gitkeep" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/Notification_Page/notification.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/notification.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/Notification_Page/notifications.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/notifications.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/Notification_Page/notifications.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/notifications.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/Register_Page/.gitkeep" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/Register_Page/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/Register_Page/script.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/Register_Page/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/Sign_Page/.gitkeep" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/Sign_Page/script.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/Sign_Page/sign-in.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/Sign_Page/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/signIn.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/Stress_Page/.gitkeep" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/Stress_Page/stress.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/stress.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/Stress_Page/stress.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/stress.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/Stress_Page/stress.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/stress.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/Welcome_Page/.gitkeep" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/Welcome_Page/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/welcome.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/Welcome_Page/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/welcome.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/Welcome_Page/welcomepage.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/welcomepage.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/images/.gitkeep" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/images/9299741.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/images/E.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/images/E4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/images/E5.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/images/E6.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/images/E7.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/images/E8.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/images/E9.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/images/ES.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/images/ES1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/images/ES2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/images/ES3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/images/Stress 1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/images/Stress tracking.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/images/comm 1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/images/community.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/images/exe.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/images/exe1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/images/exe2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/images/exercise 1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/images/exercise.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/images/fitmind.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/images/mental-control.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/images/notes.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/images/notes1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/images/wel p.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/images/welcome page.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/setup/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/setup.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/setup/java.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/java.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontEnd/setup/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/setup.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -158,7 +94,23 @@
       <option name="project" value="LOCAL" />
       <updated>1740143536270</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Create README.md">
+      <option name="closed" value="true" />
+      <created>1742566472879</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1742566472879</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Create README.md">
+      <option name="closed" value="true" />
+      <created>1742566491191</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1742566491191</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
