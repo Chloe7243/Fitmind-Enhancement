@@ -169,7 +169,8 @@ body {
 
 /* Individual Post Card */
 .post-card {
-    background: white;
+    background: #f0f9f4;
+    border: 1px solid #d4edda;
     padding: 15px;
     margin-bottom: 10px;
     border-radius: 8px;
