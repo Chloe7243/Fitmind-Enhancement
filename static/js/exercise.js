@@ -1,4 +1,7 @@
-document.addEventListener("DOMContentLoaded", function () {
+function pageLoaded(flaskData){
+    let flaskdata = JSON.parse(flaskData);
+    console.log(flaskdata);
+    console.log(flaskdata[0]);
     // Sidebar Menu Toggle
     const menuBtn = document.querySelector("#menu-icon");
     const menuBox = document.querySelector("#menu-box");
@@ -15,74 +18,84 @@ document.addEventListener("DOMContentLoaded", function () {
             menuBox.classList.remove("active");
         }
     });
-
-    // Exercise Form Elements
-    const form = document.querySelector("#exercise-form");
-    const exerciseTypeSelect = document.querySelector("#exercise-type");
-    const customInput = document.querySelector("#custom-exercise");
-    const exerciseList = document.querySelector("#exercise-list");
-    const durationInput = document.querySelector("#duration");
-    const ctx = document.querySelector("#progress-chart").getContext("2d");
-    const suggestionsList = document.querySelector("#suggestions-list");
-
-    let exerciseData = JSON.parse(localStorage.getItem("exercises")) || [];
-    let progressChart;
-
-    // Show custom exercise input field if "Custom" is selected
-    exerciseTypeSelect.addEventListener("change", () => {
-        customInput.style.display = exerciseTypeSelect.value === "Custom" ? "block" : "none";
-    });
-
-    // Form Submission: Log Exercise
-    form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const type = exerciseTypeSelect.value === "Custom" ? customInput.value.trim() : exerciseTypeSelect.value;
-        const duration = parseInt(durationInput.value);
-
-        if (!type || duration <= 0) {
-            alert("Please enter a valid exercise and duration.");
-            return;
-        }
-
-        exerciseData.push({ type, duration, date: new Date().toLocaleDateString() });
-        saveAndRender();
-        updateSuggestions(type);
-        form.reset();
-        customInput.style.display = "none";
-    });
-
-    // Save & Render Data
-    function saveAndRender() {
-        localStorage.setItem("exercises", JSON.stringify(exerciseData));
-        renderExerciseLog();
-        updateChart();
-    }
-
-    // Render Exercise Log
-    function renderExerciseLog() {
-        exerciseList.innerHTML = "";
-        exerciseData.forEach((exercise, index) => {
-            const li = document.createElement("li");
-            li.innerHTML = `
-                ${exercise.date} - ${exercise.type} - ${exercise.duration} mins 
-                <button class="remove-btn" onclick="removeExercise(${index})">🗑️ Delete</button>
-            `;
-            exerciseList.appendChild(li);
+//
+//    // Exercise Form Elements
+//    const form = document.querySelector("#exercise-form");
+        const exerciseTypeSelect = document.querySelector("#exercise-type");
+        const customInput = document.querySelector("#custom-exercise");
+//    const exerciseList = document.querySelector("#exercise-list");
+//    const durationInput = document.querySelector("#duration");
+      const ctx = document.querySelector("#progress-chart").getContext("2d");
+//    const suggestionsList = document.querySelector("#suggestions-list");
+//
+      let exerciseData = JSON.parse(flaskData) || [];
+      let progressChart;
+//
+//    // Show custom exercise input field if "Custom" is selected
+        exerciseTypeSelect.addEventListener("change", () => {
+            customInput.style.display = exerciseTypeSelect.value === "Custom" ? "block" : "none";
         });
-    }
-
-    // Remove Exercise
-    window.removeExercise = (index) => {
-        exerciseData.splice(index, 1);
-        saveAndRender();
-    };
-
+//
+//    // Form Submission: Log Exercise
+//    form.addEventListener("submit", (e) => {
+//        e.preventDefault();
+//        const type = exerciseTypeSelect.value === "Custom" ? customInput.value.trim() : exerciseTypeSelect.value;
+//        const duration = parseInt(durationInput.value);
+//
+//        if (!type || duration <= 0) {
+//            alert("Please enter a valid exercise and duration.");
+//            return;
+//        }
+//
+//        exerciseData.push({ type, duration, date: new Date().toLocaleDateString() });
+//        saveAndRender();
+//        updateSuggestions(type);
+//        form.reset();
+//        customInput.style.display = "none";
+//    });
+//
+//    // Save & Render Data
+//    function saveAndRender() {
+//        localStorage.setItem("exercises", JSON.stringify(exerciseData));
+//        renderExerciseLog();
+//        updateChart();
+//    }
+//
+//    // Render Exercise Log
+//    function renderExerciseLog() {
+//        exerciseList.innerHTML = "";
+//        exerciseData.forEach((exercise, index) => {
+//            const li = document.createElement("li");
+//            li.innerHTML = `
+//                ${exercise.date} - ${exercise.type} - ${exercise.duration} mins
+//                <button class="remove-btn" onclick="removeExercise(${index})">🗑️ Delete</button>
+//            `;
+//            exerciseList.appendChild(li);
+//        });
+//    }
+//
+//    // Remove Exercise
+//    window.removeExercise = (index) => {
+//        exerciseData.splice(index, 1);
+//        saveAndRender();
+//    };
+//
     // Update Chart.js Graph
     function updateChart() {
         if (progressChart) progressChart.destroy();
+//        let dateString = "2025-04-01 15:50:52";
+//let isoDateString = dateString.replace(" ", "T");
+//console.log(isoDateString); // "2025-04-01T15:50:52"
+//.replace(" ", "T")
+        let data = flaskdata[0];
+        const labels = exerciseData.map(data => `${data["time"]} (${data["type"]})`);
+        //print(label);
+        //const durations = exerciseData.map(e => `${flaskdata[0]["time"].replace(" ", "T")}`);
+        const durations = exerciseData.map(data => data["duration"])
+        console.log(durations)
+        //const durations = exerciseData.map(e => e.time.replace(" ", "T"));
 
-        const labels = exerciseData.map(e => `${e.date} (${e.type})`);
-        const durations = exerciseData.map(e => e.duration);
+
 
         progressChart = new Chart(ctx, {
             type: "bar",
@@ -102,41 +115,17 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     }
+    updateChart();
 
-    // Generate Personalized Recommendations
-    function updateSuggestions(type) {
-        suggestionsList.innerHTML = "";
 
-        const suggestions = {
-            Cardio: ["Stay hydrated!", "Mix cardio with strength training for balance."],
-            Stretching: ["Stretch daily to improve flexibility.", "Hold each stretch for 30 seconds."],
-            Strength: ["Focus on form, not weight.", "Take rest days to recover."],
-            Recreational: ["Join a group for fun!", "Track your distance if running."],
-            Yoga: ["Focus on your breathing.", "Morning yoga is energizing."],
-            HIIT: ["Alternate high and low intensity.", "Don't skip your warm-up."],
-            Pilates: ["Engage your core.", "Controlled movements improve results."]
-        };
 
-        if (suggestions[type]) {
-            suggestions[type].forEach(suggestion => {
-                const li = document.createElement("li");
-                li.textContent = suggestion;
-                suggestionsList.appendChild(li);
-            });
-        } else {
-            const customSuggestions = [
-                `Great choice with "${type}"! Keep it fun.`,
-                `Track your progress with "${type}" to stay motivated.`,
-                `Pair "${type}" with relaxation exercises for balance.`
-            ];
-            customSuggestions.forEach(suggestion => {
-                const li = document.createElement("li");
-                li.textContent = suggestion;
-                suggestionsList.appendChild(li);
-            });
-        }
-    }
+//    if (flaskdata[0]["rating"]) {
+//    console.log("running here");
+//    flaskdata.forEach(suggestion => {
+//                const li = document.createElement("li");
+//                li.textContent = suggestions[suggestion["rating"]];
+//                relaxationList.appendChild(li);
+//            });
+//        }
 
-    // Load Existing Data on Page Load
-    saveAndRender();
-});
+};

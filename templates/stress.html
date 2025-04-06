@@ -4,23 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FitMind - Stress Tracking</title>
-    <link rel="stylesheet" href="/FITMIND-APP-MAIN-PROJECT/static/css/stress.css">
-    <script defer src="/FITMIND-APP-MAIN-PROJECT/static/js/stress.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/stress.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
     <!-- Navigation Bar -->
-    <header>
-        <div class="navbar">
-            <div class="menu-container">
-                <div class="menu-icon" id="menu-icon"><i class="fas fa-bars"></i> Menu</div>
-            </div>
-            <div class="logo"><a href="/FITMIND-APP-MAIN-PROJECT/templates/index.html">FitMind</a></div>
-            <a href="/FITMIND-APP-MAIN-PROJECT/templates/login.html"><button class="sign-in">Sign In</button></a>
-        </div>
-    </header>
+    {% include 'navbar_template.html' %}
 
     <!-- Sidebar Menu -->
     <div class="menu-box" id="menu-box">
@@ -51,26 +42,27 @@
     <section class="stress-section">
         <h2><i class="fas fa-brain"></i> Log Your Stress Level</h2>
 
-        <form id="stress-form">
+        <form id="stress-form" method="POST" action="/stress">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
             <div class="form-group">
                 <label>How stressed are you today? (Click On The Emoji)</label>
                 <div class="emoji-scale">
-                    <label><input type="radio" name="stress-level" value="1"> 😌</label>
-                    <label><input type="radio" name="stress-level" value="2"> 🙂</label>
-                    <label><input type="radio" name="stress-level" value="3"> 😐</label>
-                    <label><input type="radio" name="stress-level" value="4"> 😟</label>
-                    <label><input type="radio" name="stress-level" value="5"> 😫</label>
+                    <label><input type="radio" name="stress-level" id="1" value="1"> 😌</label>
+                    <label><input type="radio" name="stress-level" id="2"  value="2"> 🙂</label>
+                    <label><input type="radio" name="stress-level" id="3"  value="3"> 😐</label>
+                    <label><input type="radio" name="stress-level" id="4"  value="4"> 😟</label>
+                    <label><input type="radio" name="stress-level" id="5"  value="5"> 😫</label>
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="stress-cause">What caused your stress today?</label>
-                <input type="text" id="stress-cause" placeholder="e.g., Exams, Deadlines">
+                <input type="text" id="stress-cause" name="stress-cause" placeholder="e.g., Exams, Deadlines">
             </div>
 
             <div class="form-group">
                 <label for="additional-notes">Additional Notes (optional)</label>
-                <textarea id="additional-notes" rows="3" placeholder="Add any notes..."></textarea>
+                <textarea id="additional-notes" name="additional-notes" rows="3" placeholder="Add any notes..."></textarea>
             </div>
 
             <button type="submit" class="log-btn">Log Stress</button>
@@ -80,8 +72,22 @@
     <!-- Logged Stress Entries -->
     <section class="stress-log">
         <h2>Logged Stress Entries</h2>
-        <ul id="stress-list"></ul>
+        <ul id="stress-list">
+        {% for i in logs %}
+            <li class="stress-entry">
+        <div class="entry-text">
+            {{i.time_recorded}} - Level {{i.rating}} - {{i.cause}}
+            <p class="notes">Notes: {{i.user_description}}</p>
+        </div>
+        <a href="{{ url_for('stress') }}/{{i.id}}">
+            <button class="remove-btn"  onclick="removeStressEntry(${index})">🗑️ Delete</button>
+        </a>
+
+    {% endfor %}
+            </ul>
     </section>
+
+
 
     <!-- Relaxation Recommendations -->
     <section class="relaxation-suggestions">
@@ -90,38 +96,11 @@
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-logo">
-                <h2>FitMind</h2>
-                <p>Track your fitness and stress levels effortlessly.</p>
-            </div>
-            <div class="footer-links">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="/FITMIND-APP-MAIN-PROJECT/templates/index.html">Home</a></li>
-                    <li><a href="/FITMIND-APP-MAIN-PROJECT/templates/exercise.html">Exercise Tracking</a></li>
-                    <li><a href="/FITMIND-APP-MAIN-PROJECT/templates/stress.html">Stress Tracking</a></li>
-                    <li><a href="/FITMIND-APP-MAIN-PROJECT/templates/community.html">Community</a></li>
-                    <li><a href="/FITMIND-APP-MAIN-PROJECT/templates/notes.html">My Notes</a></li>
-                </ul>
-            </div>
-            <div class="footer-contact">
-                <h3>Contact Us</h3>
-                <p>Email: support@fitmind.com</p>
-                <p>Phone: +123 456 7890</p>
-            </div>
-            <div class="footer-social">
-                <h3>Follow Us</h3>
-                <a href="#"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 FitMind. All Rights Reserved.</p>
-        </div>
-    </footer>
+    {% include 'footer_template.html' %}
 
 </body>
+<script type="text/javascript" src="{{ url_for('static',filename='js/stress.js') }}"></script>
+<script type="text/javascript">
+    pageLoaded(`{{logs | tojson}}`);
+</script>
 </html>

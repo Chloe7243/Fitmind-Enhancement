@@ -4,22 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FitMind - My Notes</title>
-    <link rel="stylesheet" href="/FITMIND-APP-MAIN-PROJECT/static/css/notes.css">
-    <script defer src="/FITMIND-APP-MAIN-PROJECT/static/js/notes.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/notes.css') }}">
+    <script defer src="{{ url_for('static',filename='js/notes.js') }}"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
     <!-- Navigation Bar -->
-    <header>
-        <div class="navbar">
-            <div class="menu-container">
-                <div class="menu-icon" id="menu-icon"><i class="fas fa-bars"></i> Menu</div>
-            </div>
-            <div class="logo"><a href="/FITMIND-APP-MAIN-PROJECT/templates/index.html">FitMind</a></div>
-            <a href="/FITMIND-APP-MAIN-PROJECT/templates/login.html"><button class="sign-in">Sign In</button></a>
-        </div>
-    </header>
+   {% include 'navbar_template.html' %}
 
     <!-- Sidebar Menu -->
     <div class="menu-box" id="menu-box">
@@ -51,11 +43,12 @@
         <h2><i class="fas fa-sticky-note"></i> My Notes</h2>
 
         <!-- Note Input -->
-        <div class="note-form">
-            <input type="text" id="note-title" placeholder="Note Title">
-            <textarea id="note-content" rows="4" placeholder="Write your note..."></textarea>
-            <button id="save-note-btn">Save Note</button>
-        </div>
+        <form class="note-form" method="POST" action="/notes">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <input type="text" name="title" id="note-title" placeholder="Note Title">
+            <textarea id="note-content" name="description" rows="4" placeholder="Write your note..."></textarea>
+            <button type="submit" id="save-note-btn">Save Note</button>
+        </form>
 
         <!-- Search & Show All Buttons -->
         <div class="search-container">
@@ -72,42 +65,7 @@
     </section>
 
     <!-- Footer Section -->
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-logo">
-                <h2>FitMind</h2>
-                <p>Track your fitness and stress levels effortlessly.</p>
-            </div>
-
-            <div class="footer-links">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="/FITMIND-APP-MAIN-PROJECT/templates/index.html">Home</a></li>
-                    <li><a href="/FITMIND-APP-MAIN-PROJECT/templates/exercise.html">Exercise Tracking</a></li>
-                    <li><a href="/FITMIND-APP-MAIN-PROJECT/templates/stress.html">Stress Tracking</a></li>
-                    <li><a href="/FITMIND-APP-MAIN-PROJECT/templates/community.html">Community</a></li>
-                    <li><a href="/FITMIND-APP-MAIN-PROJECT/templates/notes.html">My Notes</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-contact">
-                <h3>Contact Us</h3>
-                <p>Email: support@fitmind.com</p>
-                <p>Phone: +123 456 7890</p>
-            </div>
-
-            <div class="footer-social">
-                <h3>Follow Us</h3>
-                <a href="#"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <p>&copy; 2025 FitMind. All Rights Reserved.</p>
-        </div>
-    </footer>
+    {% include 'footer_template.html' %}
 
 </body>
 </html>
