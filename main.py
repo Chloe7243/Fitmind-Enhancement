@@ -148,28 +148,11 @@ def register():
                 return render_template('register.html')
 
 
-@app.route("/profile", methods=['GET', 'POST'])
-@login_required
-def profile():
-    if request.method == "GET":
-        return render_template("profile.html")
-    if request.method == "POST":
-        with app.app_context():
-            try:
-                uploaded_picture = request.files["uploaded_image"]
-                encoded_image = base64.b64encode(uploaded_picture.read())
-                string_for_database = encoded_image.decode('utf-8')
-                update_query = (update(UserAccounts).where(UserAccounts.id == current_user.id).values(
-                    profile_image=string_for_database))
-                db.session.add(update_query)
-                db.session.commit()
-                return 'uploaded'
-            except:
-                flash("there was an error when attempting to upload your picture")
-                return redirect(url_for('dashboard'))
 
-@login_required
+
+
 @app.route("/stress", methods=['GET', 'POST'])
+@login_required
 def stress():
     if request.method == "GET":
         with app.app_context():
@@ -196,8 +179,9 @@ def stress():
                     stress_logs = [log.to_dict() for log in user_logs]
                     return render_template('stress.html', logs=stress_logs)
 
-@login_required
+
 @app.route('/stress/<id>', methods=['GET'])
+@login_required
 def delete_note(id):
     if request.method == "GET":
         with app.app_context():
@@ -212,8 +196,9 @@ def delete_note(id):
                 flash("There was an error removing your log")
 
 
-@login_required
+
 @app.route("/exercise", methods=['GET', 'POST'])
+@login_required
 def exercise():
     if request.method == "GET":
         with app.app_context():
@@ -239,8 +224,9 @@ def exercise():
                 print(e)
                 return render_template('exercise.html')
 
-@login_required
+
 @app.route('/exercise/<id>', methods=['GET'])
+@login_required
 def delete_exercise(id):
     if request.method == "GET":
         with app.app_context():
@@ -255,8 +241,9 @@ def delete_exercise(id):
                 flash("There was an error removing your exercise")
 
 
-@login_required
+
 @app.route("/notes", methods=['GET', 'POST'])
+@login_required
 def notes():
     if request.method == "GET":
         with app.app_context():
@@ -278,8 +265,9 @@ def notes():
                 return render_template('notes.html')
 
 
-@login_required
+
 @app.route("/community", methods=['GET', 'POST'])
+@login_required
 def community():
     if request.method == "GET":
         return render_template("community.html")
@@ -288,6 +276,26 @@ def community():
 def notification():
     if request.method == "GET":
         return render_template("notification.html")
+
+
+@app.route("/profile", methods=['GET', 'POST'])
+@login_required
+def profile():
+    if request.method == "GET":
+      return render_template("profile.html")
+    if request.method == "POST":
+       with app.app_context():
+         try:
+           uploaded_picture = request.files["uploaded_image"]
+           encoded_image = base64.b64encode(uploaded_picture.read())
+           string_for_database = encoded_image.decode('utf-8')
+           update_query = (update(UserAccounts).where(UserAccounts.id == current_user.id).values(profile_image=string_for_database))
+           db.session.execute(update_query)
+           db.session.commit()
+           return 'uploaded'
+         except:
+             flash("there was an error when attempting to upload your picture")
+             return redirect(url_for('base'))
 
 if __name__ == '__main__':
     app.run(debug=True)
