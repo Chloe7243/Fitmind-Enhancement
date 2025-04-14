@@ -3,92 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FitMind</title>
-    <link rel="stylesheet" href="{{ url_for('static',filename='css/styles.css') }}">
-    <script defer src="{{ url_for('static',filename='js/script.js') }}"></script>
+    <title>FitMind - Your Wellness Companion</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/welcome.css') }}">
+    <script defer src="{{ url_for('static', filename='js/welcome.js') }}"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
-    <!-- Navigation Bar -->
-    {% include 'navbar_template.html' %}
-
-    <!-- Sidebar Menu -->
-    <div class="menu-box" id="menu-box">
-        <div class="menu-icon-top">
-            <i class="fas fa-home"></i>
+<!-- Loading Screen -->
+<div class="loading-screen" id="loading-screen">
+    <div class="loading-content">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="FitMind Logo" class="logo">
+        <h1 class="loading-title">Welcome to FitMind</h1>
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
         </div>
-
-        <ul>
-            <li><a href="{{ url_for('base') }}"><i class="fas fa-chart-line"></i> Dashboard</a></li>
-            <li><a href="{{ url_for('stress') }}"><i class="fas fa-heartbeat"></i> Stress Tracking</a></li>
-            <li><a href="{{ url_for('exercise') }}"><i class="fas fa-dumbbell"></i> Exercise Tracking</a></li>
-            <li><a href="{{ url_for('community') }}"><i class="fas fa-users"></i> Community</a></li>
-            <li><a href="{{ url_for('notes') }}"><i class="fas fa-sticky-note"></i> My Note</a></li>
-            <li><a href="{{ url_for('notification') }}"><i class="fas fa-bell"></i> Notifications</a></li>
-            <li><a href="{{ url_for('setting') }}"><i class="fas fa-cog"></i> Settings</a></li>
-            <li><a href="{{ url_for('about') }}"><i class="fas fa-user"></i> About Us</a></li>
-        </ul>
+        <p class="loading-text">Loading your personal wellness dashboard...</p>
     </div>
-    
+</div>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1 class="fade-in">WELCOME TO FITMIND</h1>
-            <p class="fade-in">TRACK STRESS AND EXERCISE</p>
-            <a href="#dashboard"><button class="cta-button">Get Started</button></a>
-        </div>
-    </section>
+<!-- Welcome Page -->
+<div class="container" id="welcome-container" style="display: none;">
+    <h1>Welcome to <span class="highlight">FitMind</span></h1>
+    <p class="subtext">Track your stress, log your workouts, and gain insights into your wellness journey.</p>
 
-    <!-- Profile Section -->
-    <section class="profile-section">
-        <div class="profile-container">
-            <div class="profile-avatar">AG</div>
-            <div class="profile-info">
-                <p class="greeting">Good Morning</p>
-                <h2 class="username">{{current_user.username}}</h2>
-            </div>
+    <div class="features">
+        <div class="feature-card">
+            <h2>🧘 Stress Tracking</h2>
+            <p>Log your stress, track patterns, and discover tailored relaxation techniques.</p>
         </div>
-    </section>
-    
-    <!-- Dashboard Section -->
-    <div class="dashboard-header">
-        <h1>DASHBOARD</h1>
+        <div class="feature-card">
+            <h2>🏃 Exercise Tracking</h2>
+            <p>Log your workouts and see how physical activity impacts your mental clarity.</p>
+        </div>
+        <div class="feature-card">
+            <h2>📊 Personalized Insights</h2>
+            <p>View interactive graphs and trends to understand your progress over time.</p>
+        </div>
     </div>
 
-    <section class="dashboard" id="dashboard">
-        <div class="dashboard-card">
-            <img src="{{ url_for('static',filename='images/exercise.jpg') }}" alt="Track Exercise">
-            <h2>Track Exercise</h2>
-            <p>Log your workouts and stay consistent with your fitness.</p>
-            <a href="/FITMIND-APP-MAIN-PROJECT/FrontEnd/Exercise_Page/exercise.html"><button>Track Exercise</button></a>
-        </div>
+    <div class="cta-buttons">
+        <a href="{{ url_for('register') }}"><button class="register-btn"><i class="fas fa-user-plus"></i> Register</button></a>
+        <a href="{{ url_for('login') }}"><button class="signin-btn"><i class="fas fa-sign-in-alt"></i> Sign In</button></a>
+        <a href="{{ url_for('homepage') }}"><button class="guest-btn"><i class="fas fa-user-secret"></i> Continue as Guest</button></a>
+    </div>
 
-        <div class="dashboard-card">
-            <img src="{{ url_for('static',filename='images/Stress 1.jpg') }}" alt="Track Stress">
-            <h2>Track Stress</h2>
-            <p>Monitor your stress levels and manage them effectively.</p>
-            <a href="/FITMIND-APP-MAIN-PROJECT/FrontEnd/Stress_Page/stress.html"><button>Track Stress</button></a>
-        </div>
-
-        <div class="dashboard-card">
-            <img src="{{ url_for('static',filename='images/comm 1.jpg') }}" alt="Community">
-            <h2>Community</h2>
-            <p>Engage with peers and share your wellness journey.</p>
-            <a href="/FITMIND-APP-MAIN-PROJECT/FrontEnd/Community_Page/community.html"><button>Community</button></a>
-        </div>
-
-        <div class="dashboard-card">
-            <img src="{{ url_for('static',filename='images/notes.jpg') }}" alt="My Notes">
-            <h2>My Notes</h2>
-            <p>Jot down your daily plans, reflections, and wellness journey.</p>
-            <a href="/FITMIND-APP-MAIN-PROJECT/FrontEnd/Note_Page/notes.html"><button>My Note</button></a>
-        </div>
-    </section>
-
-    <!-- Footer Section -->
-    {% include 'footer_template.html' %}
+    <p class="terms">By using FitMind, you agree to our <a href="#">Terms of Use</a> and confirm you have read our <a href="#">Privacy Policy</a>.</p>
+</div>
 
 </body>
 </html>

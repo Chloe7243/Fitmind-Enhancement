@@ -60,6 +60,11 @@ def database_reset():
 def base():
     return render_template("index.html")
 
+@app.route("/home")
+@login_required
+def homepage():
+    return render_template("homepage.html")
+
 @app.route("/setting")
 def setting():
     return render_template("setting.html")
@@ -74,7 +79,7 @@ def login():
     if request.method == "GET":
         if current_user.is_authenticated:
             # redirects if user logged in #
-            return redirect(url_for('index'))
+            return redirect(url_for('homepage'))
         return render_template("login.html")
     if request.method == "POST":
         with app.app_context():
@@ -87,7 +92,7 @@ def login():
                     flash("Invalid credentials!")
                     return render_template('login.html')
                 login_user(user_data)
-                return redirect(url_for('base'))
+                return redirect(url_for('homepage'))
             except Exception as e:
                 flash("An unexpected error occurred when adding your account to our system")
                 flash(f'{e}')
@@ -106,12 +111,12 @@ def register():
         form = SignupForm()
         if current_user.is_authenticated:
             # redirects if user logged in #
-            return redirect("index.html")
+            return redirect("homepage.html")
         return render_template("register.html", form=form)
     if request.method == "POST":
         if current_user.is_authenticated:
             # redirects if user logged in #
-            return redirect("index.html")
+            return redirect("homepage.html")
         with app.app_context():
             try:
                 # requests all data from register form #
@@ -141,7 +146,7 @@ def register():
                 db.session.add(user)
                 db.session.commit()
                 login_user(user)
-                return redirect(url_for('base'))
+                return redirect(url_for('homepage'))
             except Exception as e:
                 flash("An unexpected error occurred when adding your account to our system")
                 flash(f'{e}')
@@ -295,7 +300,7 @@ def profile():
            return 'uploaded'
          except:
              flash("there was an error when attempting to upload your picture")
-             return redirect(url_for('base'))
+             return redirect(url_for('homepage'))
 
 if __name__ == '__main__':
     app.run(debug=True)
