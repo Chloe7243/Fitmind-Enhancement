@@ -61,7 +61,6 @@ def base():
     return render_template("index.html")
 
 @app.route("/home")
-@login_required
 def homepage():
     return render_template("homepage.html")
 
