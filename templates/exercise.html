@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FitMind - Exercise Tracking</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ url_for('static',filename='css/exercise.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 
@@ -76,18 +77,14 @@
         <h2>Logged Exercises</h2>
         <ul id="exercise-list">
        {% for i in exercise %}
-        <li class="exercise-entry">
-        <div class="entry-text">
-            {{i.time}} - Level {{i.type}} - {{i.duration}}
-        </div>
-        <a href="{{ url_for('exercise') }}/{{i.id}}">
-            <button class="remove-btn"  onclick="removeStressEntry(${index})">🗑️ Delete</button>
-        </a>
+        <li class="exercise-entry" data-id="{{ i.id }}">
+            <div class="entry-text">
+                {{ i.time }} - {{ i.type }} ({{ i.duration }})
+            </div>
+            <button class="remove-btn" onclick="deleteExerciseEntry({{ i.id }}, this)">🗑️ Delete</button>
         </li>
         {% endfor %}
         </ul>
-
-
     </section>
 
     <!-- Progress Chart -->

@@ -76,32 +76,62 @@
 //    };
 //
 
-function pageLoaded(flaskData){
-    let flaskdata = JSON.parse(flaskData);
-    console.log(flaskdata);
-    console.log(flaskdata[0]);
-    const relaxationList = document.querySelector("#relaxation-list");
-    // Generate Personalized Relaxation Recommendations
+// Load Stress Data
+function pageLoaded(flaskData) {
+    let data = JSON.parse(flaskData);
+    const relaxationList = document.getElementById("relaxation-list");
+    relaxationList.innerHTML = "";  // clear old ones
 
-    relaxationList.innerHTML = "";
     const suggestions = {
-            1: ["Keep up the great mood! Consider light stretching or a walk."],
-            2: ["Try deep breathing for 5 minutes.", "Go for a short walk outside."],
-            3: ["Take a break from screens.", "Do a 10-minute meditation."],
-            4: ["Listen to calming music.", "Do a relaxing yoga session."],
-            5: ["Try journaling to express emotions.", "Reach out to someone for support."]
+        1: ["Keep up the great mood! Consider light stretching or a walk."],
+        2: ["Try deep breathing for 5 minutes.", "Go for a short walk outside."],
+        3: ["Take a break from screens.", "Do a 10-minute meditation."],
+        4: ["Listen to calming music.", "Do a relaxing yoga session."],
+        5: ["Try journaling to express emotions.", "Reach out to someone for support."]
     };
 
+    if (data.length > 0) {
+        const latestEntry = data[data.length - 1];
+        const rating = parseInt(latestEntry.rating);
 
-    console.log("running");
-    if (flaskdata[0]["rating"]) {
-    console.log("running here");
-    flaskdata.forEach(suggestion => {
+        if (suggestions[rating]) {
+            suggestions[rating].forEach(suggestion => {
                 const li = document.createElement("li");
-                li.textContent = suggestions[suggestion["rating"]];
+                li.textContent = suggestion;
                 relaxationList.appendChild(li);
             });
+        } else {
+            const li = document.createElement("li");
+            li.textContent = "No recommendations available for this level.";
+            relaxationList.appendChild(li);
         }
-
-
+    }
 }
+
+// Delete Stress Entry
+function deleteStressEntry(id, button) {
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+    fetch(`/stress/delete/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken 
+        }
+    })
+    .then(response => response.json())
+    .then(result => {
+        if (result.success) {
+            const entry = button.closest('.stress-entry');
+            entry.classList.add("removed");
+            setTimeout(() => entry.remove(), 200);
+        } else {
+            alert("Error deleting entry: " + (result.error || ""));
+        }
+    })
+    .catch(err => {
+        console.error("Error:", err);
+        alert("Something went wrong. Please try again.");
+    });
+}
+

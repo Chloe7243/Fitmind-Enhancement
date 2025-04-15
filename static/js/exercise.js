@@ -118,6 +118,33 @@ function pageLoaded(flaskData){
     updateChart();
 
 
+function deleteExerciseEntry(id, button) {
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+    fetch(`/exercise/delete/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken
+        }
+    })
+    .then(response => response.json())
+    .then(result => {
+        if (result.success) {
+            const entry = button.closest('.exercise-entry');
+            entry.classList.add("removed");
+            setTimeout(() => entry.remove(), 300);
+        } else {
+            alert("Error deleting exercise: " + (result.error || ""));
+        }
+    })
+    .catch(err => {
+        console.error("Error:", err);
+        alert("Something went wrong.");
+    });
+}
+
+
 
 //    if (flaskdata[0]["rating"]) {
 //    console.log("running here");
@@ -129,3 +156,30 @@ function pageLoaded(flaskData){
 //        }
 
 };
+
+
+function deleteExerciseEntry(id, button) {
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+    fetch(`/exercise/delete/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken
+        }
+    })
+    .then(response => response.json())
+    .then(result => {
+        if (result.success) {
+            const entry = button.closest('.exercise-entry');
+            entry.classList.add("removed");
+            setTimeout(() => entry.remove(), 200);
+        } else {
+            alert("Error deleting exercise: " + (result.error || ""));
+        }
+    })
+    .catch(err => {
+        console.error("Error:", err);
+        alert("Something went wrong.");
+    });
+}

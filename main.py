@@ -10,6 +10,7 @@ from functools import wraps
 from sqlalchemy import update
 from datetime import datetime, timedelta, timezone
 from password_strength import PasswordPolicy
+from flask import jsonify
 
 
 app = Flask(__name__)
@@ -78,7 +79,6 @@ def logout():
     logout_user()
     flash("You’ve been logged out.")
     return redirect(url_for("base"))  # or "index" if you renamed it
-
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
@@ -206,6 +206,19 @@ def delete_note(id):
             else:
                 flash("There was an error removing your log")
 
+@app.route('/stress/delete/<int:id>', methods=['DELETE'])
+@login_required
+def delete_stress(id):
+    with app.app_context():
+        stress_log = Logs.query.filter_by(log_id=id, made_by=current_user.id).first()
+        if stress_log:
+            db.session.delete(stress_log)
+            db.session.commit()
+            return jsonify({'success': True})
+        else:
+            return jsonify({'success': False, 'error': 'Entry not found'}), 404
+
+
 
 
 @app.route("/exercise", methods=['GET', 'POST'])
@@ -251,6 +264,18 @@ def delete_exercise(id):
             else:
                 flash("There was an error removing your exercise")
 
+
+@app.route('/exercise/delete/<int:id>', methods=['DELETE'])
+@login_required
+def delete_exercise_ajax(id):
+    with app.app_context():
+        exercise = Exercise.query.filter_by(log_id=id, made_by=current_user.id).first()
+        if exercise:
+            db.session.delete(exercise)
+            db.session.commit()
+            return jsonify({'success': True})
+        else:
+            return jsonify({'success': False, 'error': 'Exercise not found'}), 404
 
 
 @app.route("/notes", methods=['GET', 'POST'])
