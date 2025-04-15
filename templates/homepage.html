@@ -62,28 +62,28 @@
             <img src="{{ url_for('static',filename='images/exercise.jpg') }}" alt="Track Exercise">
             <h2>Track Exercise</h2>
             <p>Log your workouts and stay consistent with your fitness.</p>
-            <a href="/FITMIND-APP-MAIN-PROJECT/FrontEnd/Exercise_Page/exercise.html"><button>Track Exercise</button></a>
+            <a href="{{ url_for('exercise') }}"><button>Track Exercise</button></a>
         </div>
 
         <div class="dashboard-card">
             <img src="{{ url_for('static',filename='images/Stress 1.jpg') }}" alt="Track Stress">
             <h2>Track Stress</h2>
             <p>Monitor your stress levels and manage them effectively.</p>
-            <a href="/FITMIND-APP-MAIN-PROJECT/FrontEnd/Stress_Page/stress.html"><button>Track Stress</button></a>
+            <a href="{{ url_for('stress') }}"><button>Track Stress</button></a>
         </div>
 
         <div class="dashboard-card">
             <img src="{{ url_for('static',filename='images/comm 1.jpg') }}" alt="Community">
             <h2>Community</h2>
             <p>Engage with peers and share your wellness journey.</p>
-            <a href="/FITMIND-APP-MAIN-PROJECT/FrontEnd/Community_Page/community.html"><button>Community</button></a>
+            <a href="{{ url_for('community') }}"><button>Community</button></a>
         </div>
 
         <div class="dashboard-card">
             <img src="{{ url_for('static',filename='images/notes.jpg') }}" alt="My Notes">
             <h2>My Notes</h2>
             <p>Jot down your daily plans, reflections, and wellness journey.</p>
-            <a href="/FITMIND-APP-MAIN-PROJECT/FrontEnd/Note_Page/notes.html"><button>My Note</button></a>
+            <a href="{{ url_for('notes') }}"><button>My Note</button></a>
         </div>
     </section>
 

@@ -114,7 +114,7 @@ body {
 .hero {
     width: 100%;
     height: 60vh;
-    background: url('/FITMIND-APP-MAIN-PROJECT/FrontEnd/images/fitmind.jpg') center/cover no-repeat;
+    background: url('../images/fitmind.jpg') center/cover no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
