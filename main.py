@@ -72,6 +72,13 @@ def setting():
 def about():
     return render_template("about.html")
 
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    flash("You’ve been logged out.")
+    return redirect(url_for("base"))  # or "index" if you renamed it
+
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():

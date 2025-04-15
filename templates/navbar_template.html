@@ -1,10 +1,26 @@
- <!-- Navigation Bar -->
-    <header>
-        <div class="navbar">
-            <div class="menu-container">
-                <div class="menu-icon" id="menu-icon"><i class="fas fa-bars"></i> Menu</div>
-            </div>
-            <div class="logo"><a href="/FITMIND-APP-MAIN-PROJECT/FrontEnd/Home_Page/index.html">FitMind</a></div>
-            <a href="{{ url_for('login') }}"><button class="sign-in">Sign In</button></a>
+<!-- Navigation Bar -->
+<header>
+    <div class="navbar">
+        <div class="menu-container">
+            <div class="menu-icon" id="menu-icon"><i class="fas fa-bars"></i> Menu</div>
         </div>
-    </header>
+
+        <div class="logo">
+            <a href="{{ url_for('homepage') }}">FitMind</a>
+        </div>
+
+        {% if current_user.is_authenticated %}
+            <div class="dropdown">
+                <button class="dropbtn">{{ current_user.username }} <i class="fas fa-caret-down"></i></button>
+                    <div class="dropdown-content">
+                        <a href="{{ url_for('profile') }}">Profile</a>
+                        <a href="{{ url_for('logout') }}">Logout</a>
+                    </div>
+            </div>
+        {% else %}
+            <a href="{{ url_for('login') }}">Sign In</a>
+            <a href="{{ url_for('register') }}">Register</a>
+        {% endif %}
+    </div>
+</header>
+
