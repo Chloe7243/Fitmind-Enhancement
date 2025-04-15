@@ -30,6 +30,21 @@ body {
     z-index: 1000;
 }
 
+.nav-link {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    background-color: #00796b;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+.nav-link:hover {
+    background-color: #00796b;
+}
+  
+
 .logo a {
     font-size: 24px;
     font-weight: bold;
