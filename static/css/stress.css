@@ -152,6 +152,19 @@
     display: none;
 }
 
+.emoji-scale span {
+    margin-left: 5px;
+    font-size: 0.85rem;
+    color: #555;
+}
+
+.emoji-scale span {
+    margin-left: 2px;
+    font-size: 0.85rem;
+    color: #555;
+}
+
+
 /* Log Button */
 .log-btn {
     width: 100%;

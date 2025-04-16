@@ -83,13 +83,29 @@ function pageLoaded(flaskData) {
     relaxationList.innerHTML = "";  // clear old ones
 
     const suggestions = {
-        1: ["Keep up the great mood! Consider light stretching or a walk."],
-        2: ["Try deep breathing for 5 minutes.", "Go for a short walk outside."],
-        3: ["Take a break from screens.", "Do a 10-minute meditation."],
-        4: ["Listen to calming music.", "Do a relaxing yoga session."],
-        5: ["Try journaling to express emotions.", "Reach out to someone for support."]
+        1: [
+            "You're in a great space — keep it up!",
+            "Maintain your calm with a nature walk or some gentle stretches."
+        ],
+        2: [
+            "You're doing okay. Try 5 minutes of mindful breathing.",
+            "Listen to calming music or take a short digital break."
+        ],
+        3: [
+            "You're feeling in-between. Try journaling your thoughts.",
+            "Step outside for a quick walk or hydrate and reset."
+        ],
+        4: [
+            "You're under pressure — try a calming breathing exercise.",
+            "Consider doing a 10-minute meditation or yoga session."
+        ],
+        5: [
+            "You're overwhelmed. Pause and breathe deeply.",
+            "Talk to someone you trust, or listen to a guided meditation."
+        ]
     };
-
+    
+    // Check if data is available
     if (data.length > 0) {
         const latestEntry = data[data.length - 1];
         const rating = parseInt(latestEntry.rating);
@@ -135,3 +151,54 @@ function deleteStressEntry(id, button) {
     });
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("stress-form");
+    const csrfToken = document.querySelector('input[name="csrf_token"]').value;
+
+    form.addEventListener("submit", function (e) {
+        e.preventDefault(); // stop page reload
+
+        const level = document.querySelector('input[name="stress-level"]:checked');
+        const cause = document.querySelector("#stress-cause").value.trim();
+        const notes = document.querySelector("#additional-notes").value.trim();
+
+        if (!level) {
+            alert("Please select a stress level.");
+            return;
+        }
+
+        fetch("/stress", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": csrfToken
+            },
+            body: JSON.stringify({
+                "stress-level": level.value,
+                "stress-cause": cause,
+                "additional-notes": notes
+            })
+        })
+        .then(res => res.text())
+        .then(html => {
+            // Replace the whole log section with new one
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            const updatedList = doc.querySelector("#stress-list");
+            const updatedSuggestions = doc.querySelector("#relaxation-list");
+            const newHeader = doc.querySelector("#recommendation-header");
+
+            document.querySelector("#stress-list").innerHTML = updatedList.innerHTML;
+            document.querySelector("#relaxation-list").innerHTML = updatedSuggestions.innerHTML;
+            if (newHeader) {
+                document.querySelector("#recommendation-header").textContent = newHeader.textContent;
+            }
+
+            form.reset();
+        })
+        .catch(err => {
+            console.error("Failed to log stress:", err);
+            alert("Something went wrong.");
+        });
+    });
+});

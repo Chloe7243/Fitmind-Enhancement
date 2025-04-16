@@ -171,24 +171,23 @@ def stress():
             stress_logs = [log.to_dict() for log in user_logs]
             return render_template('stress.html', logs=stress_logs)
     if request.method == "POST":
-        print("posting!")
-        with app.app_context():
-            try:
-                stress_level = request.form["stress-level"]
-                cause = request.form["stress-cause"]
-                notes = request.form["additional-notes"]
-                log = Logs(made_by=current_user.id, rating=stress_level, cause=cause, user_description=notes)
-                db.session.add(log)
-                db.session.commit()
-                user_logs = Logs.query.filter_by(made_by=current_user.id)
-                stress_logs = [log.to_dict() for log in user_logs]
-                return render_template('stress.html', logs=stress_logs)
-            except Exception as e:
-                print(e)
-                with app.app_context():
-                    user_logs = Logs.query.filter_by(made_by=current_user.id)
-                    stress_logs = [log.to_dict() for log in user_logs]
-                    return render_template('stress.html', logs=stress_logs)
+        if request.is_json:
+            data = request.get_json()
+            stress_level = data.get("stress-level")
+            cause = data.get("stress-cause")
+            notes = data.get("additional-notes")
+        else:
+            stress_level = request.form["stress-level"]
+            cause = request.form["stress-cause"]
+            notes = request.form["additional-notes"]
+
+        log = Logs(made_by=current_user.id, rating=stress_level, cause=cause, user_description=notes)
+        db.session.add(log)
+        db.session.commit()
+
+        user_logs = Logs.query.filter_by(made_by=current_user.id)
+        stress_logs = [log.to_dict() for log in user_logs]
+        return render_template("stress.html", logs=stress_logs)
 
 
 @app.route('/stress/<id>', methods=['GET'])
