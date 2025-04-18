@@ -17,4 +17,14 @@ document.addEventListener("DOMContentLoaded", function () {
             body.classList.remove("overlay-active");
         }
     });
+
+    // ✅ 🔔 Flash Message Popup
+    const flashPopup = document.getElementById("flash-popup");
+
+    if (flashPopup) {
+      flashPopup.style.display = "block";
+      setTimeout(() => {
+        flashPopup.style.display = "none";
+      }, 3000);
+    }
 });

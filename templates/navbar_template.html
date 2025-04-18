@@ -1,5 +1,15 @@
 <!-- Navigation Bar -->
 <header>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div id="flash-popup" class="flash-popup">
+        {{ messages[0] }}
+        </div>
+    {% endif %}
+    {% endwith %}
+
     <div class="navbar">
         <div class="menu-container">
             <div class="menu-icon" id="menu-icon"><i class="fas fa-bars"></i> Menu</div>

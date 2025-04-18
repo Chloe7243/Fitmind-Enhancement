@@ -35,6 +35,9 @@ migrate = Migrate(app, db)
 login.login_view = "login"
 login.init_app(app)
 
+with app.app_context():
+    db.create_all()
+
 # initialises all configured settings #
 
 tokenprotection = CSRFProtect(app)
@@ -78,7 +81,7 @@ def about():
 def logout():
     logout_user()
     flash("You’ve been logged out.")
-    return redirect(url_for("base"))  # or "index" if you renamed it
+    return redirect(url_for("homepage"))  # ✅ go back to homepage.html
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
@@ -350,7 +353,6 @@ def clear_exercises():
     Exercise.query.filter_by(made_by=current_user.id).delete()
     db.session.commit()
     return "All your exercises have been cleared."
-
 
 if __name__ == '__main__':
     app.run(debug=True)
