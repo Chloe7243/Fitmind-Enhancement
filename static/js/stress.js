@@ -1,80 +1,18 @@
-//document.addEventListener("DOMContentLoaded", function () {
-    // Sidebar Menu Toggle
-    const menuBtn = document.querySelector("#menu-icon");
-    const menuBox = document.querySelector("#menu-box");
 
-    menuBtn.addEventListener("click", function (event) {
-        event.stopPropagation();
-        menuBox.classList.toggle("active");
-    });
+// Sidebar Menu Toggle
+const menuBtn = document.querySelector("#menu-icon");
+const menuBox = document.querySelector("#menu-box");
 
-    document.addEventListener("click", function (event) {
-        if (!menuBox.contains(event.target) && !menuBtn.contains(event.target)) {
-            menuBox.classList.remove("active");
-        }
-    });
-//
-//    // Form Elements
-//    const form = document.querySelector("#stress-form");
-//    const stressList = document.querySelector("#stress-list");
-//    const relaxationList = document.querySelector("#relaxation-list");
-//
-//    let stressData = JSON.parse(localStorage.getItem("stress")) || [];
-//
-//    // Form Submission: Log Stress
-////    form.addEventListener("submit", function (e) {
-////        e.preventDefault();
-////        const level = document.querySelector("input[name='stress-level']:checked")?.value;
-////        const cause = document.querySelector("#stress-cause").value.trim();
-////        const notes = document.querySelector("#additional-notes").value.trim();
-////
-////        if (!level) {
-////            alert("Please select a stress level.");
-////            return;
-////        }
-////
-////        const newEntry = {
-////            date: new Date().toLocaleString(),
-////            level: parseInt(level),
-////            cause: cause || "Not specified",
-////            notes: notes || "No additional notes"
-////        };
-////
-////        stressData.push(newEntry);
-////        saveAndRender();
-////        updateRelaxationSuggestions(newEntry.level);
-////        form.reset();
-////    });
-//
-//    // Save & Render Data
-//    function saveAndRender() {
-//        localStorage.setItem("stress", JSON.stringify(stressData));
-//        renderStressLog();
-//    }
-//
-//    // Render Stress Log
-//    function renderStressLog() {
-//        stressList.innerHTML = "";
-//        stressData.forEach((entry, index) => {
-//            const li = document.createElement("li");
-//            li.classList.add("stress-entry");
-//            li.innerHTML = `
-//                <div class="entry-text">
-//                    ${entry.date} - Level ${entry.level} - ${entry.cause}
-//                    <p class="notes">Notes: ${entry.notes}</p>
-//                </div>
-//                <button class="remove-btn" onclick="removeStressEntry(${index})">🗑️ Delete</button>
-//            `;
-//            stressList.appendChild(li);
-//        });
-//    }
-//
-//    // Remove Stress Entry
-//    window.removeStressEntry = function (index) {
-//        stressData.splice(index, 1);
-//        saveAndRender();
-//    };
-//
+menuBtn.addEventListener("click", function (event) {
+    event.stopPropagation();
+    menuBox.classList.toggle("active");
+});
+
+document.addEventListener("click", function (event) {
+    if (!menuBox.contains(event.target) && !menuBtn.contains(event.target)) {
+        menuBox.classList.remove("active");
+    }
+});
 
 // Load Stress Data
 function pageLoaded(flaskData) {
@@ -157,16 +95,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
     form.addEventListener("submit", function (e) {
         e.preventDefault(); // stop page reload
-
+    
         const level = document.querySelector('input[name="stress-level"]:checked');
         const cause = document.querySelector("#stress-cause").value.trim();
         const notes = document.querySelector("#additional-notes").value.trim();
-
+    
         if (!level) {
             alert("Please select a stress level.");
             return;
         }
-
+    
+        if (!cause) {
+            alert("Please enter a stress cause.");
+            return;
+        }
+    
         fetch("/stress", {
             method: "POST",
             headers: {
@@ -181,20 +124,39 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .then(res => res.text())
         .then(html => {
-            // Replace the whole log section with new one
             const parser = new DOMParser();
             const doc = parser.parseFromString(html, 'text/html');
             const updatedList = doc.querySelector("#stress-list");
             const updatedSuggestions = doc.querySelector("#relaxation-list");
             const newHeader = doc.querySelector("#recommendation-header");
-
+    
             document.querySelector("#stress-list").innerHTML = updatedList.innerHTML;
             document.querySelector("#relaxation-list").innerHTML = updatedSuggestions.innerHTML;
             if (newHeader) {
                 document.querySelector("#recommendation-header").textContent = newHeader.textContent;
             }
-
+    
+            // Reset the form
             form.reset();
+    
+            // Smooth scroll to logs
+            const logSection = document.querySelector(".stress-log");
+            if (logSection) {
+                logSection.scrollIntoView({ behavior: "smooth" });
+            }
+    
+            // Highlight newest log entry
+            const lastEntry = document.querySelector("#stress-list li:last-child");
+            if (lastEntry) {
+                lastEntry.classList.add("new");
+            }
+
+            // Load fresh data for updated recommendations
+            fetch("/get-latest-logs")
+                .then(res => res.json())
+                .then(data => {
+                    pageLoaded(JSON.stringify(data));
+            });
         })
         .catch(err => {
             console.error("Failed to log stress:", err);

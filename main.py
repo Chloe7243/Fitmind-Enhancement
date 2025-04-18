@@ -219,34 +219,30 @@ def delete_stress(id):
 
 
 
-
 @app.route("/exercise", methods=['GET', 'POST'])
 @login_required
 def exercise():
     if request.method == "GET":
-        with app.app_context():
-            user_exercise = Exercise.query.filter_by(made_by=current_user.id)
-            exercises_data = [exercise.to_dict() for exercise in user_exercise]
-            return render_template('exercise.html', exercise=exercises_data)
-    if request.method == "POST":
-        with app.app_context():
-            try:
-                exercise = request.form["Exercise"]
-                duration = request.form["duration"]
-                if exercise == "Custom":
-                    exercise = request.form["custom-exercise"]
-                print(exercise)
-                log = Exercise(made_by=current_user.id, type=exercise, duration=duration)
-                db.session.add(log)
-                db.session.commit()
-                user_exercise = Exercise.query.filter_by(made_by=current_user.id)
-                exercises_data = [exercise.to_dict() for exercise in user_exercise]
-                db.session.commit()
-                return render_template('exercise.html', exercise=exercises_data)
-            except Exception as e:
-                print(e)
-                return render_template('exercise.html')
+        return render_template('exercise.html', exercise=[])  # Show nothing on refresh
 
+    if request.method == "POST":
+        if request.is_json:
+            data = request.get_json()
+            exercise = data.get("Exercise")
+            duration = data.get("duration")
+
+            if exercise == "Custom":
+                exercise = data.get("custom-exercise")
+
+            now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+            return jsonify([{
+                "type": exercise,
+                "duration": duration,
+                "time": now
+            }]), 200
+
+        return jsonify({"error": "Invalid data format"}), 400
 
 @app.route('/exercise/<id>', methods=['GET'])
 @login_required
@@ -300,7 +296,6 @@ def notes():
                 return render_template('notes.html')
 
 
-
 @app.route("/community", methods=['GET', 'POST'])
 @login_required
 def community():
@@ -331,6 +326,31 @@ def profile():
          except:
              flash("there was an error when attempting to upload your picture")
              return redirect(url_for('homepage'))
+
+# Route to get the latest stress logs
+@app.route("/get-latest-logs")
+@login_required
+def get_latest_logs():
+    user_logs = Logs.query.filter_by(made_by=current_user.id).all()
+    logs_dict = [log.to_dict() for log in user_logs]
+    return jsonify(logs_dict)
+
+# Route to get the latest exercises
+@app.route("/get-latest-exercises")
+@login_required
+def get_latest_exercises():
+    exercises = Exercise.query.filter_by(made_by=current_user.id).all()
+    exercises_data = [e.to_dict() for e in exercises]
+    return jsonify(exercises_data)
+
+# Route to clear all exercises
+@app.route("/clear-exercises")
+@login_required
+def clear_exercises():
+    Exercise.query.filter_by(made_by=current_user.id).delete()
+    db.session.commit()
+    return "All your exercises have been cleared."
+
 
 if __name__ == '__main__':
     app.run(debug=True)

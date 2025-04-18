@@ -76,14 +76,14 @@
     <section class="exercise-log">
         <h2>Logged Exercises</h2>
         <ul id="exercise-list">
-       {% for i in exercise %}
-        <li class="exercise-entry" data-id="{{ i.id }}">
-            <div class="entry-text">
-                {{ i.time }} - {{ i.type }} ({{ i.duration }})
-            </div>
-            <button class="remove-btn" onclick="deleteExerciseEntry({{ i.id }}, this)">🗑️ Delete</button>
-        </li>
-        {% endfor %}
+            {% for i in exercise %}
+            <li class="exercise-entry" data-id="{{ i.id }}">
+                <div class="entry-text">
+                    {{ i.time }} - {{ i.type }} ({{ i.duration }})
+                </div>
+                <button class="remove-btn" onclick="deleteExerciseEntry({{ i.id }}, this)">🗑️ Delete</button>
+            </li>
+            {% endfor %}
         </ul>
     </section>
 

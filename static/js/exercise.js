@@ -1,102 +1,38 @@
-function pageLoaded(flaskData){
-    let flaskdata = JSON.parse(flaskData);
-    console.log(flaskdata);
-    console.log(flaskdata[0]);
-    // Sidebar Menu Toggle
-    const menuBtn = document.querySelector("#menu-icon");
-    const menuBox = document.querySelector("#menu-box");
-    const body = document.querySelector("body");
+// Sidebar Menu Toggle
+const menuBtn = document.querySelector("#menu-icon");
+const menuBox = document.querySelector("#menu-box");
 
-    menuBtn.addEventListener("click", function (event) {
-        event.stopPropagation(); // Prevents immediate closure when clicking menu icon
-        menuBox.classList.toggle("active");
+menuBtn.addEventListener("click", function (event) {
+    event.stopPropagation();
+    menuBox.classList.toggle("active");
+});
+
+document.addEventListener("click", function (event) {
+    if (!menuBox.contains(event.target) && !menuBtn.contains(event.target)) {
+        menuBox.classList.remove("active");
+    }
+});
+
+let exerciseData = JSON.parse(sessionStorage.getItem("exerciseData")) || [];
+
+function pageLoaded() {
+    const exerciseTypeSelect = document.querySelector("#exercise-type");
+    const customInput = document.querySelector("#custom-exercise");
+    const ctx = document.querySelector("#progress-chart").getContext("2d");
+    const suggestionsList = document.querySelector("#suggestions-list");
+
+    let progressChart;
+    let exerciseData = []; // ⏳ Keep all exercises logged in session
+
+    // Toggle custom input
+    exerciseTypeSelect.addEventListener("change", () => {
+        customInput.style.display = exerciseTypeSelect.value === "Custom" ? "block" : "none";
     });
 
-    // Click anywhere outside to close menu
-    document.addEventListener("click", function (event) {
-        if (!menuBox.contains(event.target) && !menuBtn.contains(event.target)) {
-            menuBox.classList.remove("active");
-        }
-    });
-//
-//    // Exercise Form Elements
-//    const form = document.querySelector("#exercise-form");
-        const exerciseTypeSelect = document.querySelector("#exercise-type");
-        const customInput = document.querySelector("#custom-exercise");
-//    const exerciseList = document.querySelector("#exercise-list");
-//    const durationInput = document.querySelector("#duration");
-      const ctx = document.querySelector("#progress-chart").getContext("2d");
-//    const suggestionsList = document.querySelector("#suggestions-list");
-//
-      let exerciseData = JSON.parse(flaskData) || [];
-      let progressChart;
-//
-//    // Show custom exercise input field if "Custom" is selected
-        exerciseTypeSelect.addEventListener("change", () => {
-            customInput.style.display = exerciseTypeSelect.value === "Custom" ? "block" : "none";
-        });
-//
-//    // Form Submission: Log Exercise
-//    form.addEventListener("submit", (e) => {
-//        e.preventDefault();
-//        const type = exerciseTypeSelect.value === "Custom" ? customInput.value.trim() : exerciseTypeSelect.value;
-//        const duration = parseInt(durationInput.value);
-//
-//        if (!type || duration <= 0) {
-//            alert("Please enter a valid exercise and duration.");
-//            return;
-//        }
-//
-//        exerciseData.push({ type, duration, date: new Date().toLocaleDateString() });
-//        saveAndRender();
-//        updateSuggestions(type);
-//        form.reset();
-//        customInput.style.display = "none";
-//    });
-//
-//    // Save & Render Data
-//    function saveAndRender() {
-//        localStorage.setItem("exercises", JSON.stringify(exerciseData));
-//        renderExerciseLog();
-//        updateChart();
-//    }
-//
-//    // Render Exercise Log
-//    function renderExerciseLog() {
-//        exerciseList.innerHTML = "";
-//        exerciseData.forEach((exercise, index) => {
-//            const li = document.createElement("li");
-//            li.innerHTML = `
-//                ${exercise.date} - ${exercise.type} - ${exercise.duration} mins
-//                <button class="remove-btn" onclick="removeExercise(${index})">🗑️ Delete</button>
-//            `;
-//            exerciseList.appendChild(li);
-//        });
-//    }
-//
-//    // Remove Exercise
-//    window.removeExercise = (index) => {
-//        exerciseData.splice(index, 1);
-//        saveAndRender();
-//    };
-//
-    // Update Chart.js Graph
-    function updateChart() {
+    function updateChart(data) {
         if (progressChart) progressChart.destroy();
-//        let dateString = "2025-04-01 15:50:52";
-//let isoDateString = dateString.replace(" ", "T");
-//console.log(isoDateString); // "2025-04-01T15:50:52"
-//.replace(" ", "T")
-        let data = flaskdata[0];
-        const labels = exerciseData.map(data => `${data["time"]} (${data["type"]})`);
-        //print(label);
-        //const durations = exerciseData.map(e => `${flaskdata[0]["time"].replace(" ", "T")}`);
-        const durations = exerciseData.map(data => data["duration"])
-        console.log(durations)
-        //const durations = exerciseData.map(e => e.time.replace(" ", "T"));
-
-
-
+        const labels = data.map(entry => `${entry.time} (${entry.type})`);
+        const durations = data.map(entry => parseInt(entry.duration));
         progressChart = new Chart(ctx, {
             type: "bar",
             data: {
@@ -115,71 +51,87 @@ function pageLoaded(flaskData){
             }
         });
     }
-    updateChart();
 
+    function updateRecommendations(data) {
+        const suggestions = {
+            Cardio: ["Great for heart health!", "Try to reach 30 minutes."],
+            Stretching: ["Good for flexibility.", "Stretch after every workout."],
+            Strength: ["Builds muscle & boosts metabolism.", "Remember to rest."],
+            Yoga: ["Mind + flexibility in balance.", "Try guided yoga sessions."],
+            HIIT: ["Great fat burner!", "Alternate HIIT and rest days."],
+            Pilates: ["Improves core and posture."],
+            Recreational: ["Fun is fitness — enjoy!", "Do it regularly."],
+            Custom: ["Great custom session!", "Stay consistent with it."]
+        };
+        const latest = data[data.length - 1];
+        const type = latest.type;
+        suggestionsList.innerHTML = "";
+        (suggestions[type] || ["Stay active and consistent."]).forEach(msg => {
+            const li = document.createElement("li");
+            li.textContent = msg;
+            suggestionsList.appendChild(li);
+        });
+    }
 
-function deleteExerciseEntry(id, button) {
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    // Handle form submit
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("exercise-form");
+        const csrfToken = document.querySelector('input[name="csrf_token"]').value;
 
-    fetch(`/exercise/delete/${id}`, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': csrfToken
-        }
-    })
-    .then(response => response.json())
-    .then(result => {
-        if (result.success) {
-            const entry = button.closest('.exercise-entry');
-            entry.classList.add("removed");
-            setTimeout(() => entry.remove(), 300);
-        } else {
-            alert("Error deleting exercise: " + (result.error || ""));
-        }
-    })
-    .catch(err => {
-        console.error("Error:", err);
-        alert("Something went wrong.");
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const type = document.getElementById("exercise-type").value;
+            const custom = document.getElementById("custom-exercise").value.trim();
+            const duration = document.getElementById("duration").value;
+            const finalType = (type === "Custom" && custom) ? custom : type;
+
+            if (!duration || (type === "Custom" && !custom)) {
+                alert("Please complete all required fields.");
+                return;
+            }
+
+            fetch("/exercise", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": csrfToken
+                },
+                body: JSON.stringify({
+                    "Exercise": finalType,
+                    "duration": duration
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (Array.isArray(data)) {
+                    const entry = data[0];
+                    const ul = document.getElementById("exercise-list");
+
+                    const li = document.createElement("li");
+                    li.classList.add("exercise-entry");
+                    li.innerHTML = `
+                        <div class="entry-text">${entry.time} - ${entry.type} (${entry.duration})</div>
+                        <button class="remove-btn" onclick="this.parentElement.remove()">🗑️ Delete</button>
+                    `;
+                    ul.prepend(li); // ✅ Add to the top of the list
+
+                    // ✅ Add new entry to chart and recs
+                    exerciseData.push(entry);
+                    sessionStorage.setItem("exerciseData", JSON.stringify(exerciseData)); // ✅ Save to session
+                    updateChart(exerciseData);
+                    updateRecommendations(exerciseData);
+
+                    form.reset();
+                    document.querySelector(".exercise-log").scrollIntoView({ behavior: "smooth" });
+                }
+            })
+            .catch(err => {
+                console.error("Error:", err);
+                alert("Something went wrong.");
+            });
+        });
     });
 }
 
-
-
-//    if (flaskdata[0]["rating"]) {
-//    console.log("running here");
-//    flaskdata.forEach(suggestion => {
-//                const li = document.createElement("li");
-//                li.textContent = suggestions[suggestion["rating"]];
-//                relaxationList.appendChild(li);
-//            });
-//        }
-
-};
-
-
-function deleteExerciseEntry(id, button) {
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
-    fetch(`/exercise/delete/${id}`, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': csrfToken
-        }
-    })
-    .then(response => response.json())
-    .then(result => {
-        if (result.success) {
-            const entry = button.closest('.exercise-entry');
-            entry.classList.add("removed");
-            setTimeout(() => entry.remove(), 200);
-        } else {
-            alert("Error deleting exercise: " + (result.error || ""));
-        }
-    })
-    .catch(err => {
-        console.error("Error:", err);
-        alert("Something went wrong.");
-    });
-}
+document.addEventListener("DOMContentLoaded", pageLoaded);
