@@ -23,22 +23,6 @@
     margin-top: 10px;
 }
 
-.start-tracking {
-    background: #ff6600;
-    color: white;
-    padding: 15px 25px;
-    border: none;
-    font-size: 18px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 15px;
-    transition: background 0.3s ease-in-out;
-}
-
-.start-tracking:hover {
-    background: #e65c00;
-}
-
 /* EXERCISE FORM */
 .exercise-section {
     max-width: 800px;
