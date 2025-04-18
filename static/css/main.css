@@ -195,6 +195,10 @@ body {
 .footer p, .footer ul {
     font-size: 14px;
 }
+.footer-links {
+    text-align: left; 
+    margin: auto;
+}
 
 .footer ul {
     list-style: none;
