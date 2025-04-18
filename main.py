@@ -73,8 +73,8 @@ def setting():
     return render_template("setting.html")
 
 @app.route("/about")
-def about():
-    return render_template("about.html")
+def about_app():
+    return render_template("about_app.html")
 
 @app.route("/logout")
 @login_required

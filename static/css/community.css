@@ -2,7 +2,7 @@
 /* HERO SECTION */
 .hero {
     text-align: center;
-    padding: 120px 20px;
+    padding: 100px 20px;
     background: #e0f2f1;
     min-height: 10vh;
     display: flex;
@@ -12,6 +12,7 @@
 }
 
 .hero h1 {
+    padding-top: 50px;
     font-size: 36px;
     color: #004d40;
 }
