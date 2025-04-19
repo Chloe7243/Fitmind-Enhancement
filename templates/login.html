@@ -12,19 +12,23 @@
 
 <div class="signin-container">
     <div class="signin-card">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="alert-logout">
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
         <h1>Welcome Back to FitMind</h1>
         <p class="subtext">Log in to track your stress and workouts.</p>
-
-
         <form class="signin-form" method="POST" action="/login">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
             <div class="form-group">
                 <label for="email">Email Address</label>
                 <input type="email" id="email" name="email" placeholder="Enter your email" required>
             </div>
-            {% for message in get_flashed_messages() %}
-                <div>{{message}}</div>
-            {% endfor %}
             <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" placeholder="Enter your password" required>
