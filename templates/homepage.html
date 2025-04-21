@@ -10,88 +10,84 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div class="page-wrapper"> 
+    <!-- Navigation Bar -->
+    {% include 'navbar_template.html' %}
 
-        <!-- Navigation Bar -->
-        {% include 'navbar_template.html' %}
-
-
-        <!-- Sidebar Menu -->
-        <div class="menu-box" id="menu-box">
-            <div class="menu-icon-top">
-                <i class="fas fa-home"></i>
-            </div>
-
-            <ul>
-                <li><a href="{{ url_for('homepage') }}"><i class="fas fa-chart-line"></i> Dashboard</a></li>
-                <li><a href="{{ url_for('stress') }}"><i class="fas fa-heartbeat"></i> Stress Tracking</a></li>
-                <li><a href="{{ url_for('exercise') }}"><i class="fas fa-dumbbell"></i> Exercise Tracking</a></li>
-                <li><a href="{{ url_for('breathe_flow') }}"><i class="fas fa-wind"></i> Breathe Flow</a></li>
-                <li><a href="{{ url_for('notes') }}"><i class="fas fa-sticky-note"></i> My Note</a></li>
-                <li><a href="{{ url_for('notification') }}"><i class="fas fa-bell"></i> Reminder</a></li>
-                <li><a href="{{ url_for('setting') }}"><i class="fas fa-cog"></i> Settings</a></li>
-                <li><a href="{{ url_for('about_app') }}"><i class="fas fa-info-circle"></i> About App</a></li>
-            </ul>
-        </div>
-        
-
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-content">
-                <h1 class="fade-in">WELCOME TO FITMIND</h1>
-                <p class="fade-in">TRACK STRESS AND EXERCISE</p>
-                <a href="#dashboard"><button class="cta-button">Get Started</button></a>
-            </div>
-        </section>
-
-        <!-- Profile Section -->
-        <section class="profile-section">
-            <div class="profile-container">
-                <div class="profile-avatar">Hi</div>
-                <div class="profile-info">
-                    <p class="greeting" id="greeting-text">Good Morning</p>
-                    <h2 class="username">{{current_user.username}}</h2>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Dashboard Section -->
-        <div class="dashboard-header">
-            <h1>DASHBOARD</h1>
+    <!-- Sidebar Menu -->
+    <div class="menu-box" id="menu-box">
+        <div class="menu-icon-top">
+            <i class="fas fa-home"></i>
         </div>
 
-        <section class="dashboard" id="dashboard">
-            <div class="dashboard-card">
-                <img src="{{ url_for('static',filename='images/exercise.jpg') }}" alt="Track Exercise">
-                <h2>Track Exercise</h2>
-                <p>Log your workouts and stay consistent with your fitness.</p>
-                <a href="{{ url_for('exercise') }}"><button>Track Exercise</button></a>
-            </div>
-
-            <div class="dashboard-card">
-                <img src="{{ url_for('static',filename='images/Stress 1.jpg') }}" alt="Track Stress">
-                <h2>Track Stress</h2>
-                <p>Monitor your stress levels and manage them effectively.</p>
-                <a href="{{ url_for('stress') }}"><button>Track Stress</button></a>
-            </div>
-
-            <div class="dashboard-card">
-                <img src="{{ url_for('static',filename='images/Breathe.jpg') }}" alt="Breathe Flow">
-                <h2>Breathe Flow</h2>
-                <p>A calming breathing game to help you relax and build mindful focus.</p>
-                <a href="{{ url_for('breathe_flow') }}"><button>Breathe Flow</button></a>
-            </div>
-
-            <div class="dashboard-card">
-                <img src="{{ url_for('static',filename='images/notes.jpg') }}" alt="My Notes">
-                <h2>My Notes</h2>
-                <p>Jot down your daily plans, reflections, and wellness journey.</p>
-                <a href="{{ url_for('notes') }}"><button>My Note</button></a>
-            </div>
-        </section>
-
-        <!-- Footer Section -->
-        {% include 'footer_template.html' %}
+        <ul>
+            <li><a href="{{ url_for('homepage') }}"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+            <li><a href="{{ url_for('stress') }}"><i class="fas fa-heartbeat"></i> Stress Tracking</a></li>
+            <li><a href="{{ url_for('exercise') }}"><i class="fas fa-dumbbell"></i> Exercise Tracking</a></li>
+            <li><a href="{{ url_for('breathe_flow') }}"><i class="fas fa-wind"></i> Breathe Flow</a></li>
+            <li><a href="{{ url_for('notes') }}"><i class="fas fa-sticky-note"></i> My Note</a></li>
+            <li><a href="{{ url_for('notification') }}"><i class="fas fa-bell"></i> Reminder</a></li>
+            <li><a href="{{ url_for('setting') }}"><i class="fas fa-cog"></i> Settings</a></li>
+            <li><a href="{{ url_for('about_app') }}"><i class="fas fa-info-circle"></i> About App</a></li>
+        </ul>
     </div>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="fade-in">WELCOME TO FITMIND</h1>
+            <p class="fade-in">TRACK STRESS AND EXERCISE</p>
+            <a href="#dashboard"><button class="cta-button">Get Started</button></a>
+        </div>
+    </section>
+
+    <!-- Profile Section -->
+    <section class="profile-section">
+        <div class="profile-container">
+            <div class="profile-avatar">Hi</div>
+            <div class="profile-info">
+                <p class="greeting" id="greeting-text">Good Morning</p>
+                <h2 class="username">{{current_user.username}}</h2>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Dashboard Section -->
+    <div class="dashboard-header">
+        <h1>DASHBOARD</h1>
+    </div>
+
+    <section class="dashboard" id="dashboard">
+        <div class="dashboard-card">
+            <img src="{{ url_for('static',filename='images/exercise.jpg') }}" alt="Track Exercise">
+            <h2>Track Exercise</h2>
+            <p>Log your workouts and stay consistent with your fitness.</p>
+            <a href="{{ url_for('exercise') }}"><button>Track Exercise</button></a>
+        </div>
+
+        <div class="dashboard-card">
+            <img src="{{ url_for('static',filename='images/Stress 1.jpg') }}" alt="Track Stress">
+            <h2>Track Stress</h2>
+            <p>Monitor your stress levels and manage them effectively.</p>
+            <a href="{{ url_for('stress') }}"><button>Track Stress</button></a>
+        </div>
+
+        <div class="dashboard-card">
+            <img src="{{ url_for('static',filename='images/Breathe.jpg') }}" alt="Breathe Flow">
+            <h2>Breathe Flow</h2>
+            <p>A calming breathing game to help you relax and build mindful focus.</p>
+            <a href="{{ url_for('breathe_flow') }}"><button>Breathe Flow</button></a>
+        </div>
+
+        <div class="dashboard-card">
+            <img src="{{ url_for('static',filename='images/notes.jpg') }}" alt="My Notes">
+            <h2>My Notes</h2>
+            <p>Jot down your daily plans, reflections, and wellness journey.</p>
+            <a href="{{ url_for('notes') }}"><button>My Note</button></a>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    {% include 'footer_template.html' %}
+
 </body>
 </html>
