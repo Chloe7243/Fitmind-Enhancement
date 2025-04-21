@@ -11,93 +11,95 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <div class="page-wrapper">
 
-    <!-- Navigation Bar -->
-    {% include 'navbar_template.html' %}
+        <!-- Navigation Bar -->
+        {% include 'navbar_template.html' %}
 
-    <!-- Sidebar Menu -->
-    <div class="menu-box" id="menu-box">
-        <div class="menu-icon-top">
-            <i class="fas fa-heartbeat"></i>
+        <!-- Sidebar Menu -->
+        <div class="menu-box" id="menu-box">
+            <div class="menu-icon-top">
+                <i class="fas fa-heartbeat"></i>
+            </div>
+
+            <ul>
+                <li><a href="{{ url_for('homepage') }}"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                <li><a href="{{ url_for('stress') }}"><i class="fas fa-heartbeat"></i> Stress Tracking</a></li>
+                <li><a href="{{ url_for('exercise') }}"><i class="fas fa-dumbbell"></i> Exercise Tracking</a></li>
+                <li><a href="{{ url_for('breathe_flow') }}"><i class="fas fa-wind"></i> Breathe Flow</a></li>
+                <li><a href="{{ url_for('notes') }}"><i class="fas fa-sticky-note"></i> My Note</a></li>
+                <li><a href="{{ url_for('notification') }}"><i class="fas fa-bell"></i> Reminder</a></li>
+                <li><a href="{{ url_for('setting') }}"><i class="fas fa-cog"></i> Settings</a></li>
+                <li><a href="{{ url_for('about_app') }}"><i class="fas fa-info-circle"></i> About App</a></li>
+            </ul>
         </div>
 
-        <ul>
-            <li><a href="{{ url_for('homepage') }}"><i class="fas fa-chart-line"></i> Dashboard</a></li>
-            <li><a href="{{ url_for('stress') }}"><i class="fas fa-heartbeat"></i> Stress Tracking</a></li>
-            <li><a href="{{ url_for('exercise') }}"><i class="fas fa-dumbbell"></i> Exercise Tracking</a></li>
-            <li><a href="{{ url_for('breathe_flow') }}"><i class="fas fa-wind"></i> Breathe Flow</a></li>
-            <li><a href="{{ url_for('notes') }}"><i class="fas fa-sticky-note"></i> My Note</a></li>
-            <li><a href="{{ url_for('notification') }}"><i class="fas fa-bell"></i> Reminder</a></li>
-            <li><a href="{{ url_for('setting') }}"><i class="fas fa-cog"></i> Settings</a></li>
-            <li><a href="{{ url_for('about_app') }}"><i class="fas fa-info-circle"></i> About App</a></li>
-        </ul>
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Manage Your Stress</h1>
+            <p>Track your stress levels and receive personalized relaxation tips.</p>
+        </section>
+
+        <!-- Stress Tracking Form -->
+        <section class="stress-section">
+            <h2><i class="fas fa-brain"></i> Log Your Stress Level</h2>
+
+            <form id="stress-form" method="POST" action="/stress">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                <div class="form-group">
+                    <label>How stressed are you today? (Click On The Emoji)</label>
+                    <div class="emoji-scale">
+                        <label><input type="radio" name="stress-level" value="1"> 😌 <span>Very Relaxed</span></label>
+                        <label><input type="radio" name="stress-level" value="2"> 🙂 <span>Calm</span></label>
+                        <label><input type="radio" name="stress-level" value="3"> 😐 <span>Neutral</span></label>
+                        <label><input type="radio" name="stress-level" value="4"> 😟 <span>Worried</span></label>
+                        <label><input type="radio" name="stress-level" value="5"> 😫 <span>Stressed</span></label>
+                    </div>                
+                </div>
+
+                <div class="form-group">
+                    <label for="stress-cause">What caused your stress today?</label>
+                    <input type="text" id="stress-cause" name="stress-cause" placeholder="e.g., Exams, Deadlines">
+                </div>
+
+                <div class="form-group">
+                    <label for="additional-notes">Additional Notes (optional)</label>
+                    <textarea id="additional-notes" name="additional-notes" rows="3" placeholder="Add any notes..."></textarea>
+                </div>
+
+                <button type="submit" class="log-btn">Log Stress</button>
+            </form>
+        </section>
+
+        <!-- Logged Stress Entries -->
+        <section class="stress-log">
+            <h2>Logged Stress Entries</h2>
+            <ul id="stress-list">
+            {% for i in logs %}
+            <li class="stress-entry" data-id="{{ i.id }}">
+                <div class="entry-text">
+                    {{ i.time }} - Level {{ i.rating }} - {{ i.cause }}
+                    <p class="notes">Notes: {{ i.description }}</p>
+                </div>
+                <button class="remove-btn" onclick="deleteStressEntry({{ i.id }}, this)">🗑️ Delete</button>
+            </li>
+            
+        {% endfor %}
+                </ul>
+        </section>
+
+
+
+        <!-- Relaxation Recommendations -->
+        <section class="relaxation-suggestions">
+            <h2>Recommended Relaxation Techniques</h2>
+            <ul id="relaxation-list"></ul>
+        </section>
+
+        <!-- Footer -->
+        {% include 'footer_template.html' %}
     </div>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <h1>Manage Your Stress</h1>
-        <p>Track your stress levels and receive personalized relaxation tips.</p>
-    </section>
-
-    <!-- Stress Tracking Form -->
-    <section class="stress-section">
-        <h2><i class="fas fa-brain"></i> Log Your Stress Level</h2>
-
-        <form id="stress-form" method="POST" action="/stress">
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-            <div class="form-group">
-                <label>How stressed are you today? (Click On The Emoji)</label>
-                <div class="emoji-scale">
-                    <label><input type="radio" name="stress-level" value="1"> 😌 <span>Very Relaxed</span></label>
-                    <label><input type="radio" name="stress-level" value="2"> 🙂 <span>Calm</span></label>
-                    <label><input type="radio" name="stress-level" value="3"> 😐 <span>Neutral</span></label>
-                    <label><input type="radio" name="stress-level" value="4"> 😟 <span>Worried</span></label>
-                    <label><input type="radio" name="stress-level" value="5"> 😫 <span>Stressed</span></label>
-                </div>                
-            </div>
-
-            <div class="form-group">
-                <label for="stress-cause">What caused your stress today?</label>
-                <input type="text" id="stress-cause" name="stress-cause" placeholder="e.g., Exams, Deadlines">
-            </div>
-
-            <div class="form-group">
-                <label for="additional-notes">Additional Notes (optional)</label>
-                <textarea id="additional-notes" name="additional-notes" rows="3" placeholder="Add any notes..."></textarea>
-            </div>
-
-            <button type="submit" class="log-btn">Log Stress</button>
-        </form>
-    </section>
-
-    <!-- Logged Stress Entries -->
-    <section class="stress-log">
-        <h2>Logged Stress Entries</h2>
-        <ul id="stress-list">
-        {% for i in logs %}
-        <li class="stress-entry" data-id="{{ i.id }}">
-            <div class="entry-text">
-                {{ i.time }} - Level {{ i.rating }} - {{ i.cause }}
-                <p class="notes">Notes: {{ i.description }}</p>
-            </div>
-            <button class="remove-btn" onclick="deleteStressEntry({{ i.id }}, this)">🗑️ Delete</button>
-        </li>
-          
-    {% endfor %}
-            </ul>
-    </section>
-
-
-
-    <!-- Relaxation Recommendations -->
-    <section class="relaxation-suggestions">
-        <h2>Recommended Relaxation Techniques</h2>
-        <ul id="relaxation-list"></ul>
-    </section>
-
-    <!-- Footer -->
-    {% include 'footer_template.html' %}
-
+    
 </body>
 <script type="text/javascript" src="{{ url_for('static',filename='js/stress.js') }}"></script>
 <script type="text/javascript">
