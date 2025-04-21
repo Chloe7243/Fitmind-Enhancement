@@ -1,3 +1,18 @@
+// Sidebar Menu Toggle
+const menuBtn = document.querySelector("#menu-icon");
+const menuBox = document.querySelector("#menu-box");
+
+menuBtn.addEventListener("click", function (event) {
+    event.stopPropagation();
+    menuBox.classList.toggle("active");
+});
+
+document.addEventListener("click", function (event) {
+    if (!menuBox.contains(event.target) && !menuBtn.contains(event.target)) {
+        menuBox.classList.remove("active");
+    }
+});
+
 let calmPoints = 0;
 let isBreathing = false;
 let breathStartTime = 0;
@@ -15,10 +30,12 @@ let gameOver = document.getElementById("game-over");
 let finalScore = document.getElementById("final-score");
 let orb = document.getElementById("orb");
 
-let fillProgress = 0;          
-let actualFill = 0;  
 let fillAnimationFrame = null;
-const FILL_SPEED = 0.01;     // Adjust this to control how fast it fills
+let actualFill = calmPoints / MAX_POINTS;
+let targetFill = 0;
+let startFill = 0;
+let startTime = 0;
+const INHALE_DURATION = 10000; // 10 seconds in milliseconds
 
 
 // Prevent spacebar from scrolling
@@ -61,8 +78,6 @@ document.addEventListener("keyup", (e) => {
     if (breathDuration >= MIN_HOLD_TIME) {
       calmPoints += SCORE_VALUE;
       feedback.textContent = "✅ Great job! Calm points earned.";
-
-      // Update actual fill based on points
       actualFill = calmPoints / MAX_POINTS;
       calmFill.style.width = `${actualFill * 100}%`;
     } else {
@@ -74,18 +89,22 @@ document.addEventListener("keyup", (e) => {
   }
 });
 
+
 // start filling the bar
 function startFillingBar() {
-  targetFill = 1; // Fill to 100% visually
+  const percentPerPoint = SCORE_VALUE / MAX_POINTS; // 10/50 = 0.2
+  startTime = Date.now();
+  startFill = actualFill;
+  targetFill = actualFill + percentPerPoint;
 
   function animate() {
     if (!isBreathing) return;
 
-    // Smoothly animate toward full width
-    actualFill += FILL_SPEED;
-    if (actualFill > 1) actualFill = 1;
+    const elapsed = Date.now() - startTime;
+    const progress = Math.min(elapsed / INHALE_DURATION, 1); // 0 to 1
+    const currentFill = startFill + (percentPerPoint * progress);
 
-    calmFill.style.width = `${actualFill * 100}%`;
+    calmFill.style.width = `${currentFill * 100}%`;
     fillAnimationFrame = requestAnimationFrame(animate);
   }
 
@@ -95,20 +114,20 @@ function startFillingBar() {
 
 // Reverse the bar animation if the user releases spacebar too early
 function reverseBar() {
-  function animate() {
-    fillProgress -= FILL_SPEED * 2; // faster fallback
-    if (fillProgress < (calmPoints / MAX_POINTS)) {
-      fillProgress = (calmPoints / MAX_POINTS); // return to last earned point
-      calmFill.style.width = `${fillProgress * 100}%`;
-      return;
-    }
+  const fallback = calmPoints / MAX_POINTS;
 
-    calmFill.style.width = `${fillProgress * 100}%`;
-    requestAnimationFrame(animate);
+  function animate() {
+    if (actualFill > fallback) {
+      actualFill -= 0.01; // Slow step back
+      if (actualFill < fallback) actualFill = fallback;
+      calmFill.style.width = `${actualFill * 100}%`;
+      requestAnimationFrame(animate);
+    }
   }
 
   animate();
 }
+
 
 // Update the calm points UI and check for game over
 function updateUI() {
