@@ -1,16 +1,40 @@
+/* HERO SECTION */
+.hero {
+    text-align: center;
+    padding: 100px 20px;
+    background: #e0f2f1;
+    min-height: 10vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero h1 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #004d40;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    padding-top: 50px;
+}
+
+.hero p {
+    font-size: 18px;
+    color: #555;
+    margin-top: 10px;
+}
 
 /* Notifications Section */
 .notifications-section {
-    flex: 1; /* This will push the footer down */
-    background: white;
     max-width: 800px;
-    width: 90%;
-    margin: 120px auto 30px;
-    padding: 30px;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    padding: 40px 20px;
+    background: white;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     border-radius: 12px;
-    text-align: center;
-    animation: fadeIn 0.8s ease-out;
+    margin-top: 20px;
 }
 
 .notifications-section h1 {
