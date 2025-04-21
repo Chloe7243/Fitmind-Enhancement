@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitMind - Breathe Flow</title>  
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/breathe_flow.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    {% include "navbar_template.html" %}
+
+    <!-- Sidebar Menu -->
+    <div class="menu-box" id="menu-box">
+        <div class="menu-icon-top">
+         <i class="fas fa-wind"></i>
+        </div>
+
+        <ul>
+            <li><a href="{{ url_for('homepage') }}"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+            <li><a href="{{ url_for('stress') }}"><i class="fas fa-heartbeat"></i> Stress Tracking</a></li>
+            <li><a href="{{ url_for('exercise') }}"><i class="fas fa-dumbbell"></i> Exercise Tracking</a></li>
+            <li><a href="{{ url_for('breathe_flow') }}"><i class="fas fa-wind"></i> Breathe Flow</a></li>
+            <li><a href="{{ url_for('notes') }}"><i class="fas fa-sticky-note"></i> My Note</a></li>
+            <li><a href="{{ url_for('notification') }}"><i class="fas fa-bell"></i> Reminder Notifications</a></li>
+            <li><a href="{{ url_for('setting') }}"><i class="fas fa-cog"></i> Settings</a></li>
+            <li><a href="{{ url_for('about_app') }}"><i class="fas fa-info-circle"></i> About App</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Breathe Flow</h1>
+        <p>Welcome to Breathe Flow, a calming mini-game to help you practice mindful breathing.</p>
+        <p>Let’s relax, focus, and have fun!</p>
+    </section>
+
+    <!-- Page Section -->
+    <section class="main-section">
+        <div class="container">
+        <div class="game-container">
+            <div id="orb"></div>
+            <div id="instructions">Press & hold <strong>Spacebar</strong> to breathe in… release to breathe out.</div>
+            <div id="feedback">Sync your breath to the glow.</div>
+            <div id="score">Calm Points: 0</div>
+            <div id="calm-meter"><div id="calm-fill"></div></div>
+            <div id="game-over">
+            <h2>🧘 Great Job!</h2>
+            <p>You reached a mindful state with <span id="final-score">0</span> calm points.</p>
+            <button onclick="restartGame()">Try Again</button>
+            </div>
+        </div>
+        </div>
+    </section>
+  
+  
+    <!-- Footer Section -->
+    {% include "footer_template.html" %}
+    
+</body>
+
+<script type="text/javascript" src="{{ url_for('static',filename='js/breathe_flow.js') }}"></script>
+</html>

@@ -299,11 +299,10 @@ def notes():
                 return render_template('notes.html')
 
 
-@app.route("/community", methods=['GET', 'POST'])
-@login_required
-def community():
-    if request.method == "GET":
-        return render_template("community.html")
+@app.route("/breathe")
+def breathe_flow():
+    return render_template("breathe_flow.html")
+
 
 @app.route("/notification", methods=['GET', 'POST'])
 def notification():

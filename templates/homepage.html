@@ -25,9 +25,9 @@
             <li><a href="{{ url_for('homepage') }}"><i class="fas fa-chart-line"></i> Dashboard</a></li>
             <li><a href="{{ url_for('stress') }}"><i class="fas fa-heartbeat"></i> Stress Tracking</a></li>
             <li><a href="{{ url_for('exercise') }}"><i class="fas fa-dumbbell"></i> Exercise Tracking</a></li>
-            <li><a href="{{ url_for('community') }}"><i class="fas fa-users"></i> Community</a></li>
+            <li><a href="{{ url_for('breathe_flow') }}"><i class="fas fa-users"></i> Breathe Flow</a></li>
             <li><a href="{{ url_for('notes') }}"><i class="fas fa-sticky-note"></i> My Note</a></li>
-            <li><a href="{{ url_for('notification') }}"><i class="fas fa-bell"></i> Notifications</a></li>
+            <li><a href="{{ url_for('notification') }}"><i class="fas fa-bell"></i> Reminder Notifications</a></li>
             <li><a href="{{ url_for('setting') }}"><i class="fas fa-cog"></i> Settings</a></li>
             <li><a href="{{ url_for('about_app') }}"><i class="fas fa-info-circle"></i> About App</a></li>
         </ul>
@@ -48,7 +48,7 @@
         <div class="profile-container">
             <div class="profile-avatar">Hi</div>
             <div class="profile-info">
-                <p class="greeting">Good Morning</p>
+                <p class="greeting" id="greeting-text">Good Morning</p>
                 <h2 class="username">{{current_user.username}}</h2>
             </div>
         </div>
@@ -75,10 +75,10 @@
         </div>
 
         <div class="dashboard-card">
-            <img src="{{ url_for('static',filename='images/comm 1.jpg') }}" alt="Community">
-            <h2>Community</h2>
-            <p>Engage with peers and share your wellness journey.</p>
-            <a href="{{ url_for('community') }}"><button>Community</button></a>
+            <img src="{{ url_for('static',filename='images/comm 1.jpg') }}" alt="Breathe Flow">
+            <h2>Breathe Flow</h2>
+            <p>A calming breathing game to help you relax and build mindful focus.</p>
+            <a href="{{ url_for('breathe_flow') }}"><button>Breathe Flow</button></a>
         </div>
 
         <div class="dashboard-card">
