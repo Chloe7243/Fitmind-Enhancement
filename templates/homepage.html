@@ -6,7 +6,6 @@
     <title>FitMind</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/homepage.css') }}">
-    <script defer src="{{ url_for('static',filename='js/homepage.js') }}"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
@@ -89,5 +88,8 @@
     <!-- Footer Section -->
     {% include 'footer_template.html' %}
 
+    <!-- JavaScript Files -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script defer src="{{ url_for('static',filename='js/homepage.js') }}"></script>
 </body>
 </html>

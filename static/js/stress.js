@@ -1,19 +1,3 @@
-
-// Sidebar Menu Toggle
-const menuBtn = document.querySelector("#menu-icon");
-const menuBox = document.querySelector("#menu-box");
-
-menuBtn.addEventListener("click", function (event) {
-    event.stopPropagation();
-    menuBox.classList.toggle("active");
-});
-
-document.addEventListener("click", function (event) {
-    if (!menuBox.contains(event.target) && !menuBtn.contains(event.target)) {
-        menuBox.classList.remove("active");
-    }
-});
-
 // Load Stress Data
 function pageLoaded(flaskData) {
     let data = JSON.parse(flaskData);

@@ -62,7 +62,8 @@
         {% include "footer_template.html" %}
     </div>
 
+    <!-- JavaScript Files -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='js/breathe_flow.js') }}"></script>
 </body>
-
-<script type="text/javascript" src="{{ url_for('static',filename='js/breathe_flow.js') }}"></script>
 </html>

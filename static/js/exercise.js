@@ -1,18 +1,4 @@
-// Sidebar Menu Toggle
-const menuBtn = document.querySelector("#menu-icon");
-const menuBox = document.querySelector("#menu-box");
-
-menuBtn.addEventListener("click", function (event) {
-    event.stopPropagation();
-    menuBox.classList.toggle("active");
-});
-
-document.addEventListener("click", function (event) {
-    if (!menuBox.contains(event.target) && !menuBtn.contains(event.target)) {
-        menuBox.classList.remove("active");
-    }
-});
-
+// Exercise logging and charting functionality
 let exerciseData = JSON.parse(sessionStorage.getItem("exerciseData")) || [];
 
 function pageLoaded() {
