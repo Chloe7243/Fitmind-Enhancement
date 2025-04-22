@@ -27,6 +27,18 @@
             {% endif %}
         </nav>
          
+        <!-- Global Reminder Pop-up -->
+        <div id="reminder-popup" class="reminder-popup">
+            <div class="popup-content">
+            <p id="reminder-message"></p>
+            <button onclick="closeReminderPopup()">OK</button>
+            </div>
+        </div>
+        
+        <!-- Single Notification Sound -->
+        <audio id="reminder-sound" src="{{ url_for('static', filename='audio/mixkit-bubble-pop-up-alert-notification-2357.wav') }}"></audio>
+        
+        
     </div>
 </header>
 
