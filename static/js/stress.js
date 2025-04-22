@@ -73,78 +73,77 @@ function deleteStressEntry(id, button) {
     });
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById("stress-form");
-    const csrfToken = document.querySelector('input[name="csrf_token"]').value;
+// Stress Level Form Submission
+const form = document.getElementById("stress-form");
+const csrfToken = document.querySelector('input[name="csrf_token"]').value;
 
-    form.addEventListener("submit", function (e) {
-        e.preventDefault(); // stop page reload
-    
-        const level = document.querySelector('input[name="stress-level"]:checked');
-        const cause = document.querySelector("#stress-cause").value.trim();
-        const notes = document.querySelector("#additional-notes").value.trim();
-    
-        if (!level) {
-            alert("Please select a stress level.");
-            return;
-        }
-    
-        if (!cause) {
-            alert("Please enter a stress cause.");
-            return;
-        }
-    
-        fetch("/stress", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRFToken": csrfToken
-            },
-            body: JSON.stringify({
-                "stress-level": level.value,
-                "stress-cause": cause,
-                "additional-notes": notes
-            })
-        })
-        .then(res => res.text())
-        .then(html => {
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, 'text/html');
-            const updatedList = doc.querySelector("#stress-list");
-            const updatedSuggestions = doc.querySelector("#relaxation-list");
-            const newHeader = doc.querySelector("#recommendation-header");
-    
-            document.querySelector("#stress-list").innerHTML = updatedList.innerHTML;
-            document.querySelector("#relaxation-list").innerHTML = updatedSuggestions.innerHTML;
-            if (newHeader) {
-                document.querySelector("#recommendation-header").textContent = newHeader.textContent;
-            }
-    
-            // Reset the form
-            form.reset();
-    
-            // Smooth scroll to logs
-            const logSection = document.querySelector(".stress-log");
-            if (logSection) {
-                logSection.scrollIntoView({ behavior: "smooth" });
-            }
-    
-            // Highlight newest log entry
-            const lastEntry = document.querySelector("#stress-list li:last-child");
-            if (lastEntry) {
-                lastEntry.classList.add("new");
-            }
+form.addEventListener("submit", function (e) {
+    e.preventDefault(); // stop page reload
 
-            // Load fresh data for updated recommendations
-            fetch("/get-latest-logs")
-                .then(res => res.json())
-                .then(data => {
-                    pageLoaded(JSON.stringify(data));
-            });
+    const level = document.querySelector('input[name="stress-level"]:checked');
+    const cause = document.querySelector("#stress-cause").value.trim();
+    const notes = document.querySelector("#additional-notes").value.trim();
+
+    if (!level) {
+        alert("Please select a stress level.");
+        return;
+    }
+
+    if (!cause) {
+        alert("Please enter a stress cause.");
+        return;
+    }
+
+    fetch("/stress", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": csrfToken
+        },
+        body: JSON.stringify({
+            "stress-level": level.value,
+            "stress-cause": cause,
+            "additional-notes": notes
         })
-        .catch(err => {
-            console.error("Failed to log stress:", err);
-            alert("Something went wrong.");
+    })
+    .then(res => res.text())
+    .then(html => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        const updatedList = doc.querySelector("#stress-list");
+        const updatedSuggestions = doc.querySelector("#relaxation-list");
+        const newHeader = doc.querySelector("#recommendation-header");
+
+        document.querySelector("#stress-list").innerHTML = updatedList.innerHTML;
+        document.querySelector("#relaxation-list").innerHTML = updatedSuggestions.innerHTML;
+        if (newHeader) {
+            document.querySelector("#recommendation-header").textContent = newHeader.textContent;
+        }
+
+        // Reset the form
+        form.reset();
+
+        // Smooth scroll to logs
+        const logSection = document.querySelector(".stress-log");
+        if (logSection) {
+            logSection.scrollIntoView({ behavior: "smooth" });
+        }
+
+        // Highlight newest log entry
+        const lastEntry = document.querySelector("#stress-list li:last-child");
+        if (lastEntry) {
+            lastEntry.classList.add("new");
+        }
+
+        // Load fresh data for updated recommendations
+        fetch("/get-latest-logs")
+            .then(res => res.json())
+            .then(data => {
+                pageLoaded(JSON.stringify(data));
         });
+    })
+    .catch(err => {
+        console.error("Failed to log stress:", err);
+        alert("Something went wrong.");
     });
 });

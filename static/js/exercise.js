@@ -60,64 +60,60 @@ function pageLoaded() {
     }
 
     // Handle form submit
-    document.addEventListener("DOMContentLoaded", function () {
-        const form = document.getElementById("exercise-form");
-        const csrfToken = document.querySelector('input[name="csrf_token"]').value;
+    const form = document.getElementById("exercise-form");
+    const csrfToken = document.querySelector('input[name="csrf_token"]').value;
 
-        form.addEventListener("submit", function (e) {
-            e.preventDefault();
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
 
-            const type = document.getElementById("exercise-type").value;
-            const custom = document.getElementById("custom-exercise").value.trim();
-            const duration = document.getElementById("duration").value;
-            const finalType = (type === "Custom" && custom) ? custom : type;
+        const type = document.getElementById("exercise-type").value;
+        const custom = document.getElementById("custom-exercise").value.trim();
+        const duration = document.getElementById("duration").value;
+        const finalType = (type === "Custom" && custom) ? custom : type;
 
-            if (!duration || (type === "Custom" && !custom)) {
-                alert("Please complete all required fields.");
-                return;
+        if (!duration || (type === "Custom" && !custom)) {
+            alert("Please complete all required fields.");
+            return;
+        }
+
+        fetch("/exercise", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": csrfToken
+            },
+            body: JSON.stringify({
+                "Exercise": finalType,
+                "duration": duration
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (Array.isArray(data)) {
+                const entry = data[0];
+                const ul = document.getElementById("exercise-list");
+
+                const li = document.createElement("li");
+                li.classList.add("exercise-entry");
+                li.innerHTML = `
+                    <div class="entry-text">${entry.time} - ${entry.type} (${entry.duration})</div>
+                    <button class="remove-btn" onclick="this.parentElement.remove()">🗑️ Delete</button>
+                `;
+                ul.prepend(li); // ✅ Add to the top of the list
+
+                // ✅ Add new entry to chart and recs
+                exerciseData.push(entry);
+                sessionStorage.setItem("exerciseData", JSON.stringify(exerciseData)); // ✅ Save to session
+                updateChart(exerciseData);
+                updateRecommendations(exerciseData);
+
+                form.reset();
+                document.querySelector(".exercise-log").scrollIntoView({ behavior: "smooth" });
             }
-
-            fetch("/exercise", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRFToken": csrfToken
-                },
-                body: JSON.stringify({
-                    "Exercise": finalType,
-                    "duration": duration
-                })
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (Array.isArray(data)) {
-                    const entry = data[0];
-                    const ul = document.getElementById("exercise-list");
-
-                    const li = document.createElement("li");
-                    li.classList.add("exercise-entry");
-                    li.innerHTML = `
-                        <div class="entry-text">${entry.time} - ${entry.type} (${entry.duration})</div>
-                        <button class="remove-btn" onclick="this.parentElement.remove()">🗑️ Delete</button>
-                    `;
-                    ul.prepend(li); // ✅ Add to the top of the list
-
-                    // ✅ Add new entry to chart and recs
-                    exerciseData.push(entry);
-                    sessionStorage.setItem("exerciseData", JSON.stringify(exerciseData)); // ✅ Save to session
-                    updateChart(exerciseData);
-                    updateRecommendations(exerciseData);
-
-                    form.reset();
-                    document.querySelector(".exercise-log").scrollIntoView({ behavior: "smooth" });
-                }
-            })
-            .catch(err => {
-                console.error("Error:", err);
-                alert("Something went wrong.");
-            });
+        })
+        .catch(err => {
+            console.error("Error:", err);
+            alert("Something went wrong.");
         });
     });
 }
-
-document.addEventListener("DOMContentLoaded", pageLoaded);
