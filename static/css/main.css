@@ -191,16 +191,16 @@ body {
     display: none;
     position: fixed;
     z-index: 9999;
-    bottom: 20px;
+    top: 30px;
     right: 20px;
-    background: #00796b;
+    background: #00bfa5;
     color: white;
     padding: 20px 30px;
     border-radius: 12px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     transition: opacity 0.3s ease;
     opacity: 1;
-    animation: slideUp 0.4s ease forwards;
+    animation: slideDown 0.4s ease;
 }
   
 .reminder-popup.hidden {
