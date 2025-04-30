@@ -77,7 +77,7 @@ def about_app():
 def logout():
     logout_user()
     flash("You’ve been logged out.")
-    return redirect(url_for("homepage"))  # ✅ go back to homepage.html
+    return redirect(url_for("homepage"))
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
