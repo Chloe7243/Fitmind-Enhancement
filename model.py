@@ -26,11 +26,9 @@ class UserAccounts(UserMixin, db.Model):
         return check_password_hash(self.password_hash, user_password)
 
 # functions for login system, such as loading users and setting/checking passwords #
-
 @login.user_loader
 def load_user(id):
-    return UserAccounts.query.get(int(id))
-
+    return db.session.get(UserAccounts, int(id))
 
 class Posts(db.Model):
     __tablename__ = "Website Posts"
