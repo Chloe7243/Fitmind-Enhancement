@@ -7,6 +7,7 @@ import pytest
 from main import app, db
 from model import UserAccounts  # Ensure model.py is in the project root
 from model import Exercise
+from model import Logs  
 
 # ---------------------------
 # Test Setup
@@ -554,3 +555,64 @@ def test_clear_exercises(client):
     response = client.get('/get-latest-exercises')
     exercises = response.get_json()
     assert len(exercises) == 0  # Ensure exercises were cleared
+
+# ---------------------------
+# Testing Large Number of Stress Logs
+# ---------------------------
+def test_large_number_of_stress_logs(client):
+    """Test handling a large number of stress logs"""
+    register_and_login(client)
+
+    # Step 1: Clear existing logs in the database
+    with app.app_context():
+        db.session.query(Logs).delete()  # Clear all existing logs
+        db.session.commit()
+
+    # Step 2: Insert a large number of stress logs
+    for i in range(1000):  # Adjust number to stress test performance
+        client.post('/stress', data={
+            'stress-level': '3',
+            'stress-cause': f'Cause {i}',
+            'additional-notes': f'Notes for log {i}'
+        }, follow_redirects=True)
+
+    # Step 3: Confirm the logs were added
+    response = client.get('/get-latest-logs')
+    logs = response.get_json()
+    assert len(logs) == 1000  # Ensure only 1000 logs were added
+
+    # Check for the cause text, case-insensitive
+    assert b'cause' in response.data.lower()  # Ensure the word 'cause' is present
+
+
+# ---------------------------
+# Testing Large Number of Exercise Logs
+# ---------------------------
+def test_large_number_of_exercise_logs(client):
+    """Test handling a large number of exercise logs"""
+    register_and_login(client)
+
+    # Step 1: Clear existing exercises in the database
+    with app.app_context():
+        db.session.query(Exercise).delete()  # Clear all existing exercises
+        db.session.commit()
+
+    # Step 2: Manually insert a large number of exercise logs
+    with app.app_context():
+        user = UserAccounts.query.filter_by(email='routeuser@example.com').first()
+        for i in range(1000):  # Adjust number to stress test performance
+            new_exercise = Exercise(made_by=user.id, type=1, duration=f"30 mins {i}")
+            db.session.add(new_exercise)
+        db.session.commit()
+
+    # Step 3: Confirm the exercises were added
+    response = client.get('/get-latest-exercises')
+    exercises = response.get_json()
+    assert len(exercises) == 1000  # Ensure only 1000 exercises were added
+
+    # Check for the exercise type, using the integer value (1) instead of 'Cardio'
+    assert b'1' in response.data.lower()  # Check for the type field (1 means "Cardio")
+    assert b'30 mins' in response.data.lower()  # Ensure '30 mins' is present in the response
+
+
+
