@@ -1,3 +1,7 @@
+# ---------------------
+# BACKEND TESTING
+# ---------------------
+
 # tests/test_routes.py
 import sys
 import os
@@ -22,8 +26,9 @@ def client():
     with app.test_client() as client:
         yield client
 
+
 # ---------------------------
-# Testing Homepage & Info Pages
+# Testing Homepage & Other Pages
 # ---------------------------
 def test_base_route(client):
     """Test index route (/)"""
@@ -43,6 +48,7 @@ def test_about_route(client):
     assert response.status_code == 200
     assert b'html' in response.data.lower()
 
+
 # ---------------------------
 # Testing Login Page (GET and POST)
 # ---------------------------
@@ -61,6 +67,7 @@ def test_login_post_invalid(client):
     assert response.status_code == 200
     assert b'invalid credentials' in response.data.lower()
 
+
 # ---------------------------
 # Testing Register Page (GET and POST)
 # ---------------------------
@@ -74,12 +81,11 @@ def test_register_post_mismatched_passwords(client):
     """Test register with mismatched passwords"""
     response = client.post('/register', data={
         'username': 'mismatchuser',
-        'email': 'mismatch@example.com',  # Use a fresh email
+        'email': 'mismatch@example.com', 
         'password': 'Password123!',
         'confirm_password': 'DifferentPass!'
     }, follow_redirects=True)
-
-    print(response.data.decode())  # You can remove this now
+    print(response.data.decode()) 
     assert response.status_code == 200
     assert b'passwords do not match' in response.data.lower()
 
@@ -94,6 +100,7 @@ def test_register_post_weak_password(client):
     assert response.status_code == 200
     assert b'passwords must be at least' in response.data.lower()
 
+
 # ---------------------------
 # Testing Register Success
 # ---------------------------
@@ -105,18 +112,17 @@ def test_register_post_success(client):
         'password': 'StrongPass@12',
         'confirm_password': 'StrongPass@12'
     }, follow_redirects=True)
-
     # Check we are redirected to the homepage after registration
     assert response.status_code == 200
     assert b'html' in response.data.lower()
+
 
 # ---------------------------
 # Testing Login with Valid Credentials
 # ---------------------------
 def test_login_post_valid(client):
     """Test login with valid credentials"""
-
-    # Step 1: Register a new user
+    # Register a new user
     client.post('/register', data={
         'username': 'validuser',
         'email': 'valid@example.com',
@@ -124,18 +130,19 @@ def test_login_post_valid(client):
         'confirm_password': 'ValidPass123@'
     }, follow_redirects=True)
 
-    # Step 2: Log out (if auto-logged in after registration)
+    # Log out (if auto-logged in after registration)
     client.get('/logout', follow_redirects=True)
 
-    # Step 3: Try to log in with the same credentials
+    # Try to log in with the same credentials
     response = client.post('/login', data={
         'email': 'valid@example.com',
         'password': 'ValidPass123@'
     }, follow_redirects=True)
 
-    # Step 4: Confirm successful login (redirect to homepage)
+    # Confirm successful login (redirect to homepage)
     assert response.status_code == 200
     assert b'html' in response.data.lower()
+
 
 # ---------------------------
 # Register & Login Helper
@@ -155,6 +162,7 @@ def register_and_login(client):
         'email': 'routeuser@example.com',
         'password': 'RoutePass@123'
     }, follow_redirects=True)
+
 
 # ---------------------------
 # Testing Routes (Protected)
@@ -206,6 +214,7 @@ def test_logout_route(client):
     assert response.status_code == 200
     assert b'logged out' in response.data.lower() or b'home' in response.data.lower()
 
+
 # ---------------------------
 # Testing POST: /stress (Log Stress Entry)
 # ---------------------------
@@ -222,7 +231,8 @@ def test_post_stress_log(client):
     assert response.status_code == 200
     assert b'exam pressure' in response.data.lower()
     assert b'upcoming deadline' in response.data.lower()
-    assert b'3' in response.data  # Confirm stress level is shown
+    assert b'3' in response.data  
+
 
 # ---------------------------
 # Testing POST: /exercise (Log Exercise Entry)
@@ -243,6 +253,7 @@ def test_post_exercise_log(client):
     assert json_data[0]['type'] == 'Cardio'
     assert json_data[0]['duration'] == '45 mins'
 
+
 # ---------------------------
 # Testing POST: /notes (Log Reflection Note)
 # ---------------------------
@@ -251,12 +262,13 @@ def test_post_note(client):
     register_and_login(client)
 
     response = client.post('/notes', data={
-        'title': '1234',  # Must be castable to int
+        'title': '1234',  
         'description': 'Reflected on my productivity today.'
     }, follow_redirects=True)
 
     assert response.status_code == 200
     assert b'notes' in response.data.lower() or b'textarea' in response.data.lower()
+
 
 # ---------------------------
 # Testing DELETE: /stress/delete/<id>
@@ -265,28 +277,29 @@ def test_delete_stress_log(client):
     """Test deleting a stress log"""
     register_and_login(client)
 
-    # Step 1: Create a stress log
+    # Create a stress log
     client.post('/stress', data={
         'stress-level': '4',
         'stress-cause': 'Deadline',
         'additional-notes': 'Group project pressure'
     }, follow_redirects=True)
 
-    # Step 2: Fetch logs via /get-latest-logs to get ID
+    # Fetch logs via /get-latest-logs to get ID
     response = client.get('/get-latest-logs')
     logs = response.get_json()
     assert logs, "No logs found"
     log_id = logs[0]['id']
 
-    # Step 3: DELETE the log
+    # DELETE the log
     delete_response = client.delete(f'/stress/delete/{log_id}')
     assert delete_response.status_code == 200
     assert delete_response.get_json()['success'] is True
 
-    # Step 4: Verify it was deleted
+    # Verify it was deleted
     confirm_response = client.get('/get-latest-logs')
     updated_logs = confirm_response.get_json()
     assert all(log['id'] != log_id for log in updated_logs)
+
 
 # ---------------------------
 # Testing DELETE: /exercise/delete/<id>
@@ -295,7 +308,7 @@ def test_delete_exercise_log(client):
     """Test deleting an exercise log (manual insert)"""
     register_and_login(client)
 
-    # Step 1: Fetch the user manually
+    # Fetch the user manually
     with app.app_context():
         user = UserAccounts.query.filter_by(email='routeuser@example.com').first()
 
@@ -308,15 +321,16 @@ def test_delete_exercise_log(client):
         db.session.commit()
         log_id = new_exercise.log_id
 
-    # Step 2: DELETE the exercise
+    # DELETE the exercise
     delete_response = client.delete(f'/exercise/delete/{log_id}')
     assert delete_response.status_code == 200
     assert delete_response.get_json()['success'] is True
 
-    # Step 3: Confirm deletion
+    # Confirm deletion
     confirm_response = client.get('/get-latest-exercises')
     updated_logs = confirm_response.get_json()
     assert all(log['id'] != log_id for log in updated_logs)
+
 
 # ---------------------------
 # Testing GET: /stress/<id> (Legacy Delete)
@@ -344,6 +358,7 @@ def test_legacy_stress_delete(client):
     updated_logs = client.get('/get-latest-logs').get_json()
     assert all(log['id'] != log_id for log in updated_logs)
 
+
 # ---------------------------
 # Testing GET: /exercise/<id> (Legacy Delete)
 # ---------------------------
@@ -365,6 +380,7 @@ def test_legacy_exercise_delete(client):
     # Confirm deletion
     updated_logs = client.get('/get-latest-exercises').get_json()
     assert all(log['id'] != log_id for log in updated_logs)
+
 
 # ---------------------------
 # Testing GET: /clear-exercises
@@ -392,6 +408,7 @@ def test_clear_exercises(client):
     updated_logs = client.get('/get-latest-exercises').get_json()
     assert updated_logs == []
 
+
 # ---------------------------
 # Testing POST: /stress (Edge Case - Invalid Data)
 # ---------------------------
@@ -417,10 +434,10 @@ def test_post_stress_invalid_data(client):
     }, follow_redirects=True)
 
     # Check that the stress-level gets stored, even though it's invalid
-    assert response.status_code == 200  # Check it's still 200
-    assert b'exam pressure' in response.data.lower()  # Ensure cause is displayed
-    assert b'upcoming deadline' in response.data.lower()  # Ensure notes appear too
-    assert b'invalid' in response.data.lower()  # Ensure invalid stress level is included
+    assert response.status_code == 200  
+    assert b'exam pressure' in response.data.lower()  
+    assert b'upcoming deadline' in response.data.lower()  
+    assert b'invalid' in response.data.lower()  
 
 
 # ---------------------------
@@ -430,17 +447,17 @@ def test_get_latest_logs(client):
     """Test fetching the latest stress logs"""
     register_and_login(client)
 
-    # Step 1: Add some logs first
+    # Add some logs first
     client.post('/stress', data={
         'stress-level': '3',
         'stress-cause': 'Exam pressure',
         'additional-notes': 'Upcoming deadline'
     }, follow_redirects=True)
 
-    # Step 2: Get the latest logs
+    # Get the latest logs
     response = client.get('/get-latest-logs')
     logs = response.get_json()
-    assert len(logs) > 0  # Ensure logs are returned
+    assert len(logs) > 0 
     assert 'Exam pressure' in [log['cause'] for log in logs]
     assert 'Upcoming deadline' in [log['description'] for log in logs]
 
@@ -452,17 +469,17 @@ def test_get_latest_exercises(client):
     """Test fetching the latest exercise logs"""
     register_and_login(client)
 
-    # Step 1: Insert exercise manually
+    # Insert exercise manually
     with app.app_context():
         user = UserAccounts.query.filter_by(email='routeuser@example.com').first()
         new_exercise = Exercise(made_by=user.id, type=1, duration="45 mins")
         db.session.add(new_exercise)
         db.session.commit()
 
-    # Step 2: Get the latest exercises
+    # Get the latest exercises
     response = client.get('/get-latest-exercises')
     exercises = response.get_json()
-    assert len(exercises) > 0  # Ensure exercises are returned
+    assert len(exercises) > 0  
     assert '45 mins' in [exercise['duration'] for exercise in exercises]
 
 
@@ -473,24 +490,24 @@ def test_clear_exercises(client):
     """Test clearing all exercise logs"""
     register_and_login(client)
 
-    # Step 1: Insert two exercises manually
+    # Insert two exercises manually
     with app.app_context():
         user = UserAccounts.query.filter_by(email='routeuser@example.com').first()
         for _ in range(2):
             db.session.add(Exercise(made_by=user.id, type=1, duration="10 mins"))
         db.session.commit()
 
-    # Step 2: Confirm they exist
+    # Confirm they exist
     response = client.get('/get-latest-exercises')
     exercises = response.get_json()
     assert len(exercises) == 2  # Ensure two exercises were added
 
-    # Step 3: Clear them
+    # Clear them
     response = client.get('/clear-exercises')
     assert response.status_code == 200
     assert b'cleared' in response.data.lower()
 
-    # Step 4: Confirm they're gone
+    # Confirm they're gone
     response = client.get('/get-latest-exercises')
     exercises = response.get_json()
     assert len(exercises) == 0  # Ensure exercises were cleared
@@ -503,22 +520,22 @@ def test_get_latest_exercises(client):
     """Test fetching the latest exercise logs"""
     register_and_login(client)
 
-    # Step 1: Clear existing exercises
+    # Clear existing exercises
     with app.app_context():
         db.session.query(Exercise).delete()
         db.session.commit()
 
-    # Step 2: Insert exercise manually
+    # Insert exercise manually
     with app.app_context():
         user = UserAccounts.query.filter_by(email='routeuser@example.com').first()
         new_exercise = Exercise(made_by=user.id, type=1, duration="45 mins")
         db.session.add(new_exercise)
         db.session.commit()
 
-    # Step 3: Get the latest exercises
+    # Get the latest exercises
     response = client.get('/get-latest-exercises')
     exercises = response.get_json()
-    assert len(exercises) > 0  # Ensure exercises are returned
+    assert len(exercises) > 0  
     assert '45 mins' in [exercise['duration'] for exercise in exercises]
 
 
@@ -529,24 +546,24 @@ def test_clear_exercises(client):
     """Test clearing all exercise logs"""
     register_and_login(client)
 
-    # Step 1: Clear existing exercises
+    # Clear existing exercises
     with app.app_context():
         db.session.query(Exercise).delete()
         db.session.commit()
 
-    # Step 2: Insert two exercises manually
+    # Insert two exercises manually
     with app.app_context():
         user = UserAccounts.query.filter_by(email='routeuser@example.com').first()
         for _ in range(2):
             db.session.add(Exercise(made_by=user.id, type=1, duration="10 mins"))
         db.session.commit()
 
-    # Step 3: Confirm they exist
+    # Confirm they exist
     response = client.get('/get-latest-exercises')
     exercises = response.get_json()
-    assert len(exercises) == 2  # Ensure two exercises were added
+    assert len(exercises) == 2  
 
-    # Step 4: Clear them
+    # Clear them
     response = client.get('/clear-exercises')
     assert response.status_code == 200
     assert b'cleared' in response.data.lower()
@@ -554,7 +571,7 @@ def test_clear_exercises(client):
     # Step 5: Confirm they're gone
     response = client.get('/get-latest-exercises')
     exercises = response.get_json()
-    assert len(exercises) == 0  # Ensure exercises were cleared
+    assert len(exercises) == 0  
 
 # ---------------------------
 # Testing Large Number of Stress Logs
@@ -563,26 +580,26 @@ def test_large_number_of_stress_logs(client):
     """Test handling a large number of stress logs"""
     register_and_login(client)
 
-    # Step 1: Clear existing logs in the database
+    # Clear existing logs in the database
     with app.app_context():
-        db.session.query(Logs).delete()  # Clear all existing logs
+        db.session.query(Logs).delete()  
         db.session.commit()
 
-    # Step 2: Insert a large number of stress logs
-    for i in range(1000):  # Adjust number to stress test performance
+    # Insert a large number of stress logs
+    for i in range(1000): 
         client.post('/stress', data={
             'stress-level': '3',
             'stress-cause': f'Cause {i}',
             'additional-notes': f'Notes for log {i}'
         }, follow_redirects=True)
 
-    # Step 3: Confirm the logs were added
+    # Confirm the logs were added
     response = client.get('/get-latest-logs')
     logs = response.get_json()
-    assert len(logs) == 1000  # Ensure only 1000 logs were added
+    assert len(logs) == 1000  
 
     # Check for the cause text, case-insensitive
-    assert b'cause' in response.data.lower()  # Ensure the word 'cause' is present
+    assert b'cause' in response.data.lower() 
 
 
 # ---------------------------
@@ -592,27 +609,27 @@ def test_large_number_of_exercise_logs(client):
     """Test handling a large number of exercise logs"""
     register_and_login(client)
 
-    # Step 1: Clear existing exercises in the database
+    # Clear existing exercises in the database
     with app.app_context():
-        db.session.query(Exercise).delete()  # Clear all existing exercises
+        db.session.query(Exercise).delete()  
         db.session.commit()
 
-    # Step 2: Manually insert a large number of exercise logs
+    # Manually insert a large number of exercise logs
     with app.app_context():
         user = UserAccounts.query.filter_by(email='routeuser@example.com').first()
-        for i in range(1000):  # Adjust number to stress test performance
+        for i in range(1000):  
             new_exercise = Exercise(made_by=user.id, type=1, duration=f"30 mins {i}")
             db.session.add(new_exercise)
         db.session.commit()
 
-    # Step 3: Confirm the exercises were added
+    # Confirm the exercises were added
     response = client.get('/get-latest-exercises')
     exercises = response.get_json()
     assert len(exercises) == 1000  # Ensure only 1000 exercises were added
 
     # Check for the exercise type, using the integer value (1) instead of 'Cardio'
-    assert b'1' in response.data.lower()  # Check for the type field (1 means "Cardio")
-    assert b'30 mins' in response.data.lower()  # Ensure '30 mins' is present in the response
+    assert b'1' in response.data.lower()  
+    assert b'30 mins' in response.data.lower()  
 
 
 

@@ -134,6 +134,9 @@ function endGame() {
 // Restart the game and reset everything
 function restartGame() {
   calmPoints = 0;
+  actualFill = 0;
+  targetFill = 0;
+  startFill = 0;
   calmFill.style.width = "0%";
   scoreText.textContent = "Calm Points: 0";
   feedback.textContent = "Press & hold Spacebar to breathe in…";
