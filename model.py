@@ -12,9 +12,6 @@ login = flask_login.LoginManager()
 class UserAccounts(UserMixin, db.Model):
     __tablename__ = "User Accounts"
     id = db.Column(db.Integer, primary_key=True)
-    streak = db.Column(db.Integer, default=0)
-    last_streak_date = db.Column(db.String, default="")
-
     username = db.Column(db.String, unique=True, nullable=False)
     email = db.Column(db.String, unique=True, nullable=False)
     password_hash = db.Column(db.String())
