@@ -28,7 +28,7 @@ will raise an exception.
 
 For example:
 
->>> import Fitmind
+>>> import main
 >>> lumache.get_random_ingredients()
 ['shells', 'gorgonzola', 'parsley']
 

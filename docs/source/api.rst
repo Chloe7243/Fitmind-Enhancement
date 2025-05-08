@@ -4,4 +4,4 @@ API
 .. autosummary::
    :toctree: generated
 
-   Fitmind
+   main.py
