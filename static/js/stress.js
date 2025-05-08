@@ -1,3 +1,11 @@
+// Detect when the user navigates back to this page (e.g., after visiting Breathe Flow)
+// If the page was restored from the back/forward cache reload the latest logs via AJAX
+window.addEventListener("pageshow", function(event) {
+    if (event.persisted || (window.performance && performance.getEntriesByType("navigation")[0].type === "back_forward")) {
+        location.reload();
+    }
+});
+
 function pageLoaded(flaskData) {
     let data = JSON.parse(flaskData);
     const relaxationList = document.getElementById("relaxation-list");
