@@ -68,9 +68,9 @@ def test_login_post_invalid(client):
     assert b'invalid credentials' in response.data.lower()
 
 
-# ---------------------------
+# ------------------------------------
 # Testing Register Page (GET and POST)
-# ---------------------------
+# ------------------------------------
 def test_register_get(client):
     """Test register page loads successfully"""
     response = client.get('/register')
