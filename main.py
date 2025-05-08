@@ -18,15 +18,7 @@ app = Flask(__name__)
 app.secret_key = secrets.token_hex(16)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///HealthAdviceGroupDatabase.db"
 app.config["SECURITY_PASSWORD_SALT"] = secrets.token_hex(16)
-app.config["MAIL_SERVER"] = "smtp.gmail.com"
-app.config["MAIL_PORT"] = 465
-app.config["DEFAULT_SENDER"] = "contact.us.cbbb@gmail.com"
-app.config["MAIL_USERNAME"] = "contact.us.cbbb@gmail.com"
-app.config["MAIL_PASSWORD"] = "ibclqtbpldsaduam"
-app.config["MAIL_USE_TLS"] = False
-app.config["MAIL_USE_SSL"] = True
-app.config['RECAPTCHA_PUBLIC_KEY'] = '6LdwgXQkAAAAAME9GrFMARDO_qEXUGMt2wOqIEyL'
-app.config['RECAPTCHA_PRIVATE_KEY'] = '6LdwgXQkAAAAAGXaBHLxm2-tT6nprMzNZ5bCfVyQ'
+
 
 mail = Mail(app)
 mail.init_app(app)
