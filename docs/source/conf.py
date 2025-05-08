@@ -2,9 +2,9 @@
 
 # -- Project information
 
-project = 'Lumache'
-copyright = '2021, Graziella'
-author = 'Graziella'
+project = 'Fitmind'
+copyright = '2025, Bolt'
+author = 'Bolt'
 
 release = '0.1'
 version = '0.1.0'
