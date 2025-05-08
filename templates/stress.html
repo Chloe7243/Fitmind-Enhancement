@@ -79,7 +79,7 @@
                     {{ i.time }} - Level {{ i.rating }} - {{ i.cause }}
                     <p class="notes">Notes: {{ i.description }}</p>
                 </div>
-                <button class="remove-btn" onclick="deleteStressEntry({{ i.id }}, this)">🗑️ Delete</button>
+                <button class="remove-btn delete-btn" data-id="{{ i.id }}">🗑️ Delete</button>
             </li>
             
         {% endfor %}
@@ -101,6 +101,9 @@
     <!-- Javascript Files -->
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const breatheFlowURL = "{{ url_for('breathe_flow') }}";
+    </script>
     <script type="text/javascript" src="{{ url_for('static',filename='js/stress.js') }}"></script>
     <script type="text/javascript">
         pageLoaded(`{{logs | tojson}}`);

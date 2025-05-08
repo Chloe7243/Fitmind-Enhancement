@@ -38,7 +38,6 @@ class SignupForm(FlaskForm):
     recaptcha = RecaptchaField()
 
 
-
 def database_reset():
     with app.app_context():
         db.drop_all()

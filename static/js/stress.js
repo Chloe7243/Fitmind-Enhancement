@@ -1,4 +1,3 @@
-// Load Stress Data
 function pageLoaded(flaskData) {
     let data = JSON.parse(flaskData);
     const relaxationList = document.getElementById("relaxation-list");
@@ -15,19 +14,21 @@ function pageLoaded(flaskData) {
         ],
         3: [
             "You're feeling in-between. Try journaling your thoughts.",
-            "Step outside for a quick walk or hydrate and reset."
+            "Step outside for a quick walk or hydrate and reset.",
+            `Visit the <a href="${breatheFlowURL}"><i class="fas fa-wind"></i> Breathe Flow</a> page for guided relaxation.`
         ],
         4: [
             "You're under pressure — try a calming breathing exercise.",
-            "Consider doing a 10-minute meditation or yoga session."
+            "Consider doing a 10-minute meditation or yoga session.",
+            `Visit the <a href="${breatheFlowURL}"><i class="fas fa-wind"></i> Breathe Flow</a> page for guided relaxation.`
         ],
         5: [
             "You're overwhelmed. Pause and breathe deeply.",
-            "Talk to someone you trust, or listen to a guided meditation."
+            "Talk to someone you trust, or listen to a guided meditation.",
+            `Visit the <a href="${breatheFlowURL}"><i class="fas fa-wind"></i> Breathe Flow</a> page for guided relaxation.`
         ]
     };
-    
-    // Check if data is available
+
     if (data.length > 0) {
         const latestEntry = data[data.length - 1];
         const rating = parseInt(latestEntry.rating);
@@ -35,7 +36,7 @@ function pageLoaded(flaskData) {
         if (suggestions[rating]) {
             suggestions[rating].forEach(suggestion => {
                 const li = document.createElement("li");
-                li.textContent = suggestion;
+                li.innerHTML = suggestion;
                 relaxationList.appendChild(li);
             });
         } else {
@@ -45,6 +46,7 @@ function pageLoaded(flaskData) {
         }
     }
 }
+
 
 // Delete Stress Entry
 function deleteStressEntry(id, button) {
@@ -72,6 +74,20 @@ function deleteStressEntry(id, button) {
         alert("Something went wrong. Please try again.");
     });
 }
+
+// Unified delete button handler using data-id
+document.addEventListener("click", function (event) {
+    if (event.target.classList.contains("delete-btn")) {
+        const button = event.target;
+        const id = button.dataset.id;
+        if (id) {
+            deleteStressEntry(id, button);
+        } else {
+            console.error("No ID found on delete button.");
+        }
+    }
+});
+
 
 // Stress Level Form Submission
 const form = document.getElementById("stress-form");
@@ -147,3 +163,4 @@ form.addEventListener("submit", function (e) {
         alert("Something went wrong.");
     });
 });
+
