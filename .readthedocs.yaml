@@ -9,6 +9,9 @@ build:
     # You can also specify other tool versions:
     # nodejs: "16"
 
+   commands:
+      - sphinx-build -b html docs/source $READTHEDOCS_OUTPUT/html
+
 # Build documentation in the docs/ directory with Sphinx
 sphinx:
    configuration: docs/source/conf.py
