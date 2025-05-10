@@ -76,8 +76,8 @@
                 {% for i in exercise %}
                 <li class="exercise-entry" data-id="{{ i.id }}">
                     <div class="entry-text">
-                        {% set date_part = i.time.split(' — ')[0] %}
-                        {% set time_part = i.time.split(' — ')[1][:5] %}
+                        <div>{{ date_part }}</div>
+                        <div>{{ time_part }}</div>
                         Date: {{ date_part }} — Time: {{ time_part }}<br>
                         Exercise: {{ i.type }} ({{ i.duration }} mins)
                     </div>
