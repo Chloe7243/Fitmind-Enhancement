@@ -3,8 +3,8 @@
 # -- Project information
 
 project = 'Fitmind'
-copyright = '2025, Bolt'
-author = 'Bolt'
+copyright = '2025, Group 3D'
+author = 'Group 3D'
 
 release = '0.1'
 version = '0.1.0'
