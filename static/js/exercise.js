@@ -65,17 +65,31 @@ function pageLoaded() {
 
     form.addEventListener("submit", function (e) {
         e.preventDefault();
-
+    
         const type = document.getElementById("exercise-type").value;
         const custom = document.getElementById("custom-exercise").value.trim();
-        const duration = document.getElementById("duration").value;
+        const durationInput = document.getElementById("duration").value.trim();
+        const duration = parseInt(durationInput);
         const finalType = (type === "Custom" && custom) ? custom : type;
-
-        if (!duration || (type === "Custom" && !custom)) {
-            alert("Please complete all required fields.");
+    
+        if (!durationInput || isNaN(duration) || duration <= 0) {
+            alert("Enter a correct time");
             return;
         }
-
+    
+        if (type === "Custom") {
+            if (!custom) {
+                alert("Please complete all required fields.");
+                return;
+            }
+    
+            const isOnlyText = /^[A-Za-z\s]+$/.test(custom);
+            if (!isOnlyText) {
+                alert("Please enter a valid exercise name");
+                return;
+            }
+        }
+    
         fetch("/exercise", {
             method: "POST",
             headers: {
@@ -92,21 +106,20 @@ function pageLoaded() {
             if (Array.isArray(data)) {
                 const entry = data[0];
                 const ul = document.getElementById("exercise-list");
-
+    
                 const li = document.createElement("li");
                 li.classList.add("exercise-entry");
                 li.innerHTML = `
                     <div class="entry-text">${entry.time} - ${entry.type} (${entry.duration})</div>
                     <button class="remove-btn" onclick="this.parentElement.remove()">🗑️ Delete</button>
                 `;
-                ul.prepend(li); // ✅ Add to the top of the list
-
-                // ✅ Add new entry to chart and recs
+                ul.prepend(li);
+    
                 exerciseData.push(entry);
-                sessionStorage.setItem("exerciseData", JSON.stringify(exerciseData)); // ✅ Save to session
+                sessionStorage.setItem("exerciseData", JSON.stringify(exerciseData));
                 updateChart(exerciseData);
                 updateRecommendations(exerciseData);
-
+    
                 form.reset();
                 document.querySelector(".exercise-log").scrollIntoView({ behavior: "smooth" });
             }
