@@ -1,3 +1,7 @@
+import os
+import sys
+sys.path.insert(0, os.path.abspath('../..'))  # adjust for location
+
 # Configuration file for the Sphinx documentation builder.
 
 # -- Project information
