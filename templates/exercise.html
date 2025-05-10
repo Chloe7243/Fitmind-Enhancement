@@ -76,10 +76,13 @@
                 {% for i in exercise %}
                 <li class="exercise-entry" data-id="{{ i.id }}">
                     <div class="entry-text">
-                        {{ i.time }} - {{ i.type }} ({{ i.duration }})
+                        {% set date_part = i.time.split(' — ')[0] %}
+                        {% set time_part = i.time.split(' — ')[1][:5] %}
+                        Date: {{ date_part }} — Time: {{ time_part }}<br>
+                        Exercise: {{ i.type }} ({{ i.duration }} mins)
                     </div>
                     <button class="remove-btn" onclick="deleteExerciseEntry({{ i.id }}, this)">🗑️ Delete</button>
-                </li>
+                </li>                
                 {% endfor %}
             </ul>
         </section>
@@ -87,7 +90,9 @@
         <!-- Progress Chart -->
         <section class="progress-section">
             <h2>Your Progress</h2>
-            <canvas id="progress-chart"></canvas>
+            <div class="chart-container">
+                <canvas id="progress-chart"></canvas>
+            </div>            
         </section>
 
         <!-- Recommendations -->

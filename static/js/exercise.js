@@ -32,8 +32,18 @@ function pageLoaded() {
             },
             options: {
                 responsive: true,
-                plugins: { legend: { display: false } },
-                scales: { y: { beginAtZero: true } }
+                maintainAspectRatio: true, // allows flexible resizing
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1
+                        }
+                    }
+                }
             }
         });
     }
@@ -108,9 +118,14 @@ function pageLoaded() {
                 const ul = document.getElementById("exercise-list");
     
                 const li = document.createElement("li");
+                const [datePart, timePart] = entry.time.split(" — ");
                 li.classList.add("exercise-entry");
+
                 li.innerHTML = `
-                    <div class="entry-text">${entry.time} - ${entry.type} (${entry.duration})</div>
+                    <div class="entry-text">
+                        Date: ${datePart} — Time: ${timePart}<br>
+                        Exercise: ${entry.type} (${entry.duration} mins)
+                    </div>
                     <button class="remove-btn" onclick="this.parentElement.remove()">🗑️ Delete</button>
                 `;
                 ul.prepend(li);

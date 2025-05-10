@@ -223,7 +223,7 @@ def exercise():
             if exercise == "Custom":
                 exercise = data.get("custom-exercise")
 
-            now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            now = datetime.now().strftime("%Y-%m-%d — %H:%M")
 
             return jsonify([{
                 "type": exercise,
