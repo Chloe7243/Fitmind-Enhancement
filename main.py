@@ -149,9 +149,6 @@ def register():
                 return render_template('register.html')
 
 
-
-
-
 @app.route("/stress", methods=['GET', 'POST'])
 @login_required
 def stress():
@@ -170,8 +167,10 @@ def stress():
             stress_level = request.form["stress-level"]
             cause = request.form["stress-cause"]
             notes = request.form["additional-notes"]
+    
+        now = datetime.now()
+        log = Logs(made_by=current_user.id, rating=stress_level, cause=cause, user_description=notes, time_recorded=now)
 
-        log = Logs(made_by=current_user.id, rating=stress_level, cause=cause, user_description=notes)
         db.session.add(log)
         db.session.commit()
 

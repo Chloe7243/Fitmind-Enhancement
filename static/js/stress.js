@@ -122,8 +122,7 @@ form.addEventListener("submit", function (e) {
     if (!isValidCause) {
         alert("Please enter a valid stress cause (letters only)");
         return;
-    }
-    
+    }    
 
     fetch("/stress", {
         method: "POST",

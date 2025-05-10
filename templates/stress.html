@@ -76,7 +76,8 @@
             {% for i in logs %}
             <li class="stress-entry" data-id="{{ i.id }}">
                 <div class="entry-text">
-                    {{ i.time }} - Level {{ i.rating }} - {{ i.cause }}
+                    <div>Date: {{ i.time.strftime('%Y-%m-%d') }} - Time: {{ i.time.strftime('%H:%M') }}</div>
+                    <div>Level {{ i.rating }} - {{ i.cause }}</div>
                     <p class="notes">Notes: {{ i.description }}</p>
                 </div>
                 <button class="remove-btn delete-btn" data-id="{{ i.id }}">🗑️ Delete</button>
