@@ -50,11 +50,12 @@ Contents:
    overview
    user_requirements
    system_requirements
-   setup
    architecture
    components
    testing
    future_work
+   setup
+   acknowledgements
 
 Indices and Tables:
 -------------------
