@@ -8,6 +8,10 @@ The system requirements define how FITMIND should function behind the scenes to 
 
 They are grouped into **functional** (what the system should do) and **non-functional** (how the system should perform) categories.
 
+.. tip::
+
+   This section translates user-facing expectations into specific system behaviors — ensuring every feature is technically grounded.
+
 Functional Requirements
 ------------------------
 
@@ -21,6 +25,9 @@ These describe the features and behaviors the system must provide.
    - Logged data must include: stress value, mood (emoji), note (if any), and timestamp.
    - The system must store stress data in a user-specific format and retrieve it on request.
    - Upon submission, the system should analyze the stress level and trigger a personalized suggestion (e.g., launch Breathe Flow).
+
+   .. note::
+      Stress logging is lightweight and real-time — providing feedback as soon as the form is submitted.
 
 2. **Exercise Tracking**
 
@@ -36,6 +43,9 @@ These describe the features and behaviors the system must provide.
    - This feature should be accessible without login.
    - It must include text instructions and visual cues, and return users to their previous page after completion.
 
+   .. seealso::
+      The Breathe Flow page is the only page open to all users — promoting accessible wellness without registration.
+
 4. **Notes Page**
 
    - The system must provide a text input field for users to create personal notes.
@@ -50,6 +60,9 @@ These describe the features and behaviors the system must provide.
    - Reminders should work regardless of the page the user is on.
    - The system must maintain a list of all reminders created by the user.
 
+   .. note::
+      Reminders continue working across all pages, ensuring no notification is missed during navigation.
+
 6. **Authentication and Access Control**
 
    - The system must allow users to register with email and password.
@@ -57,11 +70,17 @@ These describe the features and behaviors the system must provide.
    - Stress, Exercise, Notes, and Reminder pages should only be accessible when logged in.
    - The Breathe Flow tool must remain available to all users without authentication.
 
+   .. warning::
+      Unauthorized users must be prevented from accessing private pages or stored user data.
+
 7. **Data Management and Storage**
 
    - All personal data (logs, notes, reminders) must be stored securely in a structured database.
    - Each data entry must be linked to the correct user session.
    - Data should be retained and displayed only while the user is logged in.
+
+   .. tip::
+      The current implementation uses SQLite, but the system is designed to support future upgrades (e.g., PostgreSQL).
 
 Non-Functional Requirements
 ---------------------------
@@ -74,6 +93,9 @@ These describe how the system should perform, behave, and support the user exper
    - All pages should be responsive across devices (mobile, tablet, desktop).
    - Users should be able to complete core tasks (e.g., logging stress, writing notes) within 5–10 minutes.
 
+   .. tip::
+      UI decisions were made based on interview feedback, emphasizing fast, low-friction interactions.
+
 2. **Performance**
 
    - The system must respond to user input (e.g., logging, chart updates) within 1–2 seconds.
@@ -84,6 +106,9 @@ These describe how the system should perform, behave, and support the user exper
    - User authentication must be required for access to personal data.
    - Sensitive information must be handled securely and only shown to the logged-in user.
    - Sessions must expire after logout or inactivity to protect user data.
+
+   .. important::
+      FITMIND is designed around privacy — users control what they log, and only they can access their data.
 
 4. **Reliability**
 
@@ -104,6 +129,10 @@ Removed Features
 ----------------
 
 - **Community Page**: Originally planned for user interaction and sharing, this feature was removed based on user feedback and time constraints. It was replaced by a stronger focus on personal tools that prioritize privacy, simplicity, and self-reflection.
+
+.. note::
+
+   This feature may be reconsidered in future versions depending on demand and implementation resources.
 
 ---
 
