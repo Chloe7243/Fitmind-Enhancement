@@ -29,7 +29,7 @@
 ### 3.1 Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/FITMIND-APP-MAIN-PROJECT.git
+git clone https://github.com/Group-3D-coursework/FITMIND-APP-MAIN-PROJECT.git
 cd FITMIND-APP-MAIN-PROJECT
 ```
 
