@@ -17,12 +17,20 @@ Here’s what FITMIND makes possible:
 - Set reminders to stay consistent with healthy habits  
 - Keep all your data secure with private logins
 
+.. tip::
+
+   FITMIND is designed to fit into your day in under 10 minutes — making it easy to stick with, even during a busy academic term.
+
 Project Purpose
 ---------------
 
 University life can be demanding. With deadlines, exams, and a fast pace, it's easy for self-care to fall to the side. FITMIND was created to make it easier for students to pause, reflect, and take care of their well-being — even in just a few minutes a day.
 
 The app isn’t just a tracker; it’s a gentle companion that helps users notice patterns in their stress and activity, and make small changes that add up over time.
+
+.. note::
+
+   FITMIND avoids gamified features like badges or streaks, based on feedback that these can create pressure. The focus is on calm, consistent support.
 
 Core Pages and Features
 ------------------------
@@ -38,10 +46,18 @@ FITMIND is built around eight core pages, each focused on one aspect of well-bei
 - **Notes Page** – A private place to write thoughts, reflections, or summaries, with a search feature for easy access.
 - **Reminder Page** – Set your own reminders with time pickers and sound alerts that work across all pages.
 
+.. seealso::
+
+   The **Breathe Flow Page** is publicly accessible, while Stress, Exercise, Notes, and Reminder pages require login to protect your data.
+
 Target Audience
 ---------------
 
 FITMIND is designed primarily for university students — people balancing studies, life transitions, and personal growth, often under stress. But it’s also flexible enough for anyone who wants a simple, personal way to build better wellness habits.
+
+.. tip::
+
+   FITMIND is lightweight and mobile-friendly, so users can log their stress or exercises on-the-go, during breaks, or at the end of the day.
 
 Design Philosophy
 -----------------
@@ -65,11 +81,19 @@ FITMIND was built using modern, lightweight technologies:
 - **Version Control**: Git and GitHub  
 - **Documentation**: Sphinx, published with Read the Docs
 
+.. note::
+
+   As the app grows, the team is considering upgrades like PostgreSQL support, dark mode, and mobile PWA features — see the *future_work* section for details.
+
 What Makes FITMIND Different?
 -----------------------------
 
 A lot of wellness apps focus only on physical health or mental health — FITMIND connects both. It helps users understand how their stress and activity relate, and offers **real-time suggestions** to support improvement.
 
 One thoughtful touch: the **Breathe Flow page is always open**, even to guests. No sign-up. No pressure. Just a moment to breathe.
+
+.. seealso::
+
+   You can use the Breathe Flow tool anytime — even without creating an account. It’s just one click away from the landing page.
 
 Whether you're logging an exercise, calming your mind, or writing your thoughts, FITMIND is there to meet you where you are — and guide you toward feeling better, one step at a time.
