@@ -118,7 +118,7 @@ Once the dependencies are installed and your virtual environment is activated, y
 
 .. code-block:: bash
 
-   flask run
+   python main.py
 
 Then visit:
 
