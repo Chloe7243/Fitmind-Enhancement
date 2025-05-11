@@ -119,10 +119,6 @@ Test Outcome Summary
 - No critical bugs were found in session control, form handling, or reminder alerts  
 - Minor issues (e.g., button alignment, emoji padding) were resolved during UI testing  
 
-Conclusion
-----------
-
-Testing confirmed that FITMIND is stable, reliable, and ready for student use. Future work will focus on expanding **automated testing coverage** and introducing **continuous integration** via GitHub Actions or similar tools.
 
 .. note::
 
