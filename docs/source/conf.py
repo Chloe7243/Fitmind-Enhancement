@@ -3,8 +3,8 @@
 
 # -- Project information 
 project = 'FITMIND: Exercise & Stress Tracker'
-copyright = '2025, Augustine Somiah Gyamprah'
-author = 'Augustine Somiah Gyamprah'
+copyright = '2025, Group 3D SETAP'
+author = 'Group 3D'
 
 release = '1.0'
 version = '1.0.0'
