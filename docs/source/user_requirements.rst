@@ -8,6 +8,10 @@ The user requirements describe what FITMIND must offer to ensure a helpful, mean
 
 These requirements were gathered through structured interviews, user feedback, and iterative testing. They evolved throughout the development process to prioritize simplicity, personalization, and usability over complexity or gamification.
 
+.. note::
+
+   These requirements are based on real-world feedback from students. The goal is to make FITMIND feel useful, not overwhelming.
+
 Core User Needs
 ---------------
 
@@ -20,6 +24,10 @@ Below is a refined list of what users should be able to do within FITMIND:
    - Add short notes to describe the cause of stress (e.g., “exam coming up”).
    - Instantly receive a personalized suggestion after logging (e.g., launch the Breathe Flow tool).
    - Access past stress entries through visual summaries or graphs.
+
+   .. tip::
+
+      Stress tracking is designed to be completed in less than one minute — making it easy to build a daily habit.
 
 2. **Exercise Tracking**
 
@@ -36,6 +44,10 @@ Below is a refined list of what users should be able to do within FITMIND:
    - Follow inhale–hold–exhale animations with supportive text prompts.
    - Return to the previous page after completing the breathing session.
 
+   .. seealso::
+
+      The Breathe Flow tool is publicly available from the landing page — no login required.
+
 4. **Notes Page**
 
    - Write reflections, thoughts, or workout notes in a free-form text field.
@@ -49,6 +61,10 @@ Below is a refined list of what users should be able to do within FITMIND:
    - Choose a specific time for each reminder to trigger.
    - Receive a pop-up alert with sound across all pages when the reminder activates.
    - View and manage a list of upcoming saved reminders.
+
+   .. note::
+
+      Reminder pop-ups are functional across all pages, ensuring users never miss their scheduled wellness tasks.
 
 6. **Authentication and Data Privacy**
 
@@ -64,6 +80,10 @@ Below is a refined list of what users should be able to do within FITMIND:
    - Removed based on time constraints and user feedback to maintain focus and simplicity.
    - FITMIND now emphasizes personal wellness tools over social interaction.
 
+   .. important::
+
+      This decision reflects the app’s core philosophy: support individual well-being without introducing social pressure.
+
 Experience Expectations
 ------------------------
 
@@ -73,6 +93,10 @@ Users expect the app to be:
 - **Easy to navigate** – Clear layout, large buttons, and mobile-friendly views.
 - **Private** – All entries are stored securely and only accessible when signed in.
 - **Encouraging** – No gamification or pressure; only useful, calm, and responsive features.
+
+.. tip::
+
+   Many students shared they preferred simplicity and flexibility over gamified rewards — so FITMIND keeps things calm and focused.
 
 How Requirements Were Gathered
 ------------------------------
@@ -84,7 +108,9 @@ The user requirements were developed using:
 - **Observations** about common habits, stress patterns, and feature expectations
 - **Refinements** based on what students found helpful vs. unnecessary
 
-Initial ideas such as rewards, streaks, or badges were removed based on feedback — students expressed that these added pressure instead of motivation. Instead, we focused on personalization, freedom, and simplicity.
+.. warning::
+
+   Features like badges and streaks were removed after feedback showed they added unnecessary pressure. FITMIND focuses on calm, self-paced engagement.
 
 ---
 
