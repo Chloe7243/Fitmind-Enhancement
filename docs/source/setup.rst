@@ -161,12 +161,19 @@ A simplified overview of the project structure:
 
    FITMIND-APP-MAIN-PROJECT/
    ├── main.py
+   ├── model.py
+   ├── instance/
+   ├── migrations/
    ├── static/
    ├── templates/
-   ├── venv/
    ├── tests/
-   ├── database.db
-   └── README.md
+   ├── FitMind/
+   ├── docs/
+   ├── venv/
+   ├── README.md
+   ├── README.rst
+   ├── pyproject.toml
+   └── readthedocs.yaml
 
 .. tip::
 
