@@ -1,7 +1,8 @@
-# For documentation
+# Documentation Dependencies
 sphinx==7.1.2
 sphinx-rtd-theme==1.3.0rc1
 
+# Flask Application Dependencies
 flask
 flask-login
 flask-migrate
@@ -11,9 +12,6 @@ itsdangerous
 sqlalchemy
 password-strength
 
-# Optional but useful
+# Testing Dependencies
 pytest
 Flask-Testing
-
-
-
