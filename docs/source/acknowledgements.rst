@@ -5,7 +5,7 @@ This section credits the visual assets used within the FITMIND application. All 
 
 .. note::
 
-   Visual content enhances the user experience and communicates key ideas. The images listed here appear on various pages throughout the application interface and documentation.
+   Visual content enhances the user experience and communicates key ideas. The images listed here appear on the main page application interface.
 
 Illustration Sources
 --------------------
