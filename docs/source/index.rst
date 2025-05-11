@@ -4,12 +4,15 @@ FITMIND: Exercise & Stress Tracker
 Welcome to the official documentation for the **FitMind** app — a web-based wellness tool for university students to track their **stress** and **exercise** levels, visualize progress, and receive personalized recommendations.
 
 This documentation provides:
+
 - An overview of the project
 - User and system requirements
 - Implementation details
 - Setup instructions
-- Component breakdown and architecture
-- Testing and future improvements
+- System architecture and component breakdown
+- Testing procedures
+- Future improvements and feature ideas
+
 
 Contents:
 ---------
@@ -26,7 +29,6 @@ Contents:
    components
    testing
    future_work
-   acknowledgements
 
 
 Indices and Tables
