@@ -114,13 +114,13 @@ macOS Instructions
 Running the Application
 -----------------------
 
-Once the dependencies are installed and your virtual environment is activated, you can start the Flask app:
+Once your environment is set up, run the application using:
 
 .. code-block:: bash
 
    python main.py
 
-Then visit:
+Then open your browser and go to:
 
 .. code-block:: none
 
@@ -128,7 +128,7 @@ Then visit:
 
 .. tip::
 
-   If you get an error that `flask` is not recognized, make sure your virtual environment is activated and Flask is installed.
+   Ensure your `main.py` file contains the Flask app setup and is properly configured to run the server.
 
 Testing
 -------
@@ -160,7 +160,7 @@ A simplified overview of the project structure:
 .. code-block:: none
 
    FITMIND-APP-MAIN-PROJECT/
-   ├── app.py
+   ├── main.py
    ├── static/
    ├── templates/
    ├── venv/
@@ -170,19 +170,19 @@ A simplified overview of the project structure:
 
 .. tip::
 
-   Your `app.py` should contain the Flask application logic and must be correctly configured with routes, templates, and session handling.
+   Your `main.py` file serves as the app entry point. It should initialize Flask, register routes, and start the server.
 
 Troubleshooting
 ---------------
 
-- **Flask command not found**  
-  Make sure the virtual environment is activated before running `flask run`.
+- **Command not recognized**  
+  Make sure the virtual environment is activated and you're using the correct Python command.
 
 - **Permission denied (macOS)**  
   Use `chmod +x` or run with elevated permissions if needed.
 
-- **Python version error**  
-  Ensure you're using **Python 3.10 or above**.
+- **Module not found**  
+  Double-check that you've installed all required dependencies and that your virtual environment is active.
 
 Conclusion
 ----------
@@ -191,7 +191,7 @@ After completing these steps, your FITMIND application should be fully functiona
 
 .. seealso::
 
-   If you’d like to build this documentation locally, visit the `setup` section of the `/docs` folder and run:
+   If you’d like to build this documentation locally, visit the `docs/` folder and run:
 
    .. code-block:: bash
 
