@@ -279,7 +279,7 @@ def notes():
                 db.session.commit()
                 user_notes = Notes.query.filter_by(made_by=current_user.id)
                 db.session.commit()
-                return render_template('notes.html', exercise=user_notes)
+                return redirect(url_for('notes'))
             except Exception as e:
                 print(e)
                 return render_template('notes.html')
