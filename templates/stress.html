@@ -3,40 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FitMind - Stress Tracking</title>
+    <title>FitMind - Stress Tracking</title>  
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ url_for('static',filename='css/stress.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div class="page-wrapper">
+
+    <main class="page-wrapper">
 
         <!-- Navigation Bar -->
         {% include 'navbar_template.html' %}
 
         <!-- Sidebar Menu -->
-        <div class="menu-box" id="menu-box">
-            <div class="menu-icon-top">
+        <aside class="menu-box" id="menu-box">
+            <header class="menu-icon-top">
                 <i class="fas fa-heartbeat"></i>
-            </div>
-
-            <ul>
-                <li><a href="{{ url_for('homepage') }}"><i class="fas fa-chart-line"></i> Dashboard</a></li>
-                <li><a href="{{ url_for('stress') }}"><i class="fas fa-heartbeat"></i> Stress Tracking</a></li>
-                <li><a href="{{ url_for('exercise') }}"><i class="fas fa-dumbbell"></i> Exercise Tracking</a></li>
-                <li><a href="{{ url_for('breathe_flow') }}"><i class="fas fa-wind"></i> Breathe Flow</a></li>
-                <li><a href="{{ url_for('notes') }}"><i class="fas fa-sticky-note"></i> My Note</a></li>
-                <li><a href="{{ url_for('notification') }}"><i class="fas fa-bell"></i> Reminder</a></li>
-                <li><a href="{{ url_for('about_app') }}"><i class="fas fa-info-circle"></i> About App</a></li>
-            </ul>
-        </div>
+            </header>
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('homepage') }}"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                    <li><a href="{{ url_for('stress') }}"><i class="fas fa-heartbeat"></i> Stress Tracking</a></li>
+                    <li><a href="{{ url_for('exercise') }}"><i class="fas fa-dumbbell"></i> Exercise Tracking</a></li>
+                    <li><a href="{{ url_for('breathe_flow') }}"><i class="fas fa-wind"></i> Breathe Flow</a></li>
+                    <li><a href="{{ url_for('notes') }}"><i class="fas fa-sticky-note"></i> My Note</a></li>
+                    <li><a href="{{ url_for('notification') }}"><i class="fas fa-bell"></i> Reminder</a></li>
+                    <li><a href="{{ url_for('about_app') }}"><i class="fas fa-info-circle"></i> About App</a></li>
+                </ul>
+            </nav>
+        </aside>
 
         <!-- Hero Section -->
-        <section class="hero">
+        <header class="hero">
             <h1>Manage Your Stress</h1>
             <p>Track your stress levels and receive personalized relaxation tips.</p>
-        </section>
+        </header>
 
         <!-- Stress Tracking Form -->
         <section class="stress-section">
@@ -44,26 +46,27 @@
 
             <form id="stress-form" method="POST" action="/stress">
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-                <div class="form-group">
-                    <label>How stressed are you today? (Click On The Emoji)</label>
-                    <div class="emoji-scale">
+
+                <legend class="form-group">
+                    <header>How stressed are you today? (Click On The Emoji)</header>
+                    <section class="emoji-scale">
                         <label><input type="radio" name="stress-level" value="1"> 😌 <span>Very Relaxed</span></label>
                         <label><input type="radio" name="stress-level" value="2"> 🙂 <span>Calm</span></label>
                         <label><input type="radio" name="stress-level" value="3"> 😐 <span>Neutral</span></label>
                         <label><input type="radio" name="stress-level" value="4"> 😟 <span>Worried</span></label>
                         <label><input type="radio" name="stress-level" value="5"> 😫 <span>Stressed</span></label>
-                    </div>                
-                </div>
+                    </section>                
+                </legend>
 
-                <div class="form-group">
+                <legend class="form-group">
                     <label for="stress-cause">What caused your stress today?</label>
                     <input type="text" id="stress-cause" name="stress-cause" placeholder="e.g., Exams, Deadlines">
-                </div>
+                </legend>
 
-                <div class="form-group">
+                <legend class="form-group">
                     <label for="additional-notes">Additional Notes (optional)</label>
                     <textarea id="additional-notes" name="additional-notes" rows="3" placeholder="Add any notes..."></textarea>
-                </div>
+                </legend>
 
                 <button type="submit" class="log-btn">Log Stress</button>
             </form>
@@ -73,21 +76,18 @@
         <section class="stress-log">
             <h2>Logged Stress Entries</h2>
             <ul id="stress-list">
-            {% for i in logs %}
-            <li class="stress-entry" data-id="{{ i.id }}">
-                <div class="entry-text">
-                    <div>Date: {{ i.time.strftime('%Y-%m-%d') }} - Time: {{ i.time.strftime('%H:%M') }}</div>
-                    <div>Level {{ i.rating }} - {{ i.cause }}</div>
-                    <p class="notes">Notes: {{ i.description }}</p>
-                </div>
-                <button class="remove-btn delete-btn" data-id="{{ i.id }}">🗑️ Delete</button>
-            </li>
-            
-        {% endfor %}
-                </ul>
+                {% for i in logs %}
+                <li class="stress-entry" data-id="{{ i.id }}">
+                    <article class="entry-text">
+                        <p>Date: {{ i.time.strftime('%Y-%m-%d') }} - Time: {{ i.time.strftime('%H:%M') }}</p>
+                        <p>Level {{ i.rating }} - {{ i.cause }}</p>
+                        <p class="notes">Notes: {{ i.description }}</p>
+                    </article>
+                    <button class="remove-btn delete-btn" data-id="{{ i.id }}">🗑️ Delete</button>
+                </li>
+                {% endfor %}
+            </ul>
         </section>
-
-
 
         <!-- Relaxation Recommendations -->
         <section class="relaxation-suggestions">
@@ -97,7 +97,8 @@
 
         <!-- Footer -->
         {% include 'footer_template.html' %}
-    </div>
+
+    </main>
 
     <!-- Javascript Files -->
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
