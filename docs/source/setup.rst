@@ -195,15 +195,3 @@ Conclusion
 ----------
 
 After completing these steps, your FITMIND application should be fully functional on your machine. You're now ready to explore the app, contribute code, run tests, or demonstrate features.
-
-.. seealso::
-
-   If you’d like to build this documentation locally, visit the `docs/` folder and run:
-
-   .. code-block:: bash
-
-      pip install -r docs/requirements.txt
-      cd docs
-      make html
-
-   Then open `docs/build/html/index.html` in your browser.
