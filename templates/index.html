@@ -10,43 +10,44 @@
 <body>
 
 <!-- Loading Screen -->
-<div class="loading-screen" id="loading-screen">
-    <div class="loading-content">
+<section class="loading-screen" id="loading-screen">
+    <header class="loading-content">
         <img src="{{ url_for('static', filename='images/logo.png') }}" alt="FitMind Logo" class="logo">
         <h1 class="loading-title">Welcome to FitMind</h1>
         <div class="progress-container">
             <div class="progress-bar" id="progress-bar"></div>
         </div>
         <p class="loading-text">Loading your personal wellness dashboard...</p>
-    </div>
-</div>
+    </header>
+</section>
 
 <!-- Welcome Page -->
-<div class="container" id="welcome-container" style="display: none;">
+<main class="container" id="welcome-container" style="display: none;">
     <h1>Welcome to <span class="highlight">FitMind</span></h1>
     <p class="subtext">Track your stress, log your workouts, and gain insights into your wellness journey.</p>
 
-    <div class="features">
-        <div class="feature-card">
+    <section class="features">
+        <article class="feature-card">
             <h2>🧘 Stress Tracking</h2>
             <p>Log your stress, track patterns, and discover tailored relaxation techniques.</p>
-        </div>
-        <div class="feature-card">
+        </article>
+        <article class="feature-card">
             <h2>🏃 Exercise Tracking</h2>
             <p>Log your workouts and see how physical activity impacts your mental clarity.</p>
-        </div>
-        <div class="feature-card">
+        </article>
+        <article class="feature-card">
             <h2>📊 Personalized Insights</h2>
             <p>View interactive graphs and trends to understand your progress over time.</p>
-        </div>
-    </div>
+        </article>
+    </section>
 
-    <div class="cta-buttons">
+    <nav class="cta-buttons">
         <a href="{{ url_for('register') }}"><button class="register-btn"><i class="fas fa-user-plus"></i> Register</button></a>
         <a href="{{ url_for('login') }}"><button class="signin-btn"><i class="fas fa-sign-in-alt"></i> Sign In</button></a>
         <a href="{{ url_for('homepage') }}"><button class="guest-btn"><i class="fas fa-user-secret"></i> Continue as Guest</button></a>
-    </div>
-</div>
+    </nav>
+</main>
+
 <!-- Javascript Files -->
 <script defer src="{{ url_for('static', filename='js/welcome.js') }}"></script>
 </body>
