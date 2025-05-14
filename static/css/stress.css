@@ -118,6 +118,13 @@
     border-color: #00796b;
 }
 
+/* Removes borders from fieldsets */
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0 0 1.5rem 0;
+}
+
 /* Emoji Scale */
 .emoji-scale {
     display: flex;

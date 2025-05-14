@@ -47,7 +47,7 @@
             <form id="stress-form" method="POST" action="/stress">
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
 
-                <legend class="form-group">
+                <fieldset class="form-group">
                     <header>How stressed are you today? (Click On The Emoji)</header>
                     <section class="emoji-scale">
                         <label><input type="radio" name="stress-level" value="1"> 😌 <span>Very Relaxed</span></label>
@@ -56,17 +56,17 @@
                         <label><input type="radio" name="stress-level" value="4"> 😟 <span>Worried</span></label>
                         <label><input type="radio" name="stress-level" value="5"> 😫 <span>Stressed</span></label>
                     </section>                
-                </legend>
+                </fieldset>
 
-                <legend class="form-group">
+                <fieldset class="form-group">
                     <label for="stress-cause">What caused your stress today?</label>
                     <input type="text" id="stress-cause" name="stress-cause" placeholder="e.g., Exams, Deadlines">
-                </legend>
+                </fieldset>
 
-                <legend class="form-group">
+                <fieldset class="form-group">
                     <label for="additional-notes">Additional Notes (optional)</label>
                     <textarea id="additional-notes" name="additional-notes" rows="3" placeholder="Add any notes..."></textarea>
-                </legend>
+                </fieldset>
 
                 <button type="submit" class="log-btn">Log Stress</button>
             </form>

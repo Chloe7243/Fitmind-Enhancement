@@ -211,6 +211,13 @@ canvas {
     color: #555;
 }
 
+/* Removes borders from fieldsets */
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0 0 1.5rem 0;
+}
+
 /* Responsive for Mobile */
 @media (max-width: 768px) {
     .hero h1 {
