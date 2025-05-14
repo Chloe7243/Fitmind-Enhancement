@@ -30,6 +30,9 @@ Illustration Sources
   `Hand-drawn People Doing Sports Illustration`  
   https://www.freepik.com/free-vector/hand-drawn-people-doing-sports-illustration_210162954.htm
 
+- **Sound for Reminder**
+  https://mixkit.co/free-sound-effects/pop/
+
 License
 -------
 
