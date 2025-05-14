@@ -111,6 +111,13 @@ body {
     text-decoration: none;
 }
 
+/* Removes borders from fieldsets */
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0 0 1.5rem 0;
+}
+
 /* Alert */
 .alert {
     position: fixed;

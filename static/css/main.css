@@ -153,6 +153,7 @@ body {
 
 /* Adjusted Menu Icon */
 .menu-icon {
+    all: unset;
     cursor: pointer;
     font-weight: bold;
 }
