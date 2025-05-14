@@ -46,7 +46,7 @@
 
             <form id="exercise-form" method="POST" action="/exercise">
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-                <label class="form-group">
+                <div class="form-group">
                     <label for="exercise-type">Choose Exercise Type:</label>
                     <select id="exercise-type" name="Exercise">
                         <option name="Exercise" id="Cardio" value="Cardio">Cardio</option>
@@ -59,12 +59,12 @@
                         <option name="Exercise" id="Custom" value="Custom">Custom</option>
                     </select>
                     <input type="text" id="custom-exercise" name="custom-exercise" placeholder="Enter custom exercise" style="display:none;">
-                </label>
+                </div>
 
-                <label class="form-group">
+                <div class="form-group">
                     <label for="duration">Duration (minutes):</label>
                     <input name="duration" type="number" id="duration" placeholder="Enter duration" required>
-                </label>
+                </div>
 
                 <button type="submit" class="log-btn">Log Exercise</button>
             </form>

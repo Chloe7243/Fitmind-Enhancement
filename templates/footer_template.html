@@ -1,37 +1,25 @@
 <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-logo">
-                <h2>FitMind</h2>
-                <p>Track your fitness and stress levels effortlessly.</p>
-            </div>
+    <section class="footer-container">
+        <article class="footer-logo">
+            <h2>FitMind</h2>
+            <p>Track your fitness and stress levels effortlessly.</p>
+        </article>
 
-            <div class="footer-links">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="{{ url_for('homepage') }}"><i class="fas fa-chart-line"></i> Dashboard</a></li>
-                    <li><a href="{{ url_for('stress') }}"><i class="fas fa-heartbeat"></i> Stress Tracking</a></li>
-                    <li><a href="{{ url_for('exercise') }}"><i class="fas fa-dumbbell"></i> Exercise Tracking</a></li>
-                    <li><a href="{{ url_for('breathe_flow') }}"><i class="fas fa-wind"></i> Breathe Flow</a></li>
-                    <li><a href="{{ url_for('notes') }}"><i class="fas fa-sticky-note"></i> My Note</a></li>
-                    <li><a href="{{ url_for('notification') }}"><i class="fas fa-bell"></i> Reminder</a></li>
-                </ul>
-            </div>
+        <nav class="footer-links">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="{{ url_for('homepage') }}"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                <li><a href="{{ url_for('stress') }}"><i class="fas fa-heartbeat"></i> Stress Tracking</a></li>
+                <li><a href="{{ url_for('exercise') }}"><i class="fas fa-dumbbell"></i> Exercise Tracking</a></li>
+                <li><a href="{{ url_for('breathe_flow') }}"><i class="fas fa-wind"></i> Breathe Flow</a></li>
+                <li><a href="{{ url_for('notes') }}"><i class="fas fa-sticky-note"></i> My Note</a></li>
+                <li><a href="{{ url_for('notification') }}"><i class="fas fa-bell"></i> Reminder</a></li>
+            </ul>
+        </nav>
 
-            <!-- <div class="footer-contact">
-                <h3>Contact Us</h3>
-                <p>Email: support@fitmind.com</p>
-                <p>Phone: +123 456 7890</p>
-            </div>
+    </section>
 
-            <div class="footer-social">
-                <h3>Follow Us</h3>
-                <a href="#"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-            </div> -->
-        </div>
-
-        <div class="footer-bottom">
-            <p>&copy; 2025 FitMind. All Rights Reserved.</p>
-        </div>
-    </footer>
+    <section class="footer-bottom">
+        <p>&copy; 2025 FitMind. All Rights Reserved.</p>
+    </section>
+</footer>
