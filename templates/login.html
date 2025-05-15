@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FitMind - Sign In</title>
+    <link rel="icon" href="{{ url_for('static', filename='images/logo.png') }}" type="image/png">
     <link rel="stylesheet" href="{{ url_for('static',filename='css/signIn.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
+<!-- Sign In Page Container -->
 <main class="signin-container">
     <section class="signin-card">
         {% with messages = get_flashed_messages() %}
@@ -21,6 +23,7 @@
             {% endif %}
         {% endwith %}
 
+        <!-- Welcome Message -->
         <h1>Welcome Back to FitMind</h1>
         <p class="subtext">Log in to track your stress and workouts.</p>
 
