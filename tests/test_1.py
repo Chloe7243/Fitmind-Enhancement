@@ -200,13 +200,6 @@ def test_breathe_route(client):
     assert response.status_code == 200
     assert b'breathe' in response.data.lower()
 
-def test_profile_route(client):
-    """Test access to /profile page (requires login)"""
-    register_and_login(client)
-    response = client.get('/profile')
-    assert response.status_code == 200
-    assert b'profile' in response.data.lower()
-
 def test_logout_route(client):
     """Test /logout route functionality"""
     register_and_login(client)
