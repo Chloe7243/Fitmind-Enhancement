@@ -623,3 +623,5 @@ def test_large_number_of_exercise_logs(client):
     # Check for the exercise type, using the integer value (1) instead of 'Cardio'
     assert b'1' in response.data.lower()  
     assert b'30 mins' in response.data.lower()  
+
+    # mm
