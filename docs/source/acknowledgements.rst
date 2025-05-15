@@ -30,6 +30,9 @@ Illustration Sources
   `Hand-drawn People Doing Sports Illustration`  
   https://www.freepik.com/free-vector/hand-drawn-people-doing-sports-illustration_210162954.htm
 
+- **Used as Icon for title and Landing Page** 
+  https://www.freepik.com/free-vector/hand-drawn-brain-cartoon-illustration_53573325.htm#fromView=search&page=1&position=0&uuid=d761b93b-f39e-432e-979c-fec60341c0e4&query=FITMIND  
+
 - **Sound for Reminder**
   https://mixkit.co/free-sound-effects/pop/
 
