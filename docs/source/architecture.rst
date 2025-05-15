@@ -154,15 +154,3 @@ Scalability and Maintenance
 
    Developers can extend this architecture to include analytics, dark mode, or third-party login (e.g., Google OAuth) as next steps.
 
-Conclusion
-----------
-
-This architecture ensures that FITMIND is:
-
-- Lightweight
-- Modular
-- Scalable
-- Secure
-- Ready for future enhancements
-
-It balances immediate functionality with flexibility for growth, making it a strong technical foundation for supporting students’ mental and physical wellness needs.

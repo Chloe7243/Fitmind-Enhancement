@@ -70,8 +70,3 @@ Deferred Features
 
    .. note::
       The Community Page may be revisited in future versions if demand rises and privacy concerns can be addressed.
-
-Conclusion
-----------
-
-FITMIND was designed to evolve. These future enhancements aim to strengthen personalization, increase flexibility, and support a growing, diverse user base. As the app continues to grow, its mission remains the same: to help students take better care of themselves — one small habit at a time.
