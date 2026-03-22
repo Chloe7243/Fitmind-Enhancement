@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: [main, staging]
+  pull_request:
+    branches: [main, staging]
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: pip install flake8 pytest pytest-flask
+      - name: Run flake8
+        run: flake8 . --count --max-line-length=127
+      - name: Run pytest
+        run: pytest
+
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+      - name: Install dependencies
+        run: npm install
+      - name: Run ESLint
+        run: npx eslint .
+      - name: Run Jest
+        run: npm test
