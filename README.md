@@ -6,21 +6,21 @@
 
 ## 1. Key Features
 
-- Log stress using a 1–5 scale with mood emojis and optional notes  
-- Track exercise activities and view real-time progress charts  
-- Practice guided breathing without needing to log in  
-- Write and search timestamped notes  
-- Set reminders with sound and pop-up notifications  
+- Log stress using a 1–5 scale with mood emojis and optional notes
+- Track exercise activities and view real-time progress charts
+- Practice guided breathing without needing to log in
+- Write and search timestamped notes
+- Set reminders with sound and pop-up notifications
 - Secure login with session-based data access
 
 ---
 
 ## 2. Requirements
 
-- Python 3.10 or higher  
-- Git  
-- Virtual environment tool (`venv`)  
-- Flask and supporting libraries  
+- Python 3.10 or higher
+- Git
+- Virtual environment tool (`venv`)
+- Flask and supporting libraries
 
 ---
 
